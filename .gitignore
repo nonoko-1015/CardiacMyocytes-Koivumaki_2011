@@ -1,0 +1,9 @@
+*.so
+*.o.d
+*.eml
+*.ecd
+*.pyc
+*.zip
+tmp_code_*
+.DS_Store
+.ipynb_checkpoints
