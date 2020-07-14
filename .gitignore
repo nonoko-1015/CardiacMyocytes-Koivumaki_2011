@@ -4,6 +4,8 @@
 *.ecd
 *.pyc
 *.zip
+del
+del/*
 tmp_code_*
 .DS_Store
 .ipynb_checkpoints
