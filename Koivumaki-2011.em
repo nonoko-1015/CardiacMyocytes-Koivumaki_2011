@@ -1,12 +1,23 @@
 @{
-"""
-(Process\s+)Expression(Flux|Assignment)(Process\()(\w+)(\)\s+\{[\w\W]*?)\n\s*Expression.+?;
-$1Nygren_1998$4$2$3$4$5
-"""
+from math import pi
 
-R  = 8314.0  # R in component membrane (millijoule_per_mole_kelvin)
-T  = 306.15  # T in component membrane (kelvin)
-F  = 96487   # F in component membrane (coulomb_per_mole)
+N_A = 6.02214076e+23
+
+R  = 8314.0  # R in component membrane (millijoule_per_mole_kelvin) = hAM_KKT.ode
+T  = 306.15  # T in component membrane (kelvin) = hAM_KKT.ode
+F  = 96487   # F in component membrane (coulomb_per_mole) = hAM_KKT.ode
+
+Nao = 130
+Cao = 1.8
+Ko = 5.4
+
+Cm = 0.05 #nF
+
+stim_duration = 5.0
+stim_amp = 0.0
+BCL = 1e10
+stim_steepness = 5.0
+stim_offset = 2.0
 
 stim_start     = 0.1        # stim_start in component membrane (second)
 stim_end       = 100000000  # stim_end in component membrane (second)
@@ -14,13 +25,165 @@ stim_period    = 1          # stim_period in component membrane (second)
 stim_duration  = 0.006      # stim_duration in component membrane (second)
 stim_amplitude = -280       # stim_amplitude in component membrane (picoA)
 
-Vol_i   = 0.005884          # Vol_i in component intracellular_ion_concentrations (nanolitre)
-Vol_up  = 0.0003969         # Vol_up in component Ca_handling_by_the_SR (nanolitre)
-Vol_rel = 4.41e-5           # Vol_rel in component Ca_handling_by_the_SR (nanolitre)
-Vol_d   = 0.0200000 * Vol_i # Vol_d in component intracellular_ion_concentrations (nanolitre)
-Vol_c   = 0.136000 * Vol_i  # Vol_c in component cleft_space_ion_concentrations (nanolitre)
+# Geometry
+Vss    = 4.99232e-5  # volume of the subspace (nanolitre) (Table 1)
+rjunct = 6.5         # radius of the bulk cytosol (micrometer) (Table 1)
+lcell  = 122.051     # length of the cell (micrometer) (Table 1)
 
-k_rel_i = 0.0003   # k_rel_i in component Ca_handling_by_the_SR (millimolar)
+# Ca diffusion grid
+dx = 1.625  # width of bulk cytosol compartment (micrometer) (Table 1)
+
+'''
+Area between junct and nonjunct (Text S1, Eqn. 16)(micrometer**2) '''
+Aj_nj = pi * rjunct * 2 * lcell * 0.5
+'''
+diffusion distance from center to center of junct to first njunct
+(Text S1, Eqn. 17)(micrometer) '''
+xj_nj = 0.02/2 + dx/2
+'''
+diffusion distance from center of junct to center of njunct
+(between 2nd and 3rd njunct)(micrometer) '''
+xj_nj_Nai = 0.02/2 + 2*dx
+
+# Diffusion compartment volumes (uses j^2-(j-1)^2 = 2*j - 1) (Text S1, Eqn. 42)
+# (nL)
+Vnonjunct1 = pi * lcell * 1e-6 * 0.5 * dx * dx
+Vnonjunct2 = 3 * Vnonjunct1
+Vnonjunct3 = 5 * Vnonjunct1
+Vnonjunct4 = 7 * Vnonjunct1
+
+Vnonjunct = [ 0, Vnonjunct1, Vnonjunct2, Vnonjunct3, Vnonjunct4]
+
+Vcytosol = 16 * Vnonjunct1 + Vss
+
+VSR1 = 0.05*Vnonjunct1/2*0.9  # Accessible volume of SR compartment (Text S1, Eqn. 42)
+VSR2 = 0.05*Vnonjunct2/2*0.9
+VSR3 = 0.05*Vnonjunct3/2*0.9
+VSR4 = 0.05*Vnonjunct4/2*0.9
+
+VSR = [ 0, VSR1, VSR2, VSR3, VSR4]
+
+Vnonjunct_Nai = 16 * Vnonjunct1
+
+
+# Cytosol Ca Buffers
+BCa = 24e-3
+SLlow = 165
+SLhigh = 13
+
+KdBCa = 2.38e-3
+KdSLlow = 1.1
+KdSLhigh = 13e-3
+
+# SR Ca buffers
+CSQN =  6.7
+KdCSQN = 0.8
+
+# Sarcolemmal Na burrering
+# Area relation to Grandi et al. model 6.5**2 * pi() * 122 / (10.25**2 * pi() * 100) = 0.49
+# Bmax = 7.651*0.11 + 1.65*0.89 = 2.31
+BNa = 0.49 * 2.31
+KdBNa = 10
+
+# Ion channel conductances & permeabilities & other parameters
+
+PNa = 0.0018  # INa:P_Na
+
+ECa_app = 60    # ICaL:ECa_app
+gCaL = 25.3125  # ICaL:ECa_app
+kCan = 2
+kCa = 1e-3      # ICaL:k_Ca
+
+
+#gt = 7.5
+gt = 1.09*7.5      # It:g_t     Increased by ~9# in Maleckar et al.
+#gsus = 2.75
+gsus = 0.89*2.75   # Isus:g_sus Decreased by ~11# in Maleckar et al.
+gKs = 1            # IKs:g_Ks
+gKr = 0.5          # IKr:g_Kr
+#gK1 = 3.825
+gK1 = 3.825 * 0.90 # IK1:g_K1   3 in Nygren et al. 9 in Courtemanche et al.
+gNab = 0.060599    # INab:g_B_Na
+gCab = 0.0952      # ICab:g_B_Ca
+
+INaKmax = 70.8253  # INaK:i_NaK_max
+kNaKK = 1          # INaK:k_NaK_K
+kNaKNa = 11        # INaK:k_NaK_Na
+
+ICaPmax = 2.0      # ICaP:i_CaP_max
+kCaP = 0.0005      # ICaP:k_CaP
+
+kNaCa = 0.0084     # INaCa:k_NaCa
+gam = 0.45         # INaCa:gamma
+dNaCa = 0.0003     # INaCa:d_NaCa
+
+gIf = 1            # If:gIf
+
+# Ca and Na diffusion
+DCa = 780.0  # diffusion coefficient for Ca2+ (micrometer**2/sec)
+DCaSR = 44.0 # diffusion coefficient for Ca2+ in SR (micrometer**2/sec)
+DCaBm = 25.0 # diffusion coefficient for Ca2+-buffer complex (micrometer**2/sec)
+
+#DNa = 0.17 # Despa et al. (2002) 0.12 um2/s, Shannon et al. (2004)
+#1.79E-5 cm2/s = 1790 um2/s, Grandi et al. (2009) 1.2722E-6 cm2/s = 127um/s
+DNa = 0.12
+
+# SERCA parameters
+SERCAKmf = 0.25e-3  # SERCA half-maximal binding in cytosol (mM, Table S1)
+SERCAKmr = 1.8  # SERCA half-maximal binding in SR (mM, Table S1)
+k4 = 7.5  # pump rate (sec^-1, Table S1)
+
+k3 = k4 / SERCAKmr**2
+k1 = 1000**2 * k4
+k2 = k1 * SERCAKmf**2
+
+cpumps = 40e-3 # pump concentration in cytosol volume (mM, Table S1)
+
+# SR Ca leak
+kSRleak = 6e-3
+
+# RyR
+k_nu = 1.0
+k_nuss = 625.0
+
+RyRtauadapt = 1
+
+RyRtauactss = 5e-3
+RyRtauinactss = 15e-3
+
+RyRtauact = 18.75e-3
+RyRtauinact = 87.5e-3
+
+### status
+V_0 = -75.319410
+INam_0 = 0.002779
+INah1_0 = 0.903910
+INah2_0 = 0.903967
+ICaLd_0 = 0.000011
+ICaLf1_0 = 0.998857
+ICaLf2_0 = 0.998862
+ICaLfca_0 = 0.974437
+Itr_0 = 0.000959
+Its_0 = 0.954338
+Isusr_0 = 0.000311
+Isuss_0 = 0.975109
+IKsn_0 = 0.004110
+IKrpa_0 = 0.000042
+Ify_0 = 0.056207
+Nai_0 = 9.286860
+Ki_0 = 134.631300
+Nass_0 = 8.691502
+Cass_0 = 0.000162
+RyRoss_0 = 0.000040
+RyRcss_0 = 0.999972
+RyRass_0 = 0.245530
+RyRo_0 = [ 0.000040, 0.000095, 0.000078, 0.000057 ]
+RyRc_0 = [ 0.999972, 0.999372, 0.999509, 0.999560 ]
+RyRa_0 = [ 0.245530, 0.192536, 0.201034, 0.216312 ]
+SERCACa_0 = [ 0.004250, 0.004639, 0.004512, 0.004326, 0.004250 ]
+SERCACass_0 = 0.004250
+Cai_0 = [ 0, 0.000135, 0.000138, 0.000144, 0.000156 ]
+CaSR_0 = [ 0, 0.618922, 0.607629, 0.590527, 0.573811 ]
 
 }
 
@@ -44,6 +207,24 @@ System System( / )
     Value  0.0;
   }
 
+  Variable Variable( Nao )
+  {
+    MolarConc    @(Nao * 1.0e-3);
+    Fixed  1;
+  }
+
+  Variable Variable( Ko )
+  {
+    MolarConc    @(Ko * 1.0e-3);
+    Fixed  1;
+  }
+
+  Variable Variable( Cao )
+  {
+    MolarConc    @(Cao * 1.0e-3);
+    Fixed  1;
+  }
+
   Process Nygren_1998voiFluxProcess(voi)
   {
     Name "time in component environment (second)";
@@ -51,10 +232,40 @@ System System( / )
     VariableReferenceList
       [voi :.:voi  1];
   }
-
 }
 
-System System( /Cleft )
+System System( /Cell )
+{
+  StepperID    Default;
+  Name "Cell";
+
+  Variable Variable( SIZE )
+  {
+    Value    @((Vcytosol + VSR1 + VSR2 + VSR3 + VSR4)*1.0E-9);
+  }
+}
+
+@include('./Koivumaki-2011_Cell_Membrane.em')
+
+System System( /Cell/Cytosol )
+{
+  StepperID    Default;
+  Name "Cell";
+
+  Variable Variable( SIZE )
+  {
+    Value    @(Vcytosol * 1.0e-9);
+  }
+
+  Variable Variable(K_i)
+  {
+    Name "K_i in component intracellular_ion_concentrations (molar)";
+    MolarConc  134.631300e-3;  # hAM_KKT.ode Ki
+  }
+
+} # END of /Cell/Cytosol
+
+System System( /Cell/Cytosol/ss )
 {
   StepperID    Default;
 
@@ -62,1279 +273,138 @@ System System( /Cleft )
 
   Variable Variable(SIZE)
   {
-    Name "Vol_c in component cleft_space_ion_concentrations (litre)";
-    Value  @(Vol_c * 1.0e-9);
+    Name "Vss in component cleft_space_ion_concentrations (litre)";
+    Value  @(Vss * 1.0e-9);
   }
-  Variable Variable(Na_c)
+
+  Variable Variable(Na_ss)
   {
     Name "Na_c in component cleft_space_ion_concentrations (molar)";
-    MolarConc  130.011e-3;
+    MolarConc  @(Nass_0 * 1e-3);
   }
 
-  Variable Variable(K_c)
-  {
-    Name "K_c in component cleft_space_ion_concentrations (molar)";
-    MolarConc  5.3581e-3;
-  }
-
-  Variable Variable(Ca_c)
+  Variable Variable(Ca_ss)
   {
     Name "Ca_c in component cleft_space_ion_concentrations (molar)";
-    MolarConc  1.8147e-3;
+    MolarConc  @(Cass_0 * 1e-3);
   }
 
-  Process Nygren_1998j_Na_cFluxProcess(j_Na_c)
+  Process Koivumaki_2011_BufferFluxProcess(Na_buffer)
   {
-    Name "d/dt Na_c in component cleft_space_ion_concentrations (millimolar)";
+    Name "Sodium buffering";
 
-    tau_Na  14.3; # tau_Na in component cleft_space_ion_concentrations (second)
-    Na_b  130; # Na_b in component cleft_space_ion_concentrations (millimolar)
+    @{'''
+    beta = 1.0 / ( 1.0 + B * KdB / pow(( ion.MolarConc * 1000 + KdB ), 2 ) )
+    '''}
+
+    B    @BNa;
+    KdB  @KdBNa;
 
     VariableReferenceList
-      [Na_c :.:Na_c  1];
+      [ion :../ss:Na_ss -1];
   }
 
-  Process Nygren_1998j_K_cFluxProcess(j_K_c)
+  Process Koivumaki_2011_CassBufferFluxProcess(Ca_buffer)
   {
-    Name "d/dt K_c in component cleft_space_ion_concentrations (millimolar)";
+    @{'''
+    # Ca buffers
+    betass = ( 1 + SLlow*KdSLlow/(Cass + KdSLlow)**2 + SLhigh*KdSLhigh/(Cass + KdSLhigh)**2 + BCa*KdBCa/(Cass + KdBCa)**2  )**(-1)
+    dCass_dt = (1-betass) * ( JCass/Vss + (-ICaL - ICab - ICaP + 2*INaCa) / (2*Vss*F) )
+    '''}
 
-    tau_K  10; # tau_K in component cleft_space_ion_concentrations (second)
-    K_b  5.4; # K_b in component cleft_space_ion_concentrations (millimolar)
+    F  @F;
+    SLlow  @SLlow;
+    KdSLlow  @KdSLlow;
+    SLhigh  @SLhigh;
+    KdSLhigh  @KdSLhigh;
+    BCa  @BCa;
+    KdBCa  @KdBCa;
 
     VariableReferenceList
-      [K_c   :.:K_c  1];
+      [Cass   :.:Ca_ss -1];
   }
 
-  Process Nygren_1998j_Ca_cFluxProcess(j_Ca_c)
+  Process Koivumaki_2011_DiffusionJNjFluxProcess(Jj_nj)
   {
-    Name "d/dt Ca_c in component cleft_space_ion_concentrations (millimolar)";
+    Name "Ca diffusion from junct to non-junct";
+    @{'''
+    #  Diffusion from junct to non-junct (pmol/sec)
+    Jj_nj = DCa * Aj_nj / xj_nj * (Cass-Cai4)*1e-6
+    '''}
 
-    tau_Ca  24.7; # tau_Ca in component cleft_space_ion_concentrations (second)
-    Ca_b  1.8; # Ca_b in component cleft_space_ion_concentrations (millimolar)
+    D  @DCa;
+    Aj_nj  @Aj_nj;
+    xj_nj  @xj_nj;
 
     VariableReferenceList
-      [Ca_c :.:Ca_c  1];
+      [nj :../bulk_4:Ca  1]  # Cai4
+      [j  :.:Ca_ss      -1]; # Cass
   }
 
-}
+} # END of /Cell/Cytosol/ss
 
-System System( /Cytosol )
+System System( /Cell/Cytosol/bulk; )
 {
   StepperID    Default;
-
-  Name "Cytosol";
+  Name "Cell";
 
   Variable Variable( SIZE )
   {
-    Name "Vol_i in component intracellular_ion_concentrations (litre)";
-    Value    @(Vol_i * 1.0e-9);
-  }
-
-  ### status
-
-  Variable Variable(V)
-  {
-    Name "V in component membrane (millivolt)";
-    Value  -74.2525;
+    Value    @((Vnonjunct1 + Vnonjunct2 + Vnonjunct3 + Vnonjunct4) * 1.0e-9);
   }
 
   Variable Variable(Na_i)
   {
     Name "Na_i in component intracellular_ion_concentrations (molar)";
-    MolarConc  8.5547e-3;
+    MolarConc  9.286860e-3;    # hAM_KKT.ode Nai
   }
 
-  Variable Variable(m)
+  Variable Variable(JNa)
   {
-    Name "m in component sodium_current_m_gate (dimensionless)";
-    Value  0.0032017;
-  }
-
-  Variable Variable(h1)
-  {
-    Name "h1 in component sodium_current_h1_gate (dimensionless)";
-    Value  0.8814;
-  }
-
-  Variable Variable(h2)
-  {
-    Name "h2 in component sodium_current_h2_gate (dimensionless)";
-    Value  0.8742;
-  }
-
-  Variable Variable(d_L)
-  {
-    Name "d_L in component L_type_Ca_channel_d_L_gate (dimensionless)";
-    Value  1.3005e-5;
-  }
-
-  Variable Variable(f_L_1)
-  {
-    Name "f_L_1 in component L_type_Ca_channel_f_L1_gate (dimensionless)";
-    Value  0.9986;
-  }
-
-  Variable Variable(f_L_2)
-  {
-    Name "f_L_2 in component L_type_Ca_channel_f_L2_gate (dimensionless)";
-    Value  0.9986;
-  }
-
-  Variable Variable(K_i)
-  {
-    Name "K_i in component intracellular_ion_concentrations (molar)";
-    MolarConc  129.435e-3;
-  }
-
-  Variable Variable(r)
-  {
-    Name "r in component Ca_independent_transient_outward_K_current_r_gate (dimensionless)";
-    Value  0.0010678;
-  }
-
-  Variable Variable(s)
-  {
-    Name "s in component Ca_independent_transient_outward_K_current_s_gate (dimensionless)";
-    Value  0.949;
-  }
-
-  Variable Variable(r_sus)
-  {
-    Name "r_sus in component sustained_outward_K_current_r_sus_gate (dimensionless)";
-    Value  0.00015949;
-  }
-
-  Variable Variable(s_sus)
-  {
-    Name "s_sus in component sustained_outward_K_current_s_sus_gate (dimensionless)";
-    Value  0.9912;
-  }
-
-  Variable Variable(n)
-  {
-    Name "n in component delayed_rectifier_K_currents_n_gate (dimensionless)";
-    Value  0.0048357;
-  }
-
-  Variable Variable(p_a)
-  {
-    Name "p_a in component delayed_rectifier_K_currents_pa_gate (dimensionless)";
-    Value  0.0001;
-  }
-
-  Variable Variable(Ca_i)
-  {
-    Name "Ca_i in component intracellular_ion_concentrations (molar)";
-    MolarConc  6.729e-8;
-  }
-
-  Variable Variable(O_C)
-  {
-    Name "O_C in component intracellular_Ca_buffering (dimensionless)";
-    Value  0.0275;
-  }
-
-  Variable Variable(O_TC)
-  {
-    Name "O_TC in component intracellular_Ca_buffering (dimensionless)";
-    Value  0.0133;
-  }
-
-  Variable Variable(O_TMgC)
-  {
-    Name "O_TMgC in component intracellular_Ca_buffering (dimensionless)";
-    Value  0.1961;
-  }
-
-  Variable Variable(O_TMgMg)
-  {
-    Name "O_TMgMg in component intracellular_Ca_buffering (dimensionless)";
-    Value  0.7094;
-  }
-
-  ### algebraic
-
-  Variable Variable(i_Stim)
-  {
-    Name "i_Stim in component membrane (picoA)";
     Value  0.0;
   }
 
-  Variable Variable(m_infinity)
-  {
-    Name "m_infinity in component sodium_current_m_gate (dimensionless)";
-    Value  0.0032017055046363744;
-  }
-
-  Variable Variable(h_infinity)
-  {
-    Name "h_infinity in component sodium_current_h1_gate (dimensionless)";
-    Value  0.8818331920341357;
-  }
-
-  Variable Variable(d_L_infinity)
-  {
-    Name "d_L_infinity in component L_type_Ca_channel_d_L_gate (dimensionless)";
-    Value  1.3001523226591241e-05;
-  }
-
-  Variable Variable(f_L_infinity)
-  {
-    Name "f_L_infinity in component L_type_Ca_channel_f_L1_gate (dimensionless)";
-    Value  0.9986400461877076;
-  }
-
-  Variable Variable(r_infinity)
-  {
-    Name "r_infinity in component Ca_independent_transient_outward_K_current_r_gate (dimensionless)";
-    Value  0.0010677467619427574;
-  }
-
-  Variable Variable(s_infinity)
-  {
-    Name "s_infinity in component Ca_independent_transient_outward_K_current_s_gate (dimensionless)";
-    Value  0.949549739332083;
-  }
-
-  Variable Variable(r_sus_infinity)
-  {
-    Name "r_sus_infinity in component sustained_outward_K_current_r_sus_gate (dimensionless)";
-    Value  0.00015937958206002146;
-  }
-
-  Variable Variable(s_sus_infinity)
-  {
-    Name "s_sus_infinity in component sustained_outward_K_current_s_sus_gate (dimensionless)";
-    Value  0.998246137934045;
-  }
-
-  Variable Variable(n_infinity)
-  {
-    Name "n_infinity in component delayed_rectifier_K_currents_n_gate (dimensionless)";
-    Value  0.0006026430448910566;
-  }
-
-  Variable Variable(p_a_infinity)
-  {
-    Name "p_a_infinity in component delayed_rectifier_K_currents_pa_gate (dimensionless)";
-    Value  5.142078505326955e-05;
-  }
-
-  Variable Variable(E_Na)
-  {
-    Name "E_Na in component sodium_current (millivolt)";
-    Value  71.78374025254665;
-  }
-
-  Variable Variable(tau_m)
-  {
-    Name "tau_m in component sodium_current_m_gate (second)";
-    Value  2.6411712783673727e-05;
-  }
-
-  Variable Variable(tau_h1)
-  {
-    Name "tau_h1 in component sodium_current_h1_gate (second)";
-    Value  0.03029985430041965;
-  }
-
-  Variable Variable(tau_h2)
-  {
-    Name "tau_h2 in component sodium_current_h2_gate (second)";
-    Value  0.12299941720167859;
-  }
-
-  Variable Variable(tau_d_L)
-  {
-    Name "tau_d_L in component L_type_Ca_channel_d_L_gate (second)";
-    Value  0.0024873842753601674;
-  }
-
-  Variable Variable(tau_f_L1)
-  {
-    Name "tau_f_L1 in component L_type_Ca_channel_f_L1_gate (second)";
-    Value  0.010561832433011065;
-  }
-
-  Variable Variable(tau_f_L2)
-  {
-    Name "tau_f_L2 in component L_type_Ca_channel_f_L2_gate (second)";
-    Value  0.06655984396077287;
-  }
-
-  Variable Variable(tau_r)
-  {
-    Name "tau_r in component Ca_independent_transient_outward_K_current_r_gate (second)";
-    Value  0.0015076482796525805;
-  }
-
-  Variable Variable(tau_s)
-  {
-    Name "tau_s in component Ca_independent_transient_outward_K_current_s_gate (second)";
-    Value  0.07183350864577431;
-  }
-
-  Variable Variable(tau_r_sus)
-  {
-    Name "tau_r_sus in component sustained_outward_K_current_r_sus_gate (second)";
-    Value  0.009472038556972982;
-  }
-
-  Variable Variable(tau_s_sus)
-  {
-    Name "tau_s_sus in component sustained_outward_K_current_s_sus_gate (second)";
-    Value  0.33788952618800877;
-  }
-
-  Variable Variable(tau_n)
-  {
-    Name "tau_n in component delayed_rectifier_K_currents_n_gate (second)";
-    Value  0.7000000000905494;
-  }
-
-  Variable Variable(tau_p_a)
-  {
-    Name "tau_p_a in component delayed_rectifier_K_currents_pa_gate (second)";
-    Value  0.031750398000436095;
-  }
-
-  Variable Variable(i_Na)
-  {
-    Name "i_Na in component sodium_current (picoA)";
-    Value  0.0;
-  }
-
-  Variable Variable(f_Ca)
-  {
-    Name "f_Ca in component L_type_Ca_channel (dimensionless)";
-    Value  0.002891415473410205;
-  }
-
-  Variable Variable(i_Ca_L)
-  {
-    Name "i_Ca_L in component L_type_Ca_channel (picoA)";
-    Value  0.0;
-  }
-
-  Variable Variable(E_K)
-  {
-    Name "E_K in component Ca_independent_transient_outward_K_current (millivolt)";
-    Value  -84.00907384905881;
-  }
-
-  Variable Variable(i_t)
-  {
-    Name "i_t in component Ca_independent_transient_outward_K_current (picoA)";
-    Value  0.0;
-  }
-
-  Variable Variable(i_sus)
-  {
-    Name "i_sus in component sustained_outward_K_current (picoA)";
-    Value  0.0;
-  }
-
-  Variable Variable(p_i)
-  {
-    Name "p_i in component delayed_rectifier_K_currents_pi_gate (dimensionless)";
-    Value  0.6904422140268597;
-  }
-
-  Variable Variable(i_K1)
-  {
-    Name "i_K1 in component inward_rectifier (picoA)";
-    Value  0.0;
-  }
-
-  Variable Variable(i_Kr)
-  {
-    Name "i_Kr in component delayed_rectifier_K_currents (picoA)";
-    Value  0.0;
-  }
-
-  Variable Variable(i_Ks)
-  {
-    Name "i_Ks in component delayed_rectifier_K_currents (picoA)";
-    Value  0.0;
-  }
-
-  Variable Variable(i_B_Na)
-  {
-    Name "i_B_Na in component background_currents (picoA)";
-    Value  0.0;
-  }
-
-  Variable Variable(E_Ca)
-  {
-    Name "E_Ca in component background_currents (millivolt)";
-    Value  134.5701213309398;
-  }
-
-  Variable Variable(i_B_Ca)
-  {
-    Name "i_B_Ca in component background_currents (picoA)";
-    Value  0.0;
-  }
-
-  Variable Variable(i_NaK)
-  {
-    Name "i_NaK in component sodium_potassium_pump (picoA)";
-    Value  0.0;
-  }
-
-  Variable Variable(i_CaP)
-  {
-    Name "i_CaP in component sarcolemmal_calcium_pump_current (picoA)";
-    Value  0.0;
-  }
-
-  Variable Variable(i_NaCa)
-  {
-    Name "i_NaCa in component Na_Ca_ion_exchanger_current (picoA)";
-    Value  0.0;
-  }
-
-  Variable Variable(dOCdt)
-  {
-    Name "dOCdt in component intracellular_Ca_buffering (per_second)";
-    Value  0.0;
-  }
-
-  Variable Variable(dOTCdt)
-  {
-    Name "dOTCdt in component intracellular_Ca_buffering (per_second)";
-    Value  0.0;
-  }
-
-  Variable Variable(dOTMgCdt)
-  {
-    Name "dOTMgCdt in component intracellular_Ca_buffering (per_second)";
-    Value  0.0;
-  }
-
-  Process Nygren_1998v_VFluxProcess(v_V)
-  {
-    Name "d/dt V in component membrane (millivolt)";
-
-    Cm  0.05; # Cm in component membrane (nanoF)
-
-    VariableReferenceList
-      [V      :.:V       1]
-      [i_Stim :.:i_Stim  0]
-      [i_Na   :.:i_Na    0]
-      [i_Ca_L :.:i_Ca_L  0]
-      [i_t    :.:i_t     0]
-      [i_sus  :.:i_sus   0]
-      [i_K1   :.:i_K1    0]
-      [i_Kr   :.:i_Kr    0]
-      [i_Ks   :.:i_Ks    0]
-      [i_B_Na :.:i_B_Na  0]
-      [i_B_Ca :.:i_B_Ca  0]
-      [i_NaK  :.:i_NaK   0]
-      [i_CaP  :.:i_CaP   0]
-      [i_NaCa :.:i_NaCa  0];
-  }
-
-  Process Nygren_1998j_K_iFluxProcess(j_K_i)
-  {
-    Name "d/dt K_i in component intracellular_ion_concentrations (millimolar)";
-
-    F  @F;
-
-    VariableReferenceList
-      [K_c   :../Cleft:K_c  1]
-      [K_i   :.:K_i        -1]
-      [i_t   :.:i_t         0]
-      [i_sus :.:i_sus       0]
-      [i_K1  :.:i_K1        0]
-      [i_Kr  :.:i_Kr        0]
-      [i_Ks  :.:i_Ks        0]
-      [i_NaK :.:i_NaK       0];
-  }
-
-  Process Nygren_1998j_Na_iFluxProcess(j_Na_i)
-  {
-    Name "d/dt Na_i in component intracellular_ion_concentrations (millimolar)";
-
-    F  @F;
-    phi_Na_en -1.68;  # phi_Na_en in component intracellular_ion_concentrations (picoA)
-
-    VariableReferenceList
-      [Na_c   :../Cleft:Na_c  1]
-      [Na_i   :.:Na_i        -1]
-      [i_Na   :.:i_Na         0]
-      [i_B_Na :.:i_B_Na       0]
-      [i_NaK  :.:i_NaK        0]
-      [i_NaCa :.:i_NaCa       0];
-  }
-
-  Process Nygren_1998j_Ca_iFluxProcess(j_Ca_i)
-  {
-    Name "d/dt Ca_i in component intracellular_ion_concentrations (millimolar)";
-
-    F  @F;
-
-    VariableReferenceList
-      [Ca_i     :.:Ca_i      1]
-      [dOTCdt   :.:dOTCdt    0]
-      [dOTMgCdt :.:dOTMgCdt  0]
-      [dOCdt    :.:dOCdt     0];
-  }
-
-    Process Nygren_1998j_Ca_i_cFluxProcess(j_Ca_i_c)
-    {
-      Name "d/dt Ca_i in component intracellular_ion_concentrations (millimolar)";
-
-      F  @F;
-
-      VariableReferenceList
-        [Ca_c   :../Cleft:Ca_c  1]
-        [Ca_i   :.:Ca_i        -1]
-        [i_B_Ca :.:i_B_Ca       0]
-        [i_CaP  :.:i_CaP        0]
-        [i_NaCa :.:i_NaCa       0];
-    }
-
-  Process Nygren_1998E_KAssignmentProcess(E_K)
+  Process Koivumaki_2011_Jj_njAssignmentProcess(JNa)
   {
     StepperID    PSV;
-    F  @F;
-    T  @T;
-    R  @R;
+    Name "Na diffusion from junct to non-junct";
+    @{'''
+    #  Diffusion from junct to non-junct    (pmol/sec)
+    JNa = DNa * Aj_nj / xj_nj_Nai * (Nass - Nai)* 1e-3
+    '''}
+
+    D  @DNa;
+    Aj_nj  @Aj_nj;
+    xj_nj  @xj_nj_Nai;
 
     VariableReferenceList
-      [E_K :.:E_K         1]
-      [K_c :../Cleft:K_c  0]
-      [K_i :.:K_i         0];
+      [Jj_nj :.:JNa        1]
+      [nj    :.:Na_i       0]
+      [j     :../ss:Na_ss  0];
   }
 
-  Process Nygren_1998_ItAssignmentProcess(i_t)
+  Process ZeroVariableAsFluxProcess(JNa_flux)
   {
-    StepperID    PSV;
-
-    g_t  7.5; # g_t in component Ca_independent_transient_outward_K_current (nanoS)
-
     VariableReferenceList
-      [i_t        :.:i_t         1]
-      [tau_r      :.:tau_r       1]
-      [r_infinity :.:r_infinity  1]
-      [tau_s      :.:tau_s       1]
-      [s_infinity :.:s_infinity  1]
-      [r          :.:r           0]
-      [s          :.:s           0]
-      [V          :.:V           0]
-      [E_K        :.:E_K         0];
-  }
-
-  Process Nygren_1998v_rFluxProcess(v_r)
-  {
-    Name "d/dt r in component Ca_independent_transient_outward_K_current_r_gate (dimensionless)";
-
-    VariableReferenceList
-      [r          :.:r           1]
-      [r_infinity :.:r_infinity  0]
-      [tau_r      :.:tau_r       0];
-  }
-
-  Process Nygren_1998v_sFluxProcess(v_s)
-  {
-    Name "d/dt s in component Ca_independent_transient_outward_K_current_s_gate (dimensionless)";
-
-    VariableReferenceList
-      [s          :.:s           1]
-      [s_infinity :.:s_infinity  0]
-      [tau_s      :.:tau_s       0];
-  }
-
-  Process Nygren_1998_IsusAssignmentProcess(i_sus)
-  {
-    StepperID    PSV;
-
-    g_sus  2.75; # g_sus in component sustained_outward_K_current (nanoS)
-
-    VariableReferenceList
-      [tau_r_sus      :.:tau_r_sus       1]
-      [r_sus_infinity :.:r_sus_infinity  1]
-      [tau_s_sus      :.:tau_s_sus       1]
-      [s_sus_infinity :.:s_sus_infinity  1]
-      [i_sus          :.:i_sus           1]
-      [r_sus          :.:r_sus           0]
-      [s_sus          :.:s_sus           0]
-      [V              :.:V               0]
-      [E_K            :.:E_K             0];
-  }
-
-  Process Nygren_1998v_r_susFluxProcess(v_r_sus)
-  {
-    Name "d/dt r_sus in component sustained_outward_K_current_r_sus_gate (dimensionless)";
-
-    VariableReferenceList
-      [r_sus          :.:r_sus           1]
-      [r_sus_infinity :.:r_sus_infinity  0]
-      [tau_r_sus      :.:tau_r_sus       0];
-  }
-
-  Process Nygren_1998v_s_susFluxProcess(v_s_sus)
-  {
-    Name "d/dt s_sus in component sustained_outward_K_current_s_sus_gate (dimensionless)";
-
-    VariableReferenceList
-      [s_sus          :.:s_sus           1]
-      [s_sus_infinity :.:s_sus_infinity  0]
-      [tau_s_sus      :.:tau_s_sus       0];
-  }
-
-  Process Nygren_1998_IKrAssignmentProcess(i_Kr)
-  {
-    StepperID    PSV;
-
-    g_Kr  0.5; # g_Kr in component delayed_rectifier_K_currents (nanoS)
-
-    VariableReferenceList
-      [tau_p_a      :.:tau_p_a       1]
-      [p_a_infinity :.:p_a_infinity  1]
-      [p_i :.:p_i  1]
-      [i_Kr :.:i_Kr  1]
-      [p_a  :.:p_a   0]
-      [V    :.:V     0]
-      [E_K  :.:E_K   0];
-  }
-
-  Process Nygren_1998v_p_aFluxProcess(v_p_a)
-  {
-    Name "d/dt p_a in component delayed_rectifier_K_currents_pa_gate (dimensionless)";
-
-    VariableReferenceList
-      [p_a          :.:p_a           1]
-      [p_a_infinity :.:p_a_infinity  0]
-      [tau_p_a      :.:tau_p_a       0];
-  }
-
-  Process Nygren_1998_IKsAssignmentProcess(i_Ks)
-  {
-    StepperID    PSV;
-
-    g_Ks  1; # g_Ks in component delayed_rectifier_K_currents (nanoS)
-
-    VariableReferenceList
-      [tau_n        :.:tau_n         1]
-      [n_infinity   :.:n_infinity    1]
-      [i_Ks :.:i_Ks  1]
-      [n    :.:n     0]
-      [V    :.:V     0]
-      [E_K  :.:E_K   0];
-  }
-
-  Process Nygren_1998v_nFluxProcess(v_n)
-  {
-    Name "d/dt n in component delayed_rectifier_K_currents_n_gate (dimensionless)";
-
-    VariableReferenceList
-      [n          :.:n           1]
-      [n_infinity :.:n_infinity  0]
-      [tau_n      :.:tau_n       0];
-  }
-
-  Process Nygren_1998i_K1AssignmentProcess(i_K1)
-  {
-    StepperID    PSV;
-
-    T  @T;
-    R  @R;
-    F  @F;
-    g_K1  3; # g_K1 in component inward_rectifier (nanoS)
-
-    VariableReferenceList
-      [i_K1 :.:i_K1        1]
-      [K_c  :../Cleft:K_c  0]
-      [V    :.:V           0]
-      [E_K  :.:E_K         0];
-  }
-
-  Process Nygren_1998i_NaKAssignmentProcess(i_NaK)
-  {
-    StepperID    PSV;
-
-    k_NaK_Na  11; # k_NaK_Na in component sodium_potassium_pump (millimolar)
-    k_NaK_K  1; # k_NaK_K in component sodium_potassium_pump (millimolar)
-    i_NaK_max  70.8253; # i_NaK_max in component sodium_potassium_pump (picoA)
-
-    VariableReferenceList
-      [i_NaK :.:i_NaK       1]
-      [K_c   :../Cleft:K_c  0]
-      [Na_i  :.:Na_i        0]
-      [V     :.:V           0];
-  }
-
-  Process Nygren_1998E_NaAssignmentProcess(E_Na)
-  {
-    StepperID    PSV;
-
-    F  @F;
-    T  @T;
-    R  @R;
-
-    VariableReferenceList
-      [E_Na :.:E_Na         1]
-      [Na_c :../Cleft:Na_c  0]
-      [Na_i :.:Na_i         0];
-  }
-
-  Process Nygren_1998_INaAssignmentProcess(i_Na)
-  {
-    StepperID    PSV;
-
-    T  @T;
-    R  @R;
-    F  @F;
-    P_Na  0.0016; # P_Na in component sodium_current (nanolitre_per_second)
-
-    VariableReferenceList
-      [i_Na :.:i_Na         1]
-      [m_infinity :.:m_infinity  1]
-      [tau_m      :.:tau_m       1]
-      [h_infinity :.:h_infinity  1]
-      [tau_h1     :.:tau_h1      1]
-      [tau_h2     :.:tau_h2      1]
-      [m    :.:m            0]
-      [h1   :.:h1           0]
-      [h2   :.:h2           0]
-      [Na_c :../Cleft:Na_c  0]
-      [V    :.:V            0]
-      [E_Na :.:E_Na         0];
-  }
-
-  Process Nygren_1998v_mFluxProcess(v_m)
-  {
-
-    VariableReferenceList
-      [m          :.:m           1]
-      [m_infinity :.:m_infinity  0]
-      [tau_m      :.:tau_m       0];
-  }
-
-  Process Nygren_1998v_h1FluxProcess(v_h1)
-  {
-    Name "d/dt h1 in component sodium_current_h1_gate (dimensionless)";
-
-    VariableReferenceList
-      [h1         :.:h1          1]
-      [h_infinity :.:h_infinity  0]
-      [tau_h1     :.:tau_h1      0];
-  }
-
-  Process Nygren_1998v_h2FluxProcess(v_h2)
-  {
-    Name "d/dt h2 in component sodium_current_h2_gate (dimensionless)";
-
-    VariableReferenceList
-      [h2         :.:h2          1]
-      [h_infinity :.:h_infinity  0]
-      [tau_h2     :.:tau_h2      0];
-  }
-
-  Process Nygren_1998i_B_NaAssignmentProcess(i_B_Na)
-  {
-    StepperID    PSV;
-
-    g_B_Na  0.060599; # g_B_Na in component background_currents (nanoS)
-
-    VariableReferenceList
-      [i_B_Na :.:i_B_Na  1]
-      [V      :.:V       0]
-      [E_Na   :.:E_Na    0];
-  }
-
-  Process Nygren_1998E_CaAssignmentProcess(E_Ca)
-  {
-    StepperID    PSV;
-
-    F  @F;
-    T  @T;
-    R  @R;
-
-    VariableReferenceList
-      [E_Ca :.:E_Ca         1]
-      [Ca_c :../Cleft:Ca_c  0]
-      [Ca_i :.:Ca_i         0];
-  }
-
-  Process Nygren_1998_ICaLAssignmentProcess(i_Ca_L)
-  {
-    StepperID    PSV;
-
-    E_Ca_app  60; # E_Ca_app in component L_type_Ca_channel (millivolt)
-    g_Ca_L  6.75; # g_Ca_L in component L_type_Ca_channel (nanoS)
-    k_Ca  0.025; # k_Ca in component L_type_Ca_channel (millimolar)
-
-    VariableReferenceList
-      [i_Ca_L :.:i_Ca_L  1]
-      [d_L_infinity :.:d_L_infinity  1]
-      [tau_d_L      :.:tau_d_L       1]
-      [f_L_infinity :.:f_L_infinity  1]
-      [tau_f_L1     :.:tau_f_L1      1]
-      [tau_f_L2     :.:tau_f_L2      1]
-      [f_Ca :.:f_Ca     1]
-      [d_L    :.:d_L     0]
-      [f_L_1  :.:f_L_1   0]
-      [f_L_2  :.:f_L_2   0]
-      [Ca_d :../d:Ca_d  0]
-      [V      :.:V       0];
-  }
-
-  Process Nygren_1998v_d_LFluxProcess(v_d_L)
-  {
-    Name "d/dt d_L in component L_type_Ca_channel_d_L_gate (dimensionless)";
-
-    VariableReferenceList
-      [d_L          :.:d_L           1]
-      [d_L_infinity :.:d_L_infinity  0]
-      [tau_d_L      :.:tau_d_L       0];
-  }
-
-  Process Nygren_1998v_f_L_1FluxProcess(v_f_L_1)
-  {
-    Name "d/dt f_L_1 in component L_type_Ca_channel_f_L1_gate (dimensionless)";
-
-    VariableReferenceList
-      [f_L_1        :.:f_L_1         1]
-      [f_L_infinity :.:f_L_infinity  0]
-      [tau_f_L1     :.:tau_f_L1      0];
-  }
-
-  Process Nygren_1998v_f_L_2FluxProcess(v_f_L_2)
-  {
-    Name "d/dt f_L_2 in component L_type_Ca_channel_f_L2_gate (dimensionless)";
-
-    VariableReferenceList
-      [f_L_2        :.:f_L_2         1]
-      [f_L_infinity :.:f_L_infinity  0]
-      [tau_f_L2     :.:tau_f_L2      0];
-  }
-
-  Process Nygren_1998i_B_CaAssignmentProcess(i_B_Ca)
-  {
-    StepperID    PSV;
-
-    g_B_Ca  0.078681; # g_B_Ca in component background_currents (nanoS)
-
-    VariableReferenceList
-      [i_B_Ca :.:i_B_Ca  1]
-      [V      :.:V       0]
-      [E_Ca   :.:E_Ca    0];
-  }
-
-  Process Nygren_1998i_CaPAssignmentProcess(i_CaP)
-  {
-    StepperID    PSV;
-
-    k_CaP  0.0002; # k_CaP in component sarcolemmal_calcium_pump_current (millimolar)
-    i_CaP_max  4; # i_CaP_max in component sarcolemmal_calcium_pump_current (picoA)
-
-    VariableReferenceList
-      [i_CaP :.:i_CaP  1]
-      [Ca_i  :.:Ca_i   0];
-  }
-
-  Process Nygren_1998i_NaCaAssignmentProcess(i_NaCa)
-  {
-    StepperID    PSV;
-
-    T  @T;
-    R  @R;
-    F  @F;
-    gamma  0.45; # gamma in component Na_Ca_ion_exchanger_current (dimensionless)
-    k_NaCa  0.0374842; # k_NaCa in component Na_Ca_ion_exchanger_current (picoA_per_millimolar_4)
-    d_NaCa  0.0003; # d_NaCa in component Na_Ca_ion_exchanger_current (per_millimolar_4)
-
-    VariableReferenceList
-      [i_NaCa :.:i_NaCa       1]
-      [Na_i   :.:Na_i         0]
-      [Ca_c   :../Cleft:Ca_c  0]
-      [V      :.:V            0]
-      [Na_c   :../Cleft:Na_c  0]
-      [Ca_i   :.:Ca_i         0];
-  }
-
-  Process Nygren_1998i_StimAssignmentProcess(i_Stim)
-  {
-    StepperID    PSV;
-
-    Name "i_Stim in component membrane (picoA)";
-
-    stim_amplitude  @stim_amplitude;
-    stim_duration  @stim_duration;
-    stim_period  @stim_period;
-    stim_start  @stim_start;
-    stim_end  @stim_end;
-
-    VariableReferenceList
-      [i_Stim :.:i_Stim  1]
-      [voi    :/:voi     0];
-  }
-
-  Process Nygren_1998_OAssignmentProcess(O)
-  {
-    StepperID    PSV;
-
-    VariableReferenceList
-      [dOCdt    :.:dOCdt     1]
-      [dOTCdt   :.:dOTCdt    1]
-      [dOTMgCdt :.:dOTMgCdt  1]
-      [O_C      :.:O_C       0]
-      [O_TC     :.:O_TC      0]
-      [O_TMgC   :.:O_TMgC    0]
-      [O_TMgMg  :.:O_TMgMg   0]
-      [Ca_i     :.:Ca_i      0];
-  }
-
-  Process Nygren_1998v_O_CFluxProcess(v_O_C)
-  {
-    Name "d/dt O_C in component intracellular_Ca_buffering (dimensionless)";
-
-    VariableReferenceList
-      [O_C   :.:O_C    1]
-      [dOCdt :.:dOCdt  0];
-  }
-
-  Process Nygren_1998v_O_TCFluxProcess(v_O_TC)
-  {
-    Name "d/dt O_TC in component intracellular_Ca_buffering (dimensionless)";
-
-    VariableReferenceList
-      [O_TC   :.:O_TC    1]
-      [dOTCdt :.:dOTCdt  0];
-  }
-
-  Process Nygren_1998v_O_TMgCFluxProcess(v_O_TMgC)
-  {
-    Name "d/dt O_TMgC in component intracellular_Ca_buffering (dimensionless)";
-
-    VariableReferenceList
-      [O_TMgC   :.:O_TMgC    1]
-      [dOTMgCdt :.:dOTMgCdt  0];
-  }
-
-  Process Nygren_1998v_O_TMgMgFluxProcess(v_O_TMgMg)
-  {
-
-    Mg_i  2.5; # Mg_i in component intracellular_Ca_buffering (millimolar)
-
-    VariableReferenceList
-      [O_TMgMg :.:O_TMgMg 1]
-      [O_TMgC  :.:O_TMgC  0];
-  }
-
-}
-
-System System( /d )
-{
-  StepperID    Default;
-
-  Name "The diffusion-restricted subsarcolemmal space";
-
-  Variable Variable(SIZE)
-  {
-    Name "Vol_d in component intracellular_ion_concentrations (litre)";
-    Value  @(Vol_d * 1.0e-9);
-  }
-
-  Variable Variable(Ca_d)
-  {
-    Name "Ca_d in component intracellular_ion_concentrations (molar)";
-    MolarConc  7.2495e-8;
-  }
-
-  Variable Variable(i_di)
-  {
-    Name "i_di in component intracellular_ion_concentrations (picoA)";
-    Value  0.0;
-  }
-
-  Process Nygren_1998i_diAssignmentProcess(i_di)
-  {
-    StepperID    PSV;
-
-    tau_di  0.01; # tau_di in component intracellular_ion_concentrations (second)
-    F  @F;
-
-    VariableReferenceList
-      [i_di :.:i_di           1]
-      [Ca_d :.:Ca_d           0]
-      [Ca_i :../Cytosol:Ca_i  0];
-  }
-
-  Process Nygren_1998j_Ca_diFluxProcess(j_Ca_di)
-  {
-    Name "d/dt Ca_d in component intracellular_ion_concentrations (millimolar)";
-
-    F  @F;
-
-    VariableReferenceList
-      [Ca_i :../Cytosol:Ca_i  1]
-      [Ca_d :.:Ca_d          -1]
-      [i_di :.:i_di           0];
-  }
-
-  Process Nygren_1998j_Ca_dFluxProcess(j_Ca_d)
-  {
-    Name "d/dt Ca_d in component intracellular_ion_concentrations (millimolar)";
-
-    F  @F;
-
-    VariableReferenceList
-      [Ca_d   :.:Ca_d             1]
-      [Ca_c   :../Cleft:Ca_c     -1]
-      [i_Ca_L :../Cytosol:i_Ca_L  0];
-  }
-
-}
-
-System System( /SR_up )
-{
-  StepperID    Default;
-
-  Name "The sarcoplasmic reticulum uptake compartment";
-
-  Variable Variable(SIZE)
-  {
-    Name "Vol_up in component Ca_handling_by_the_SR (litre)";
-    Value  @(Vol_up * 1.0e-9);
-  }
-
-  Variable Variable(i_up)
-  {
-    Name "i_up in component Ca_handling_by_the_SR (picoA)";
-    Value  0.0;
-  }
-
-  Variable Variable(Ca_up)
-  {
-    Name "Ca_up in component Ca_handling_by_the_SR (molar)";
-    MolarConc  0.6646e-3;
-  }
-
-  Process Nygren_1998i_upAssignmentProcess(i_up)
-  {
-    StepperID    PSV;
-
-    k_srca  0.5; # k_srca in component Ca_handling_by_the_SR (millimolar)
-    k_xcs  0.4; # k_xcs in component Ca_handling_by_the_SR (dimensionless)
-    k_cyca  0.0003; # k_cyca in component Ca_handling_by_the_SR (millimolar)
-    I_up_max  2800; # I_up_max in component Ca_handling_by_the_SR (picoA)
-
-    VariableReferenceList
-      [i_up  :.:i_up           1]
-      [Ca_i  :../Cytosol:Ca_i  0]
-      [Ca_up :.:Ca_up          0];
-  }
-
-  Process Nygren_1998j_Ca_up_iFluxProcess(j_Ca_up_i)
-  {
-    Name "d/dt Ca_up in component Ca_handling_by_the_SR (millimolar)";
-
-    F  @F;
-
-    VariableReferenceList
-      [Ca_up :.:Ca_up          1]
-      [Ca_i  :../Cytosol:Ca_i -1]
-      [i_up  :.:i_up           0];
-  }
-
-}
-
-System System( /SR_rel )
-{
-  StepperID    Default;
-
-  Name "The sarcoplasmic reticulum release compartment";
-
-  Variable Variable(SIZE)
-  {
-    Name "Vol_rel in component Ca_handling_by_the_SR (litre)";
-    Value  @(Vol_rel * 1.0e-9);
-  }
-
-  Variable Variable(Ca_rel)
-  {
-    Name "Ca_rel in component Ca_handling_by_the_SR (molar)";
-    MolarConc  0.6465e-3;
-  }
-
-  Variable Variable(F1)
-  {
-    Name "F1 in component Ca_handling_by_the_SR (dimensionless)";
-    Value  0.4284;
-  }
-
-  Variable Variable(F2)
-  {
-    Name "F2 in component Ca_handling_by_the_SR (dimensionless)";
-    Value  0.0028;
-  }
-
-  Variable Variable(i_tr)
-  {
-    Name "i_tr in component Ca_handling_by_the_SR (picoA)";
-    Value  0.0;
-  }
-
-  Variable Variable(i_rel)
-  {
-    Name "i_rel in component Ca_handling_by_the_SR (picoA)";
-    Value  0.0;
-  }
-
-  Variable Variable(O_Calse)
-  {
-    Name "O_Calse in component Ca_handling_by_the_SR (dimensionless)";
-    Value  0.4369;
-  }
-
-  Variable Variable(v_O_Calse)
-  {
-    Name "d/dt O_Calse in component Ca_handling_by_the_SR (dimensionless)";
-    Value  0.0;
-  }
-
-  Variable Variable(r_act)
-  {
-    Name "r_act in component Ca_handling_by_the_SR (per_second)";
-    Value  0.22966210288261288;
-  }
-
-  Variable Variable(r_inact)
-  {
-    Name "r_inact in component Ca_handling_by_the_SR (per_second)";
-    Value  34.342589791678876;
-  }
-
-  Process Nygren_1998i_trAssignmentProcess(i_tr)
-  {
-    StepperID    PSV;
-
-    tau_tr  0.01; # tau_tr in component Ca_handling_by_the_SR (second)
-    F  @F;
-
-    VariableReferenceList
-      [i_tr   :.:i_tr          1]
-      [Ca_up  :../SR_up:Ca_up  0]
-      [Ca_rel :.:Ca_rel        0];
-  }
-
-  Process Nygren_1998v_F1FluxProcess(v_F1)
-  {
-
-    r_recov  0.815; # r_recov in component Ca_handling_by_the_SR (per_second)
-
-    VariableReferenceList
-      [F1    :.:F1     1]
-      [F2    :.:F2     0]
-      [r_act :.:r_act  0];
-  }
-
-  Process Nygren_1998v_F2FluxProcess(v_F2)
-  {
-    Name "d/dt F2 in component Ca_handling_by_the_SR (dimensionless)";
-
-    VariableReferenceList
-      [F2      :.:F2       1]
-      [r_act   :.:r_act    0]
-      [F1      :.:F1       0]
-      [r_inact :.:r_inact  0];
-  }
-
-  Process Nygren_1998r_actAssignmentProcess(r_act)
-  {
-    StepperID    PSV;
-
-    k_rel_d  0.003; # k_rel_d in component Ca_handling_by_the_SR (millimolar)
-    k_rel_i  @k_rel_i;
-
-    VariableReferenceList
-      [r_act :.:r_act          1]
-      [Ca_i  :../Cytosol:Ca_i  0]
-      [Ca_d  :../d:Ca_d        0];
-  }
-
-  Process Nygren_1998r_inactAssignmentProcess(r_inact)
-  {
-    StepperID    PSV;
-
-    k_rel_i  @k_rel_i;
-
-    VariableReferenceList
-      [r_inact :.:r_inact        1]
-      [Ca_i    :../Cytosol:Ca_i  0];
-  }
-
-  Process Nygren_1998i_relAssignmentProcess(i_rel)
-  {
-    StepperID    PSV;
-
-    alpha_rel  200000; # alpha_rel in component Ca_handling_by_the_SR (picoA_per_millimolar)
-
-    VariableReferenceList
-      [i_rel  :.:i_rel          1]
-      [F2     :.:F2             0]
-      [Ca_rel :.:Ca_rel         0]
-      [Ca_i   :../Cytosol:Ca_i  0];
-  }
-
-  Process Nygren_1998j_Ca_rel_upFluxProcess(j_Ca_rel_up)
-  {
-    Name "d/dt Ca_rel in component Ca_handling_by_the_SR (millimolar)";
-
-    F  @F;
-
-    VariableReferenceList
-      [Ca_rel :.:Ca_rel       1]
-      [Ca_up  :../SR_up:Ca_up -1]
-      [i_tr   :.:i_tr         0];
-  }
-
-  Process Nygren_1998j_Ca_rel_iFluxProcess(j_Ca_rel_i)
-  {
-    Name "d/dt Ca_rel in component Ca_handling_by_the_SR (millimolar)";
-
-    F  @F;
-
-    VariableReferenceList
-      [Ca_rel    :.:Ca_rel        -1]
-      [Ca_i      :../Cytosol:Ca_i  1]
-      [i_rel     :.:i_rel          0];
-  }
-
-  Process Nygren_1998j_Ca_relFluxProcess(j_Ca_rel)
-  {
-    Name "d/dt Ca_rel in component Ca_handling_by_the_SR (millimolar)";
-
-    F  @F;
-
-    VariableReferenceList
-      [Ca_rel    :.:Ca_rel     1]
-      [v_O_Calse :.:v_O_Calse  0];
-  }
-
-  Process Nygren_1998v_O_Calse_assignAssignmentProcess(v_O_Calse_assign)
-  {
-    StepperID    PSV;
-
-    Name "d/dt O_Calse in component Ca_handling_by_the_SR (dimensionless)";
-
-    VariableReferenceList
-      [v_O_Calse :.:v_O_Calse  1]
-      [O_Calse   :.:O_Calse    0]
-      [Ca_rel    :.:Ca_rel     0];
-  }
-
-  Process Nygren_1998v_O_CalseFluxProcess(v_O_Calse)
-  {
-    Name "d/dt O_Calse in component Ca_handling_by_the_SR (dimensionless)";
-
-    VariableReferenceList
-      [O_Calse   :.:O_Calse    1]
-      [v_O_Calse :.:v_O_Calse  0];
-  }
-
-}
+      [JNa  :.:JNa        0] # pmol/sec
+      [Nai  :.:Na_i       1]
+      [Nass :../ss:Na_ss -1];
+
+    k @(N_A * 1e-12);  # pmol/sec -> NoM/sec
+  }
+
+} # END of /Cell/Cytosol/bulk
+
+# /Cell/Cytoplasm/bulk_x
+@{x = 1}
+@[while x <= 4]
+@include('./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em')
+@{x += 1}
+@[end while]
+
+# /Cell/SR_x
+@{x = 1}
+@[while x <= 4]
+@include('./Koivumaki-2011_Cell_SR_x.em')
+@{x += 1}
+@[end while]
