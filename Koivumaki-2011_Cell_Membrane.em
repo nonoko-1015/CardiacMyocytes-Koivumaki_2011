@@ -50,9 +50,9 @@ System System( /Cell/Membrane )
     Value  @IKrpa_0;
   }
 
-  Variable Variable(i_Stim) # TODO
+  Variable Variable(ist) # TODO
   {
-    Name "i_Stim in component membrane (picoA)";
+    Name "ist in component membrane (picoA)";
     Value  0.0;
   }
 
@@ -301,21 +301,21 @@ System System( /Cell/Membrane )
     Cm  @Cm;
 
     VariableReferenceList
-      [V      :.:V       1]
-      [i_Stim :.:i_Stim  0]
+      [V      :.:V      1]
+      [ist    :.:ist    0]
       [INa    :.:INa    0]
-      [ICaL   :.:ICaL  0]
+      [ICaL   :.:ICaL   0]
       [It     :.:It     0]
       [Isus   :.:Isus   0]
       [IK1    :.:IK1    0]
       [IKr    :.:IKr    0]
       [IKs    :.:IKs    0]
-      [INab   :.:INab  0]
-      [ICab   :.:ICab  0]
+      [INab   :.:INab   0]
+      [ICab   :.:ICab   0]
       [INaK   :.:INaK   0]
       [ICaP   :.:ICaP   0]
       [INaCa  :.:INaCa  0]
-      [If     :.:If      0];
+      [If     :.:If     0];
   }
 
   Process Nygren_1998_EAssignmentProcess(E_Na)
@@ -808,21 +808,30 @@ System System( /Cell/Membrane )
       [g_tau :.:Ifytau  0];
   }
 
-  Process Nygren_1998i_StimAssignmentProcess(i_Stim) # TODO
+  Process Koivumaki_2011_IstAssignmentProcess(ist) # TODO
   {
     StepperID    PSV;
 
-    Name "i_Stim in component membrane (picoA)";
+    Name "ist in component membrane (picoA)";
 
-    stim_amplitude  @stim_amplitude;
+    @{'''
+    stim_time = time % BCL
+    f1 = 1+exp(-stim_steepness*(stim_time - stim_offset))
+    f2 = 1+exp(stim_steepness*(stim_time-stim_offset-stim_duration))
+    #peak = 1 + exp(-stim_steepness*stim_duration/2)
+    #ist = -stim_amp*peak**2/(f1*f2)
+    ist = -stim_amp/(f1*f2)
+    '''}
+
     stim_duration  @stim_duration;
-    stim_period  @stim_period;
-    stim_start  @stim_start;
-    stim_end  @stim_end;
+    stim_amp  @stim_amp;
+    BCL  @BCL;
+    stim_steepness  @stim_steepness;
+    stim_offset  @stim_offset;
 
     VariableReferenceList
-      [i_Stim :.:i_Stim  1]
-      [voi    :/:voi     0];
+      [ist :.:ist  1]
+      [t   :/:t    0];
   }
 
   Process Koivumaki_2011_ZeroVariableAsCurrentFluxProcess(JNa_INa)

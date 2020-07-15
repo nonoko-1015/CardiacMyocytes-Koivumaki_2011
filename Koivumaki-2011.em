@@ -201,7 +201,7 @@ System System( / )
       Value    1.0;
   }
 
-  Variable Variable(voi)
+  Variable Variable(t)
   {
     Name "time in component environment (second)";
     Value  0.0;
@@ -225,12 +225,12 @@ System System( / )
     Fixed  1;
   }
 
-  Process Nygren_1998voiFluxProcess(voi)
+  Process Nygren_1998voiFluxProcess(t)
   {
     Name "time in component environment (second)";
 
     VariableReferenceList
-      [voi :.:voi  1];
+      [t :.:t  1];
   }
 }
 
