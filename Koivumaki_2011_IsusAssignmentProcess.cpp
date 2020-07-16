@@ -35,14 +35,14 @@ LIBECS_DM_CLASS( Koivumaki_2011_IsusAssignmentProcess, Process )
     Isusr  = getVariableReference( "Isusr" ).getVariable();
     Isuss  = getVariableReference( "Isuss" ).getVariable();
     V  = getVariableReference( "V" ).getVariable();
-    E_K  = getVariableReference( "E_K" ).getVariable();
+    EK  = getVariableReference( "EK" ).getVariable();
 
   }
 
   virtual void fire()
   {
     v = V->getValue();
-    Isus->setValue( g_sus*Isusr->getValue()*Isuss->getValue()*(v-E_K->getValue()) );
+    Isus->setValue( g_sus*Isusr->getValue()*Isuss->getValue()*(v-EK->getValue()) );
     Isusrtau->setValue( 0.00900000/(1.00000+exp((v+5.00000)/12.0000))+0.000500000 );
     Isusrinf->setValue( 1.00000/(1.00000+exp((v+6.00000)/-8.60000)) ); // Maleckar et al.
     Isusstau->setValue( 0.5900000/(1.00000+exp((v+60.0000)/10.0000))+3.050000 ); // Maleckar et al.
@@ -60,7 +60,7 @@ LIBECS_DM_CLASS( Koivumaki_2011_IsusAssignmentProcess, Process )
   Variable* Isusr;
   Variable* Isuss;
   Variable* V;
-  Variable* E_K;
+  Variable* EK;
 
   Real g_sus;
   Real v;
