@@ -13,17 +13,11 @@ Ko = 5.4
 
 Cm = 0.05 #nF
 
-stim_duration = 5.0
-stim_amp = 0.0
-BCL = 1e10
+stim_duration = 6.0e-3 # sec
+stim_amp = -280.0      # pA
+BCL = 1.0              # sec
 stim_steepness = 5.0
-stim_offset = 2.0
-
-stim_start     = 0.1        # stim_start in component membrane (second)
-stim_end       = 100000000  # stim_end in component membrane (second)
-stim_period    = 1          # stim_period in component membrane (second)
-stim_duration  = 0.006      # stim_duration in component membrane (second)
-stim_amplitude = -280       # stim_amplitude in component membrane (picoA)
+stim_offset = 1.0e-3   # sec
 
 # Geometry
 Vss    = 4.99232e-5  # volume of the subspace (nanolitre) (Table 1)

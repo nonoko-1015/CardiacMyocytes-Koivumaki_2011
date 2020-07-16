@@ -63,7 +63,7 @@ LIBECS_DM_CLASS( Koivumaki_2011_IstAssignmentProcess, Process )
       return;
     }
     f2 = 1.0 + exp( f2 );
-    ist->setValue( -stim_amp/( f1 * f2 ));
+    ist->setValue( stim_amp/( f1 * f2 ));
   }
 
  protected:

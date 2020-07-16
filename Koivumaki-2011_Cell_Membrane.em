@@ -818,8 +818,6 @@ System System( /Cell/Membrane )
     stim_time = time % BCL
     f1 = 1+exp(-stim_steepness*(stim_time - stim_offset))
     f2 = 1+exp(stim_steepness*(stim_time-stim_offset-stim_duration))
-    #peak = 1 + exp(-stim_steepness*stim_duration/2)
-    #ist = -stim_amp*peak**2/(f1*f2)
     ist = -stim_amp/(f1*f2)
     '''}
 
