@@ -1,4 +1,3 @@
-
 #include "libecs.hpp"
 #include "Process.hpp"
 
@@ -40,21 +39,24 @@ LIBECS_DM_CLASS( Koivumaki_2011_IstAssignmentProcess, Process )
     ist  = getVariableReference( "ist" ).getVariable();
     t  = getVariableReference( "t" ).getVariable();
 
+    BCL_msec = Integer( BCL * 1e+3 );
     threshold = log( abs(stim_amp) * 1.0e+6 );
+    f1_const = stim_steepness * stim_offset * 1e+3;
+    f2_const = -stim_steepness * ( stim_offset + stim_duration ) * 1e+3;
   }
 
   virtual void fire()
   {
-    Real _t = t->getValue();
-    Real stim_time = Real(Integer(_t) % Integer(BCL));
-    Real f1 = -stim_steepness * ( stim_time - stim_offset );
+    Integer t_msec = Integer( t->getValue() * 1e+3 );
+    Real stim_time_msec = Real( t_msec % BCL_msec );
+    Real f1 = -stim_steepness * stim_time_msec + f1_const;
     if ( f1 > threshold )
     {
       ist->setValue( 0.0 );
       return;
     }
     f1 = 1.0 + exp( f1 );
-    Real f2 = stim_steepness * ( stim_time -stim_offset - stim_duration );
+    Real f2 = stim_steepness * stim_time_msec + f2_const;
     if ( f2 > threshold )
     {
       ist->setValue( 0.0 );
@@ -69,13 +71,16 @@ LIBECS_DM_CLASS( Koivumaki_2011_IstAssignmentProcess, Process )
   Variable* ist;
   Variable* t;
 
-  Real stim_duration;
-  Real stim_amp;
-  Real BCL;
-  Real stim_steepness;
-  Real stim_offset;
+  Real stim_duration;  // sec
+  Real stim_amp;       // pA
+  Real BCL;            // sec
+  Real stim_steepness; // sec
+  Real stim_offset;    // sec
 
+  Integer BCL_msec;
   Real threshold;
+  Real f1_const;
+  Real f2_const;
 };
 
 LIBECS_DM_INIT( Koivumaki_2011_IstAssignmentProcess, Process );
