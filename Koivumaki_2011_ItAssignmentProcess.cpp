@@ -35,14 +35,14 @@ LIBECS_DM_CLASS( Koivumaki_2011_ItAssignmentProcess, Process )
     Itr  = getVariableReference( "Itr" ).getVariable();
     Its  = getVariableReference( "Its" ).getVariable();
     V  = getVariableReference( "V" ).getVariable();
-    E_K  = getVariableReference( "E_K" ).getVariable();
+    EK  = getVariableReference( "EK" ).getVariable();
 
   }
 
   virtual void fire()
   {
     v = V->getValue();
-    It->setValue( g_t*Itr->getValue()*Its->getValue()*(v-E_K->getValue()) );
+    It->setValue( g_t*Itr->getValue()*Its->getValue()*(v-EK->getValue()) );
     Itrtau->setValue( 0.00350000*exp(-(pow(v/30.0000, 2.00000)))+0.00150000 );
     Itrinf->setValue( 1.00000/(1.00000+exp((v-1.00000)/-11.0000)) );
     // Itstau->setValue( 0.481200*exp(-(pow((v+52.4500)/14.9700, 2.00000)))+0.0141400 );
@@ -60,7 +60,7 @@ LIBECS_DM_CLASS( Koivumaki_2011_ItAssignmentProcess, Process )
   Variable* Itr;
   Variable* Its;
   Variable* V;
-  Variable* E_K;
+  Variable* EK;
 
   Real g_t;
   Real v;
