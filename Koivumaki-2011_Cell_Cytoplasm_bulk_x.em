@@ -142,14 +142,14 @@ System System( /Cell/Cytosol/@SystemName )
   Process ZeroVariableAsFluxProcess(J_bulkSERCA)
   {
     VariableReferenceList
-      [J_bulkSERCA :.:J_bulkSERCA1  0] # pmol/sec
-      [SERCACa     :.:SERCACa       1]
-      [Cai         :.:Ca           -2];
+      [J_bulkSERCA :.:J_bulkSERCA  0] # pmol/sec
+      [SERCACa     :.:SERCACa      1]
+      [Cai         :.:Ca          -2];
 
     k @(N_A * 1e-12 * 0.5);  # pmol/sec -> NoM/sec
   }
 
-  Process Koivumaki_2011_JSRCaleakAssignmentProcess( JCaleak_assign )
+  Process Koivumaki_2011_JSRCaleakAssignmentProcess( JSRCaleak_assign )
   {
     StepperID    PSV;
     Name "";
@@ -165,12 +165,12 @@ System System( /Cell/Cytosol/@SystemName )
       [Cai       :.:Ca                       0];
   }
 
-  Process ZeroVariableAsFluxProcess(JCaleak)
+  Process ZeroVariableAsFluxProcess(JSRCaleak)
   {
     VariableReferenceList
-      [JCaleak :.:JCaleak                  0] # pmol/sec
-      [Cai     :.:Ca                       1]
-      [CaSR    :../../SR_@(x==0 ? 4:x):Ca -1];
+      [JSRCaleak :.:JSRCaleak                0] # pmol/sec
+      [Cai       :.:Ca                       1]
+      [CaSR      :../../SR_@(x==0 ? 4:x):Ca -1];
 
     k @(N_A * 1e-12);  # pmol/sec -> NoM/sec
   }

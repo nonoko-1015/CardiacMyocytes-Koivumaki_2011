@@ -603,7 +603,7 @@ System System( /Cell/Membrane )
       [Itr    :.:Itr     0]
       [Its    :.:Its     0]
       [V      :.:V       0]
-      [E_K    :.:EK      0];
+      [EK     :.:EK      0];
   }
 
   Process Nygren_1998_GatingFluxProcess(dItr_dt)
@@ -642,7 +642,7 @@ System System( /Cell/Membrane )
       [Isusr    :.:Isusr     0]
       [Isuss    :.:Isuss     0]
       [V        :.:V         0]
-      [E_K      :.:EK        0];
+      [EK       :.:EK        0];
   }
 
   Process Nygren_1998_GatingFluxProcess(dIsusr_dt)
@@ -732,8 +732,8 @@ System System( /Cell/Membrane )
       [IfK    :.:IfK     1]
       [If     :.:If      1]
       [Ify    :.:Ify     0]
-      [E_Na   :.:ENa    0]
-      [E_K    :.:EK     0]
+      [ENa    :.:ENa     0]
+      [EK     :.:EK      0]
       [V      :.:V       0];
   }
 

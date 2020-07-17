@@ -4,12 +4,12 @@
 
 USE_LIBECS;
 
-LIBECS_DM_CLASS( Koivumaki_2011_CaBulkDiffusionFluxProcess, ContinuousProcess )
+LIBECS_DM_CLASS( Koivumaki_2011_CaSRDiffusionFluxProcess, ContinuousProcess )
 {
 
  public:
 
-  LIBECS_DM_OBJECT( Koivumaki_2011_CaBulkDiffusionFluxProcess, Process )
+  LIBECS_DM_OBJECT( Koivumaki_2011_CaSRDiffusionFluxProcess, Process )
   {
     INHERIT_PROPERTIES( Process );
 
@@ -19,7 +19,7 @@ LIBECS_DM_CLASS( Koivumaki_2011_CaBulkDiffusionFluxProcess, ContinuousProcess )
 
   }
 
-  Koivumaki_2011_CaBulkDiffusionFluxProcess()
+  Koivumaki_2011_CaSRDiffusionFluxProcess()
   {
     // do nothing
   }
@@ -71,4 +71,4 @@ LIBECS_DM_CLASS( Koivumaki_2011_CaBulkDiffusionFluxProcess, ContinuousProcess )
   Real DCa_2_j_dx2;
 };
 
-LIBECS_DM_INIT( Koivumaki_2011_CaBulkDiffusionFluxProcess, Process );
+LIBECS_DM_INIT( Koivumaki_2011_CaSRDiffusionFluxProcess, Process );

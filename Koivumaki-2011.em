@@ -389,14 +389,8 @@ System System( /Cell/Cytosol/bulk )
     MolarConc  9.286860e-3;    # hAM_KKT.ode Nai
   }
 
-  Variable Variable(JNa)
+  Process Koivumaki_2011_DiffusionJNjFluxProcess(JNa_assign)
   {
-    Value  @JNa_0;
-  }
-
-  Process Koivumaki_2011_Jj_njAssignmentProcess(JNa_assign)
-  {
-    StepperID    PSV;
     Name "Na diffusion from junct to non-junct";
     @{'''
     #  Diffusion from junct to non-junct    (pmol/sec)
@@ -408,25 +402,14 @@ System System( /Cell/Cytosol/bulk )
     xj_nj  @xj_nj_Nai;
 
     VariableReferenceList
-      [Jj_nj :.:JNa     1]
       [nj    :.:Na_i    0]
       [j     :../ss:Na  0];
-  }
-
-  Process ZeroVariableAsFluxProcess(JNa)
-  {
-    VariableReferenceList
-      [JNa  :.:JNa     0] # pmol/sec
-      [Nai  :.:Na_i    1]
-      [Nass :../ss:Na -1];
-
-    k @(N_A * 1e-12);  # pmol/sec -> NoM/sec
   }
 
 } # END of /Cell/Cytosol/bulk
 
 
-@{DEBUG_WITHOUT_PROCESS = 1}
+@{DEBUG_WITHOUT_PROCESS = 0}
 # /Cell/Membrane
 @include('./Koivumaki-2011_Cell_Membrane.em')
 
