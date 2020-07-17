@@ -14,353 +14,37 @@ System System( /Cell/Membrane )
     Value  @V_0;
   }
 
-  Variable Variable(Itr)
+  Variable Variable(ENa)
   {
-    Name "Itr in component Ca_independent_transient_outward_K_current_r_gate (dimensionless)";
-    Value  @Itr_0;
+    Name "ENa in component sodium_current (millivolt)";
+    Value  @ENa_0;
   }
 
-  Variable Variable(Its)
+  Variable Variable(EK)
   {
-    Name "Its in component Ca_independent_transient_outward_K_current_s_gate (dimensionless)";
-    Value  @Its_0;
+    Name "EK in component Ca_independent_transient_outward_K_current (millivolt)";
+    Value  @EK_0;
   }
 
-  Variable Variable(Isusr)
+  Variable Variable(ECa)
   {
-    Name "Isusr in component sustained_outward_K_current_r_sus_gate (dimensionless)";
-    Value  @Isusr_0;
+    Name "ECa in component background_currents (millivolt)";
+    Value  @ECa_0;
   }
 
-  Variable Variable(Isuss)
-  {
-    Name "Isuss in component sustained_outward_K_current_s_sus_gate (dimensionless)";
-    Value  @Isuss_0;
-  }
-
-  Variable Variable(IKsn)
-  {
-    Name "IKsn in component delayed_rectifier_K_currents_n_gate (dimensionless)";
-    Value  @IKsn_0;
-  }
-
-  Variable Variable(IKrpa)
-  {
-    Name "IKrpa in component delayed_rectifier_K_currents_pa_gate (dimensionless)";
-    Value  @IKrpa_0;
-  }
-
-  Variable Variable(ist) # TODO
+  Variable Variable(ist)
   {
     Name "ist in component membrane (picoA)";
     Value  0.0;
   }
 
-  Variable Variable(INaminf)
-  {
-    Name "INaminf in component sodium_current_m_gate (dimensionless)";
-    Value  0.0032017055046363744;
-  }
-
-  Variable Variable(INahinf)
-  {
-    Name "INahinf in component sodium_current_h1_gate (dimensionless)";
-    Value  0.8818331920341357;
-  }
-
-  Variable Variable(ICaLfcainf)
-  {
-    Value  0.0; # ICaLfcainf  TODO
-  }
-
-  Variable Variable(ICaLdinf)
-  {
-    Name "ICaLdinf in component L_type_Ca_channel_d_L_gate (dimensionless)";
-    Value  1.3001523226591241e-05;
-  }
-
-  Variable Variable(ICaLfinf)
-  {
-    Name "ICaLfinf in component L_type_Ca_channel_f_L1_gate (dimensionless)";
-    Value  0.9986400461877076;
-  }
-
-  Variable Variable(Itrinf)
-  {
-    Name "Itrinf in component Ca_independent_transient_outward_K_current_r_gate (dimensionless)";
-    Value  0.0010677467619427574;
-  }
-
-  Variable Variable(Itsinf)
-  {
-    Name "Itsinf in component Ca_independent_transient_outward_K_current_s_gate (dimensionless)";
-    Value  0.949549739332083;
-  }
-
-  Variable Variable(Isusrinf)
-  {
-    Name "Isusrinf in component sustained_outward_K_current_r_sus_gate (dimensionless)";
-    Value  0.00015937958206002146;
-  }
-
-  Variable Variable(Isussinf)
-  {
-    Name "Isussinf in component sustained_outward_K_current_s_sus_gate (dimensionless)";
-    Value  0.998246137934045;
-  }
-
-  Variable Variable(IKsninf)
-  {
-    Name "IKsninf in component delayed_rectifier_K_currents_n_gate (dimensionless)";
-    Value  0.0006026430448910566;
-  }
-
-  Variable Variable(IKrpainf)
-  {
-    Name "IKrpainf in component delayed_rectifier_K_currents_pa_gate (dimensionless)";
-    Value  5.142078505326955e-05;
-  }
-
-  Variable Variable(INamtau)
-  {
-    Name "INamtau in component sodium_current_m_gate (second)";
-    Value  2.6411712783673727e-05;
-  }
-
-  Variable Variable(INah1tau)
-  {
-    Name "INah1tau in component sodium_current_h1_gate (second)";
-    Value  0.03029985430041965;
-  }
-
-  Variable Variable(INah2tau)
-  {
-    Name "INah2tau in component sodium_current_h2_gate (second)";
-    Value  0.12299941720167859;
-  }
-
-  Variable Variable(ICaLfcatau)
-  {
-    Value  2.0e-3; # ICaLfcatau
-  }
-
-  Variable Variable(ICaLdtau)
-  {
-    Name "ICaLdtau in component L_type_Ca_channel_d_L_gate (second)";
-    Value  0.0024873842753601674;
-  }
-
-  Variable Variable(ICaLf1tau)
-  {
-    Name "ICaLf1tau in component L_type_Ca_channel_f_L1_gate (second)";
-    Value  0.010561832433011065;
-  }
-
-  Variable Variable(ICaLf2tau)
-  {
-    Name "ICaLf2tau in component L_type_Ca_channel_f_L2_gate (second)";
-    Value  0.06655984396077287;
-  }
-
-  Variable Variable(Itrtau)
-  {
-    Name "Itrtau in component Ca_independent_transient_outward_K_current_r_gate (second)";
-    Value  0.0015076482796525805;
-  }
-
-  Variable Variable(Itstau)
-  {
-    Name "Itstau in component Ca_independent_transient_outward_K_current_s_gate (second)";
-    Value  0.07183350864577431;
-  }
-
-  Variable Variable(Isusrtau)
-  {
-    Name "Isusrtau in component sustained_outward_K_current_r_sus_gate (second)";
-    Value  0.009472038556972982;
-  }
-
-  Variable Variable(Isusstau)
-  {
-    Name "Isusstau in component sustained_outward_K_current_s_sus_gate (second)";
-    Value  0.33788952618800877;
-  }
-
-  Variable Variable(IKsntau)
-  {
-    Name "IKsntau in component delayed_rectifier_K_currents_n_gate (second)";
-    Value  0.7000000000905494;
-  }
-
-  Variable Variable(IKrpatau)
-  {
-    Name "IKrpatau in component delayed_rectifier_K_currents_pa_gate (second)";
-    Value  0.031750398000436095;
-  }
+  # INa
 
   Variable Variable(INa)
   {
     Name "INa in component sodium_current (picoA)";
-    Value  0.0;
+    Value  @INa_0;
   }
-
-  Variable Variable(ICaL)
-  {
-    Name "ICaL in component L_type_Ca_channel (picoA)";
-    Value  0.0;
-  }
-
-  Variable Variable(E_Na)
-  {
-    Name "E_Na in component sodium_current (millivolt)";
-    Value  71.78374025254665;
-  }
-
-  Variable Variable(E_K)
-  {
-    Name "E_K in component Ca_independent_transient_outward_K_current (millivolt)";
-    Value  -84.00907384905881;
-  }
-
-  Variable Variable(It)
-  {
-    Name "It in component Ca_independent_transient_outward_K_current (picoA)";
-    Value  0.0;
-  }
-
-  Variable Variable(Isus)
-  {
-    Name "Isus in component sustained_outward_K_current (picoA)";
-    Value  0.0;
-  }
-
-  Variable Variable(IKrpi)
-  {
-    Name "IKrpi in component delayed_rectifier_K_currents_pi_gate (dimensionless)";
-    Value  0.6904422140268597;
-  }
-
-  Variable Variable(IK1)
-  {
-    Name "IK1 in component inward_rectifier (picoA)";
-    Value  0.0;
-  }
-
-  Variable Variable(IKr)
-  {
-    Name "IKr in component delayed_rectifier_K_currents (picoA)";
-    Value  0.0;
-  }
-
-  Variable Variable(IKs)
-  {
-    Name "IKs in component delayed_rectifier_K_currents (picoA)";
-    Value  0.0;
-  }
-
-  Variable Variable(INab)
-  {
-    Name "INab in component background_currents (picoA)";
-    Value  0.0;
-  }
-
-  Variable Variable(E_Ca)
-  {
-    Name "E_Ca in component background_currents (millivolt)";
-    Value  134.5701213309398;
-  }
-
-  Variable Variable(ICab)
-  {
-    Name "ICab in component background_currents (picoA)";
-    Value  0.0;
-  }
-
-  Variable Variable(INaK)
-  {
-    Name "INaK in component sodium_potassium_pump (picoA)";
-    Value  0.0;
-  }
-
-  Variable Variable(ICaP)
-  {
-    Name "ICaP in component sarcolemmal_calcium_pump_current (picoA)";
-    Value  0.0;
-  }
-
-  Variable Variable(INaCa)
-  {
-    Name "INaCa in component Na_Ca_ion_exchanger_current (picoA)";
-    Value  0.0;
-  }
-
-  Process Nygren_1998_VFluxProcess(dV_dt)
-  {
-    Name "d/dt V in component membrane (millivolt)";
-
-    Cm  @Cm;
-
-    VariableReferenceList
-      [V      :.:V      1]
-      [ist    :.:ist    0]
-      [INa    :.:INa    0]
-      [ICaL   :.:ICaL   0]
-      [It     :.:It     0]
-      [Isus   :.:Isus   0]
-      [IK1    :.:IK1    0]
-      [IKr    :.:IKr    0]
-      [IKs    :.:IKs    0]
-      [INab   :.:INab   0]
-      [ICab   :.:ICab   0]
-      [INaK   :.:INaK   0]
-      [ICaP   :.:ICaP   0]
-      [INaCa  :.:INaCa  0]
-      [If     :.:If     0];
-  }
-
-  Process Nygren_1998_EAssignmentProcess(E_Na)
-  {
-    StepperID    PSV;
-    F  @F;
-    T  @T;
-    R  @R;
-    z  1;
-
-    VariableReferenceList
-      [E :.:E_Na               1]
-      [o :/:Nao               0]
-      [i :../Cytosol/ss:Na_ss  0];
-  }
-
-  Process Nygren_1998_EAssignmentProcess(E_K)
-  {
-    StepperID    PSV;
-    F  @F;
-    T  @T;
-    R  @R;
-    z  1;
-
-    VariableReferenceList
-      [E :.:E_K           1]
-      [o :/:Ko            0]
-      [i :../Cytosol:K_i  0];
-  }
-
-  Process Nygren_1998_EAssignmentProcess(E_Ca)
-  {
-    StepperID    PSV;
-    F  @F;
-    T  @T;
-    R  @R;
-    z  2;
-
-    VariableReferenceList
-      [E :.:E_Ca               1]
-      [o :/:Cao               0]
-      [i :../Cytosol/ss:Ca_ss  0];
-  }
-
-  # INa
 
   Variable Variable(INam)
   {
@@ -380,60 +64,83 @@ System System( /Cell/Membrane )
     Value  @INah2_0;
   }
 
-  Process Nygren_1998_INaAssignmentProcess(INa) # same as Nygren_1998
+  Variable Variable(INaminf)
   {
-    StepperID    PSV;
-
-    T  @T;
-    R  @R;
-    F  @F;
-    P_Na  @PNa; # 0.0016, P_Na in component sodium_current (nanolitre_per_second)
-
-    VariableReferenceList
-      [i_Na        :.:INa               1]
-      [m_infinity :.:INaminf         1]
-      [tau_m      :.:INamtau              1]
-      [h_infinity :.:INahinf         1]
-      [tau_h1     :.:INah1tau             1]
-      [tau_h2     :.:INah2tau             1]
-      [m       :.:INam               0]
-      [h1      :.:INah1              0]
-      [h2      :.:INah2              0]
-      [Na_c       :../Cytosol/ss:Na_ss  0]
-      [V          :.:V                  0]
-      [E_Na       :.:E_Na               0];
+    Name "INaminf in component sodium_current_m_gate (dimensionless)";
+    Value  @INaminf_0;
   }
 
-  Process Nygren_1998_GatingFluxProcess(dINam_dt) # ok
+  Variable Variable(INahinf)
   {
-
-    VariableReferenceList
-      [gate  :.:INam        1]
-      [g_inf :.:INaminf  0]
-      [g_tau :.:INamtau       0];
+    Name "INahinf in component sodium_current_h1_gate (dimensionless)";
+    Value  @INahinf_0;
   }
 
-  Process Nygren_1998_GatingFluxProcess(dINah1_dt) # ok
+  Variable Variable(INamtau)
   {
-    Name "dINah1_dt in component sodium_current_h1_gate (dimensionless)";
-
-    VariableReferenceList
-      [gate  :.:INah1       1]
-      [g_inf :.:INahinf  0]
-      [g_tau :.:INah1tau      0];
+    Name "INamtau in component sodium_current_m_gate (second)";
+    Value  @INamtau_0;
   }
 
-  Process Nygren_1998_GatingFluxProcess(dINah2_dt) # ok
+  Variable Variable(INah1tau)
   {
-    Name "dINah2_dt in component sodium_current_h2_gate (dimensionless)";
+    Name "INah1tau in component sodium_current_h1_gate (second)";
+    Value  @INah1tau_0;
+  }
 
-    VariableReferenceList
-      [gate  :.:INah2       1]
-      [g_inf :.:INahinf  0]
-      [g_tau :.:INah2tau      0];
+  Variable Variable(INah2tau)
+  {
+    Name "INah2tau in component sodium_current_h2_gate (second)";
+    Value  @INah2tau_0;
   }
 
   # ICaL
+
+  Variable Variable(ICaLfcainf)
+  {
+    Value  @ICaLfcainf_0; # ICaLfcainf
+  }
+
+  Variable Variable(ICaL)
+  {
+    Name "ICaL in component L_type_Ca_channel (picoA)";
+    Value  @ICaL_0;
+  }
+
+  Variable Variable(ICaLdinf)
+  {
+    Name "ICaLdinf in component L_type_Ca_channel_d_L_gate (dimensionless)";
+    Value  @ICaLdinf_0;
+  }
+
+  Variable Variable(ICaLfinf)
+  {
+    Name "ICaLfinf in component L_type_Ca_channel_f_L1_gate (dimensionless)";
+    Value  @ICaLfinf_0;
+  }
+
+  Variable Variable(ICaLdtau)
+  {
+    Name "ICaLdtau in component L_type_Ca_channel_d_L_gate (second)";
+    Value  @ICaLdtau_0;
+  }
+
+  Variable Variable(ICaLf1tau)
+  {
+    Name "ICaLf1tau in component L_type_Ca_channel_f_L1_gate (second)";
+    Value  @ICaLf1tau_0;
+  }
+
+  Variable Variable(ICaLf2tau)
+  {
+    Name "ICaLf2tau in component L_type_Ca_channel_f_L2_gate (second)";
+    Value  @ICaLf2tau_0;
+  }
+
+  Variable Variable(ICaLfcatau)
+  {
+    Value  @ICaLfcatau_0;
+  }
 
   Variable Variable(ICaLd)
   {
@@ -459,6 +166,363 @@ System System( /Cell/Membrane )
     Value  @ICaLfca_0;
   }
 
+  # It
+
+  Variable Variable(It)
+  {
+    Name "It in component Ca_independent_transient_outward_K_current (picoA)";
+    Value  @It_0;
+  }
+
+  Variable Variable(Itrinf)
+  {
+    Name "Itrinf in component Ca_independent_transient_outward_K_current_r_gate (dimensionless)";
+    Value  @Itrinf_0;
+  }
+
+  Variable Variable(Itsinf)
+  {
+    Name "Itsinf in component Ca_independent_transient_outward_K_current_s_gate (dimensionless)";
+    Value  @Itsinf_0;
+  }
+
+  Variable Variable(Itrtau)
+  {
+    Name "Itrtau in component Ca_independent_transient_outward_K_current_r_gate (second)";
+    Value  @Itrtau_0;
+  }
+
+  Variable Variable(Itstau)
+  {
+    Name "Itstau in component Ca_independent_transient_outward_K_current_s_gate (second)";
+    Value  @Itstau_0;
+  }
+
+  Variable Variable(Itr)
+  {
+    Name "Itr in component Ca_independent_transient_outward_K_current_r_gate (dimensionless)";
+    Value  @Itr_0;
+  }
+
+  Variable Variable(Its)
+  {
+    Name "Its in component Ca_independent_transient_outward_K_current_s_gate (dimensionless)";
+    Value  @Its_0;
+  }
+
+  # Isus
+
+  Variable Variable(Isus)
+  {
+    Name "Isus in component sustained_outward_K_current (picoA)";
+    Value  @Isus_0;
+  }
+
+  Variable Variable(Isusrinf)
+  {
+    Name "Isusrinf in component sustained_outward_K_current_r_sus_gate (dimensionless)";
+    Value  @Isusrinf_0;
+  }
+
+  Variable Variable(Isussinf)
+  {
+    Name "Isussinf in component sustained_outward_K_current_s_sus_gate (dimensionless)";
+    Value  @Isussinf_0;
+  }
+
+  Variable Variable(Isusrtau)
+  {
+    Name "Isusrtau in component sustained_outward_K_current_r_sus_gate (second)";
+    Value  @Isusrtau_0;
+  }
+
+  Variable Variable(Isusstau)
+  {
+    Name "Isusstau in component sustained_outward_K_current_s_sus_gate (second)";
+    Value  @Isusstau_0;
+  }
+
+  Variable Variable(Isusr)
+  {
+    Name "Isusr in component sustained_outward_K_current_r_sus_gate (dimensionless)";
+    Value  @Isusr_0;
+  }
+
+  Variable Variable(Isuss)
+  {
+    Name "Isuss in component sustained_outward_K_current_s_sus_gate (dimensionless)";
+    Value  @Isuss_0;
+  }
+
+  # IKs
+
+  Variable Variable(IKs)
+  {
+    Name "IKs in component delayed_rectifier_K_currents (picoA)";
+    Value  @IKs_0;
+  }
+
+  Variable Variable(IKsninf)
+  {
+    Name "IKsninf in component delayed_rectifier_K_currents_n_gate (dimensionless)";
+    Value  @IKsninf_0;
+  }
+
+  Variable Variable(IKsntau)
+  {
+    Name "IKsntau in component delayed_rectifier_K_currents_n_gate (second)";
+    Value  @IKsntau_0;
+  }
+
+  Variable Variable(IKsn)
+  {
+    Name "IKsn in component delayed_rectifier_K_currents_n_gate (dimensionless)";
+    Value  @IKsn_0;
+  }
+
+  # IKr
+
+  Variable Variable(IKrpi)
+  {
+    Name "IKrpi in component delayed_rectifier_K_currents_pi_gate (dimensionless)";
+    Value  @IKrpi_0;
+  }
+
+  Variable Variable(IKr)
+  {
+    Name "IKr in component delayed_rectifier_K_currents (picoA)";
+    Value  @IKr_0;
+  }
+
+  Variable Variable(IKrpainf)
+  {
+    Name "IKrpainf in component delayed_rectifier_K_currents_pa_gate (dimensionless)";
+    Value  @IKrpainf_0;
+  }
+
+  Variable Variable(IKrpatau)
+  {
+    Name "IKrpatau in component delayed_rectifier_K_currents_pa_gate (second)";
+    Value  @IKrpatau_0;
+  }
+
+  Variable Variable(IKrpa)
+  {
+    Name "IKrpa in component delayed_rectifier_K_currents_pa_gate (dimensionless)";
+    Value  @IKrpa_0;
+  }
+
+  # IK1
+
+  Variable Variable(IK1)
+  {
+    Name "IK1 in component inward_rectifier (picoA)";
+    Value  @IK1_0;
+  }
+
+  # Background leaks
+
+  Variable Variable(INab)
+  {
+    Name "INab in component background_currents (picoA)";
+    Value  @INab_0;
+  }
+
+  Variable Variable(ICab)
+  {
+    Name "ICab in component background_currents (picoA)";
+    Value  @ICab_0;
+  }
+
+  # INaK
+
+  Variable Variable(INaK)
+  {
+    Name "INaK in component sodium_potassium_pump (picoA)";
+    Value  @INaK_0;
+  }
+
+  # INaCa
+
+  Variable Variable(INaCa)
+  {
+    Name "INaCa in component Na_Ca_ion_exchanger_current (picoA)";
+    Value  @INaCa_0;
+  }
+
+  # ICaP
+
+  Variable Variable(ICaP)
+  {
+    Name "ICaP in component sarcolemmal_calcium_pump_current (picoA)";
+    Value  @ICaP_0;
+  }
+
+# If
+
+  Variable Variable(Ifyinf)
+  {
+    Name "";
+    Value  @Ifyinf_0;
+  }
+
+  Variable Variable(Ifytau)
+  {
+    Name "";
+    Value  @Ifytau_0;
+  }
+
+  Variable Variable(Ify)
+  {
+    Name "";
+    Value  @Ify_0;
+  }
+
+  Variable Variable(IfNa)
+  {
+    Name "";
+    Value  @IfNa_0;
+  }
+
+  Variable Variable(IfK)
+  {
+    Name "";
+    Value  @IfK_0;
+  }
+
+  Variable Variable(If)
+  {
+    Name "";
+    Value  @If_0;
+  }
+
+  #**********************************************
+  # Processes
+  #**********************************************
+
+  @[if not DEBUG_WITHOUT_PROCESS]
+  # V
+  Process Nygren_1998_VFluxProcess(dV_dt)
+  {
+    Name "d/dt V in component membrane (millivolt)";
+
+    Cm  @Cm;
+
+    VariableReferenceList
+      [V      :.:V      1]
+      [ist    :.:ist    0]
+      [INa    :.:INa    0]
+      [ICaL   :.:ICaL   0]
+      [It     :.:It     0]
+      [Isus   :.:Isus   0]
+      [IK1    :.:IK1    0]
+      [IKr    :.:IKr    0]
+      [IKs    :.:IKs    0]
+      [INab   :.:INab   0]
+      [ICab   :.:ICab   0]
+      [INaK   :.:INaK   0]
+      [ICaP   :.:ICaP   0]
+      [INaCa  :.:INaCa  0]
+      [If     :.:If     0];
+  }
+
+  Process Nygren_1998_EAssignmentProcess(ENa)
+  {
+    StepperID    PSV;
+    F  @F;
+    T  @T;
+    R  @R;
+    z  1;
+
+    VariableReferenceList
+      [E :.:ENa               1]
+      [o :/:Nao               0]
+      [i :../Cytosol/ss:Na  0];
+  }
+
+  Process Nygren_1998_EAssignmentProcess(EK)
+  {
+    StepperID    PSV;
+    F  @F;
+    T  @T;
+    R  @R;
+    z  1;
+
+    VariableReferenceList
+      [E :.:EK           1]
+      [o :/:Ko            0]
+      [i :../Cytosol:K_i  0];
+  }
+
+  Process Nygren_1998_EAssignmentProcess(ECa)
+  {
+    StepperID    PSV;
+    F  @F;
+    T  @T;
+    R  @R;
+    z  2;
+
+    VariableReferenceList
+      [E :.:ECa               1]
+      [o :/:Cao               0]
+      [i :../Cytosol/ss:Ca  0];
+  }
+
+  # INa
+  Process Nygren_1998_INaAssignmentProcess(INa) # same as Nygren_1998
+  {
+    StepperID    PSV;
+
+    T  @T;
+    R  @R;
+    F  @F;
+    P_Na  @PNa; # 0.0016, P_Na in component sodium_current (nanolitre_per_second)
+
+    VariableReferenceList
+      [i_Na       :.:INa             1]
+      [m_infinity :.:INaminf         1]
+      [tau_m      :.:INamtau         1]
+      [h_infinity :.:INahinf         1]
+      [tau_h1     :.:INah1tau        1]
+      [tau_h2     :.:INah2tau        1]
+      [m          :.:INam            0]
+      [h1         :.:INah1           0]
+      [h2         :.:INah2           0]
+      [Na_c       :../Cytosol/ss:Na  0]
+      [V          :.:V               0]
+      [E_Na       :.:ENa             0];
+  }
+
+  Process Nygren_1998_GatingFluxProcess(dINam_dt)
+  {
+
+    VariableReferenceList
+      [gate  :.:INam     1]
+      [g_inf :.:INaminf  0]
+      [g_tau :.:INamtau  0];
+  }
+
+  Process Nygren_1998_GatingFluxProcess(dINah1_dt)
+  {
+    Name "dINah1_dt in component sodium_current_h1_gate (dimensionless)";
+
+    VariableReferenceList
+      [gate  :.:INah1     1]
+      [g_inf :.:INahinf   0]
+      [g_tau :.:INah1tau  0];
+  }
+
+  Process Nygren_1998_GatingFluxProcess(dINah2_dt)
+  {
+    Name "dINah2_dt in component sodium_current_h2_gate (dimensionless)";
+
+    VariableReferenceList
+      [gate  :.:INah2     1]
+      [g_inf :.:INahinf   0]
+      [g_tau :.:INah2tau  0];
+  }
+
+  # ICaL
   Process Koivumaki_2011_ICaLAssignmentProcess(ICaL)
   {
     StepperID    PSV;
@@ -481,11 +545,11 @@ System System( /Cell/Membrane )
       [ICaLd      :.:ICaLd              0]   # ICaLd
       [ICaLf1     :.:ICaLf1             0]   # ICaLf1
       [ICaLf2     :.:ICaLf2             0]   # ICaLf2
-      [Ca_ss      :../Cytosol/ss:Ca_ss  0]
+      [Ca_ss      :../Cytosol/ss:Ca     0]
       [V          :.:V                  0];
   }
 
-  Process Nygren_1998_GatingFluxProcess(dICaLd_dt) # ok
+  Process Nygren_1998_GatingFluxProcess(dICaLd_dt)
   {
     Name "dICaLd_dt in component L_type_Ca_channel_d_L_gate (dimensionless)";
 
@@ -495,7 +559,7 @@ System System( /Cell/Membrane )
       [g_tau :.:ICaLdtau  0];
   }
 
-  Process Nygren_1998_GatingFluxProcess(dICaLf1_dt) # ok
+  Process Nygren_1998_GatingFluxProcess(dICaLf1_dt)
   {
     Name "dICaLf1_dt in component L_type_Ca_channel_f_L1_gate (dimensionless)";
 
@@ -505,7 +569,7 @@ System System( /Cell/Membrane )
       [g_tau :.:ICaLf1tau  0];
   }
 
-  Process Nygren_1998_GatingFluxProcess(dICaLf2_dt) # ok
+  Process Nygren_1998_GatingFluxProcess(dICaLf2_dt)
   {
     Name "dICaLf2_dt in component L_type_Ca_channel_f_L2_gate (dimensionless)";
 
@@ -515,7 +579,7 @@ System System( /Cell/Membrane )
       [g_tau :.:ICaLf2tau  0];
   }
 
-  Process Nygren_1998_GatingFluxProcess(dICaLfca_dt) #ok
+  Process Nygren_1998_GatingFluxProcess(dICaLfca_dt)
   {
     VariableReferenceList
       [gate  :.:ICaLfca     1]
@@ -539,7 +603,7 @@ System System( /Cell/Membrane )
       [Itr    :.:Itr     0]
       [Its    :.:Its     0]
       [V      :.:V       0]
-      [E_K    :.:E_K     0];
+      [E_K    :.:EK      0];
   }
 
   Process Nygren_1998_GatingFluxProcess(dItr_dt)
@@ -578,7 +642,7 @@ System System( /Cell/Membrane )
       [Isusr    :.:Isusr     0]
       [Isuss    :.:Isuss     0]
       [V        :.:V         0]
-      [E_K      :.:E_K       0];
+      [E_K      :.:EK        0];
   }
 
   Process Nygren_1998_GatingFluxProcess(dIsusr_dt)
@@ -614,7 +678,7 @@ System System( /Cell/Membrane )
       [i_Ks       :.:IKs      1]
       [n          :.:IKsn     0]
       [V          :.:V        0]
-      [E_K        :.:E_K      0];
+      [E_K        :.:EK       0];
   }
 
   Process Nygren_1998_GatingFluxProcess(dIKsn_dt)
@@ -641,7 +705,7 @@ System System( /Cell/Membrane )
       [i_Kr         :.:IKr       1]
       [p_a          :.:IKrpa     0]
       [V            :.:V         0]
-      [E_K          :.:E_K       0];
+      [E_K          :.:EK        0];
   }
 
   Process Nygren_1998_GatingFluxProcess(dIKrpa_dt)
@@ -652,6 +716,35 @@ System System( /Cell/Membrane )
       [gate  :.:IKrpa     1]
       [g_inf :.:IKrpainf  0]
       [g_tau :.:IKrpatau  0];
+  }
+
+  # If
+  Process Koivumaki_2011_IfAssignmentProcess(If)
+  {
+    StepperID    PSV;
+
+    gIf  @gIf;
+
+    VariableReferenceList
+      [Ifyinf :.:Ifyinf  1]
+      [Ifytau :.:Ifytau  1]
+      [IfNa   :.:IfNa    1]
+      [IfK    :.:IfK     1]
+      [If     :.:If      1]
+      [Ify    :.:Ify     0]
+      [E_Na   :.:ENa    0]
+      [E_K    :.:EK     0]
+      [V      :.:V       0];
+  }
+
+  Process Nygren_1998_GatingFluxProcess(dIfy_dt)
+  {
+    Name "dIfy_dt (sec^-1)";
+
+    VariableReferenceList
+      [gate  :.:Ify     1]
+      [g_inf :.:Ifyinf  0]
+      [g_tau :.:Ifytau  0];
   }
 
   # IK1
@@ -668,7 +761,7 @@ System System( /Cell/Membrane )
       [i_K1 :.:IK1  1]
       [K_c  :/:Ko   0]
       [V    :.:V    0]
-      [E_K  :.:E_K  0];
+      [E_K  :.:EK  0];
   }
 
   # INaK
@@ -683,7 +776,7 @@ System System( /Cell/Membrane )
     VariableReferenceList
       [i_NaK :.:INaK               1]
       [K_c   :/:Ko                 0]  # Ko
-      [Na_i  :../Cytosol/ss:Na_ss  0]  # Nass
+      [Na_i  :../Cytosol/ss:Na  0]  # Nass
       [V     :.:V                  0];
   }
 
@@ -696,7 +789,7 @@ System System( /Cell/Membrane )
     VariableReferenceList
       [i :.:INab  1]
       [V :.:V     0]
-      [E :.:E_Na  0];
+      [E :.:ENa  0];
   }
 
   Process Nygren_1998_BackgroudLeakAssignmentProcess(ICab)
@@ -708,7 +801,7 @@ System System( /Cell/Membrane )
     VariableReferenceList
       [i :.:ICab  1]
       [V :.:V     0]
-      [E :.:E_Ca  0];
+      [E :.:ECa  0];
   }
 
   Process Nygren_1998i_CaPAssignmentProcess(ICaP)
@@ -720,7 +813,7 @@ System System( /Cell/Membrane )
 
     VariableReferenceList
       [i_CaP :.:ICaP               1]
-      [Ca_i  :../Cytosol/ss:Ca_ss  0]; # Cass
+      [Ca_i  :../Cytosol/ss:Ca  0]; # Cass
   }
 
   Process Nygren_1998i_NaCaAssignmentProcess(INaCa)
@@ -736,79 +829,15 @@ System System( /Cell/Membrane )
     # fCaNCX  1;
 
     VariableReferenceList
-      [i_NaCa :.:INaCa              1]
-      [Na_i   :../Cytosol/ss:Na_ss  0]  # Nass
-      [Ca_c   :/:Cao                0]  # Cao
-      [V      :.:V                  0]
-      [Na_c   :/:Nao                0]  # Nao
-      [Ca_i   :../Cytosol/ss:Ca_ss  0]; # Cass
+      [i_NaCa :.:INaCa           1]
+      [Na_i   :../Cytosol/ss:Na  0]  # Nass
+      [Ca_c   :/:Cao             0]  # Cao
+      [V      :.:V               0]
+      [Na_c   :/:Nao             0]  # Nao
+      [Ca_i   :../Cytosol/ss:Ca  0]; # Cass
   }
 
-  Variable Variable(Ify)
-  {
-    Name "";
-    Value  @Ify_0;
-  }
-
-  Variable Variable(Ifyinf)
-  {
-    Name "";
-    Value  0.0;  # TODO
-  }
-
-  Variable Variable(Ifytau)
-  {
-    Name "";
-    Value  0.0;  # TODO
-  }
-
-  Variable Variable(IfNa)
-  {
-    Name "";
-    Value  0.0;
-  }
-
-  Variable Variable(IfK)
-  {
-    Name "";
-    Value  0.0;
-  }
-
-  Variable Variable(If)
-  {
-    Name "";
-    Value  0.0;
-  }
-
-  Process Koivumaki_2011_IfAssignmentProcess(If)
-  {
-    StepperID    PSV;
-
-    gIf  @gIf;
-
-    VariableReferenceList
-      [Ifyinf :.:Ifyinf  1]
-      [Ifytau :.:Ifytau  1]
-      [IfNa   :.:IfNa    1]
-      [IfK    :.:IfK     1]
-      [If     :.:If      1]
-      [Ify    :.:Ify     0]
-      [E_Na   :.:E_Na    0]
-      [E_K    :.:E_K     0]
-      [V      :.:V       0];
-  }
-
-  Process Nygren_1998_GatingFluxProcess(dIfy_dt)
-  {
-    Name "dIfy_dt (sec^-1)";
-
-    VariableReferenceList
-      [gate  :.:Ify     1]
-      [g_inf :.:Ifyinf  0]
-      [g_tau :.:Ifytau  0];
-  }
-
-  Process Koivumaki_2011_IstAssignmentProcess(ist) # TODO
+  Process Koivumaki_2011_IstAssignmentProcess(ist)
   {
     StepperID    PSV;
 
@@ -821,11 +850,11 @@ System System( /Cell/Membrane )
     ist = -stim_amp/(f1*f2)
     '''}
 
-    stim_duration  @stim_duration;
-    stim_amp  @stim_amp;
-    BCL  @BCL;
+    stim_duration   @stim_duration;
+    stim_amp        @stim_amp;
+    BCL             @BCL;
     stim_steepness  @stim_steepness;
-    stim_offset  @stim_offset;
+    stim_offset     @stim_offset;
 
     VariableReferenceList
       [ist :.:ist  1]
@@ -838,16 +867,16 @@ System System( /Cell/Membrane )
     F @F;
 
     VariableReferenceList
-      [INa   :../Membrane:INa      0] # pA = pC/sec
-      [INab  :../Membrane:INab     0]
-      [INaK  :../Membrane:INaK     0] # 3 * INaK
-      [INaK  :../Membrane:INaK     0]
-      [INaK  :../Membrane:INaK     0]
-      [INaCa :../Membrane:INaCa    0] # 3 * INaCa
-      [INaCa :../Membrane:INaCa    0]
-      [INaCa :../Membrane:INaCa    0]
-      [IfNa  :../Membrane:IfNa     0]
-      [Nass  :../Cytosol/ss:Na_ss  1];
+      [INa   :../Membrane:INa    0] # pA = pC/sec
+      [INab  :../Membrane:INab   0]
+      [INaK  :../Membrane:INaK   0] # 3 * INaK
+      [INaK  :../Membrane:INaK   0]
+      [INaK  :../Membrane:INaK   0]
+      [INaCa :../Membrane:INaCa  0] # 3 * INaCa
+      [INaCa :../Membrane:INaCa  0]
+      [INaCa :../Membrane:INaCa  0]
+      [IfNa  :../Membrane:IfNa   0]
+      [Nass  :../Cytosol/ss:Na   1];
   }
 
   Process Koivumaki_2011_ZeroVariableAsCurrentFluxProcess(JK_IK)
@@ -875,5 +904,28 @@ System System( /Cell/Membrane )
       [INaK :../Membrane:INaK  0]
       [Ki   :../Cytosol:K_i    1];
   }
+
+  Process Koivumaki_2011_ZeroVariableAsCurrentFluxProcess(JCa_ICa)
+  {
+    k -0.5;
+    F @F;
+
+    VariableReferenceList
+      [ICaL :../Membrane:ICaL  0] # pA = pC/sec
+      [ICab :../Membrane:ICab  0]
+      [ICaP :../Membrane:ICaP  0]
+      [Cass :../Cytosol/ss:Ca  1];
+  }
+
+  Process Koivumaki_2011_ZeroVariableAsCurrentFluxProcess(JCa_INaCa)
+  {
+    k 1;
+    F @F;
+
+    VariableReferenceList
+      [INaCa :../Membrane:INaCa  0] # pA = pC/sec
+      [Cass  :../Cytosol/ss:Ca   1];
+  }
+  @[end if]  @#{ENDIF DEBUG_WITHOUT_PROCESS}
 
 } # End of /Cell/Membrane

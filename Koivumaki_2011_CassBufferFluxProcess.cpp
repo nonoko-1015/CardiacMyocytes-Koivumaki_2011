@@ -12,7 +12,6 @@ LIBECS_DM_CLASS( Koivumaki_2011_CassBufferFluxProcess, ContinuousProcess )
   {
     INHERIT_PROPERTIES( Process );
 
-    PROPERTYSLOT_SET_GET( Real, F );
     PROPERTYSLOT_SET_GET( Real, SLlow );
     PROPERTYSLOT_SET_GET( Real, KdSLlow );
     PROPERTYSLOT_SET_GET( Real, SLhigh );
@@ -26,7 +25,6 @@ LIBECS_DM_CLASS( Koivumaki_2011_CassBufferFluxProcess, ContinuousProcess )
     // do nothing
   }
 
-  SIMPLE_SET_GET_METHOD( Real, F );
   SIMPLE_SET_GET_METHOD( Real, SLlow );
   SIMPLE_SET_GET_METHOD( Real, KdSLlow );
   SIMPLE_SET_GET_METHOD( Real, SLhigh );
@@ -62,7 +60,6 @@ LIBECS_DM_CLASS( Koivumaki_2011_CassBufferFluxProcess, ContinuousProcess )
 
   Variable* Cass;
 
-  Real F;
   Real SLlow;
   Real KdSLlow;
   Real SLhigh;

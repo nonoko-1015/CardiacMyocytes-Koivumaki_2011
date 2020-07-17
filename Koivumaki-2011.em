@@ -1,11 +1,11 @@
 @{
-from math import pi
+from math import exp, log, pi
 
 N_A = 6.02214076e+23
 
-R  = 8314.0  # R in component membrane (millijoule_per_mole_kelvin) = hAM_KKT.ode
-T  = 306.15  # T in component membrane (kelvin) = hAM_KKT.ode
-F  = 96487   # F in component membrane (coulomb_per_mole) = hAM_KKT.ode
+R  = 8314.0  # R in component membrane (millijoule_per_mole_kelvin)
+T  = 306.15  # T in component membrane (kelvin)
+F  = 96487   # F in component membrane (coulomb_per_mole)
 
 Nao = 130
 Cao = 1.8
@@ -46,9 +46,9 @@ Vnonjunct2 = 3 * Vnonjunct1
 Vnonjunct3 = 5 * Vnonjunct1
 Vnonjunct4 = 7 * Vnonjunct1
 
-Vnonjunct = [ 0, Vnonjunct1, Vnonjunct2, Vnonjunct3, Vnonjunct4]
+Vcytosol = [ Vss, Vnonjunct1, Vnonjunct2, Vnonjunct3, Vnonjunct4]
 
-Vcytosol = 16 * Vnonjunct1 + Vss
+# Vcytosol = 16 * Vnonjunct1 + Vss
 
 VSR1 = 0.05*Vnonjunct1/2*0.9  # Accessible volume of SR compartment (Text S1, Eqn. 42)
 VSR2 = 0.05*Vnonjunct2/2*0.9
@@ -57,7 +57,8 @@ VSR4 = 0.05*Vnonjunct4/2*0.9
 
 VSR = [ 0, VSR1, VSR2, VSR3, VSR4]
 
-Vnonjunct_Nai = 16 * Vnonjunct1
+# Vnonjunct_Nai = 16 * Vnonjunct1
+Vnonjunct_Nai = sum( Vcytosol )
 
 
 # Cytosol Ca Buffers
@@ -168,16 +169,131 @@ Nai_0 = 9.286860
 Ki_0 = 134.631300
 Nass_0 = 8.691502
 Cass_0 = 0.000162
+Cai_0 = [ Cass_0, 0.000135, 0.000138, 0.000144, 0.000156 ]
 RyRoss_0 = 0.000040
 RyRcss_0 = 0.999972
 RyRass_0 = 0.245530
-RyRo_0 = [ 0.000040, 0.000095, 0.000078, 0.000057 ]
-RyRc_0 = [ 0.999972, 0.999372, 0.999509, 0.999560 ]
-RyRa_0 = [ 0.245530, 0.192536, 0.201034, 0.216312 ]
-SERCACa_0 = [ 0.004250, 0.004639, 0.004512, 0.004326, 0.004250 ]
+RyRo_0 = [ RyRoss_0, 0.000095, 0.000078, 0.000057 ]
+RyRc_0 = [ RyRcss_0, 0.999372, 0.999509, 0.999560 ]
+RyRa_0 = [ RyRass_0, 0.192536, 0.201034, 0.216312 ]
 SERCACass_0 = 0.004250
-Cai_0 = [ 0, 0.000135, 0.000138, 0.000144, 0.000156 ]
+SERCACa_0 = [ SERCACass_0, 0.004639, 0.004512, 0.004326, 0.004250 ]
+CaCytosol_0 = [ Cass_0, 0.000135, 0.000138, 0.000144, 0.000156 ]
 CaSR_0 = [ 0, 0.618922, 0.607629, 0.590527, 0.573811 ]
+
+ENa_0 = R*T/F * log ( Nao / Nass_0 )
+EK_0 = R*T/F * log ( Ko / Ki_0 )
+ECa_0 = R*T/F/2 * log ( Cao / Cass_0 )
+
+# INa
+INa_0 = PNa * INam_0**3 * ( 0.9*INah1_0 + 0.1*INah2_0) * Nao * V_0 * F**2/(R*T) * ( exp( (V_0-ENa_0)*F/R/T ) - 1) / ( exp( V_0*F/R/T ) - 1)
+INaminf_0 = 1/(1+exp((V_0+27.12)/-8.21))
+INahinf_0 = 1/(1+exp((V_0+63.6)/5.3))
+INamtau_0 = 0.000042*exp( -((V_0+25.57)/28.8)**2 ) + 0.000024
+INah1tau_0 = 0.03/(1+exp((V_0+35.1)/3.2)) + 0.0003
+INah2tau_0 = 0.12/(1+exp((V_0+35.1)/3.2)) + 0.003
+
+# ICaL
+ICaLfcainf_0 = 1-1 / ( 1 + (kCa/Cass_0)**(kCan))
+ICaL_0 = gCaL *(ICaLd_0) * (ICaLfca_0)*(ICaLf1_0)* (ICaLf2_0) * (V_0 - ECa_app)
+ICaLdinf_0 = 1/(1+exp((V_0+9)/-5.8))
+ICaLfinf_0 = 1/(1+exp((V_0+27.4)/7.1))
+ICaLdtau_0 = 0.0027*exp( -((V_0+35)/30)**2 ) + 0.002
+ICaLf1tau_0 = 0.98698*exp( -((V_0+30.16047)/7.09396)**2 ) + 0.04275/(1+exp((V_0-51.61555)/-80.61331)) + 0.03576/(1+exp((V_0+29.57272)/13.21758)) - 0.00821
+ICaLf2tau_0 = 1.3323*exp( -((V_0+40)/14.2)**2 ) + 0.0626
+ICaLfcatau_0 = 2e-3
+
+# It
+It_0 = gt * (Itr_0) * (Its_0) * (V_0 - EK_0)
+Itrinf_0 = 1.0/(1.0+exp((V_0-1.0)/-11.0))
+Itsinf_0 = 1.0/(1.0+exp((V_0+40.5)/11.5))
+Itrtau_0 = 0.0035*exp( -((V_0+0)/30.0)**2.0 ) + 0.0015
+#Itstau_0 = 0.4812*exp( -((V_0+52.45)/14.97)**2.0 ) + 0.01414
+Itstau_0 = 0.025635*exp( -((V_0+52.45)/15.8827)**2.0 ) + 0.01414 # Maleckar et al.
+
+# Isus
+Isus_0 = gsus * (Isusr_0) * (Isuss_0) * (V_0 - EK_0)
+Isusrinf_0 = 1.0/(1.0 + exp((V_0 + 6)/-8.6)) # Maleckar et al.
+Isussinf_0 = 1.0/(1.0 + exp((V_0 + 7.5)/10.0)) # Maleckar et al.
+Isusrtau_0 = 0.009/(1.0 + exp((V_0 + 5)/12.0)) + 0.0005 # Maleckar et al.
+Isusstau_0 = 0.59/(1.0 + exp((V_0 + 60.0)/10.0)) + 3.05 # Maleckar et al.
+
+# IKs
+IKs_0 = gKs * (IKsn_0) * (V_0 - EK_0)
+IKsninf_0 = 1.0/(1.0+exp((V_0-19.9)/-12.7))
+IKsntau_0 = 0.4*exp( -((V_0-20.0)/20.0)**2.0 ) + 0.7
+
+# IKr
+IKrpi_0 = 1.0/(1.0+exp((V_0+55.0)/24.0))
+IKr_0 = gKr * (IKrpa_0) * IKrpi_0 * (V_0 - EK_0)
+IKrpainf_0 = 1.0/(1.0+exp((V_0+15.0)/-6.0))
+IKrpatau_0 = 0.21718*exp( -((V_0+20.1376)/22.1996)**2.0 ) + 0.03118
+
+# IK1
+IK1_0 = gK1 * Ko**0.4457 * (V_0 - EK_0) / (1.0+exp(1.5*(V_0-EK_0+3.6)*F/R/T))
+
+# Background leaks
+INab_0 = gNab * (V_0 - ENa_0)
+ICab_0 = gCab * (V_0 - ECa_0)
+
+# INaK
+INaK_0 = INaKmax * Ko/(Ko + kNaKK) * Nass_0**1.5/(Nass_0**1.5+kNaKNa**1.5) * (V_0 + 150.0) / (V_0 + 200.0)
+
+# INaCa
+fCaNCX = 1.0
+INaCa_0 = kNaCa * ( (exp( gam*V_0*F/R/T ) * Nass_0**3.0 * Cao - exp( (gam-1.0)*V_0*F/R/T ) * Nao**3.0 * Cass_0*fCaNCX ) / ( 1.0 + dNaCa*(Nao**3.0 * Cass_0*fCaNCX + Nass_0**3.0 * Cao) ) )
+
+# ICaP
+ICaP_0 = ICaPmax * Cass_0 / (kCaP + Cass_0)
+
+# If, Zorn-Pauly LAW fit
+Ifyinf_0 = 1.0 / (1.0 + exp((V_0+97.82874)/12.48025))
+Ifytau_0 = 1.0 / (0.00332*exp(-V_0/16.54103)+23.71839*exp(V_0/16.54103))
+IfNa_0 = gIf * (Ify_0)*((0.2677)*(V_0-ENa_0))
+IfK_0 = gIf * (Ify_0)*((1.0-0.2677)*(V_0-EK_0))
+If_0 = IfK_0 + IfNa_0
+
+# SERCA fluxes
+
+J_SERCASRss_0 = (-k3*CaSR_0[4]**2*(cpumps-SERCACass_0)+k4*SERCACass_0)*Vss*2.0
+J_bulkSERCAss_0 = (k1*Cass_0**2.0*(cpumps-SERCACass_0)-k2*SERCACass_0)*Vss*2.0
+
+J_SERCASR_0 = [J_SERCASRss_0, 0.0, 0.0, 0.0]
+J_bulkSERCA_0 = [J_bulkSERCAss_0, 0.0, 0.0, 0.0]
+for x in [1, 2, 3]:
+  J_SERCASR_0[x] = (-k3*CaSR_0[x]**2.0*(cpumps-SERCACa_0[x])+k4*SERCACa_0[x])*Vcytosol[x]*2.0
+  J_bulkSERCA_0[x] = (k1*CaCytosol_0[x]**2.0*(cpumps-SERCACa_0[x])-k2*SERCACa_0[x])*Vcytosol[x]*2.0
+
+# RyR
+
+RyRSRCass_0 = (1.0 - 1.0/(1.0 +  exp((CaSR_0[4]-0.3)/0.1)))
+RyRainfss_0 = 0.505-0.427/(1.0 + exp((Cass_0*1000.0-0.29)/0.082))
+RyRoinfss_0 = (1.0 - 1.0/(1.0 +  exp((Cass_0*1000.0-((RyRass_0) + 0.22))/0.03)))
+RyRcinfss_0 = (1.0/(1.0 + exp((Cass_0*1000.0-((RyRass_0)+0.02))/0.01)))
+Jrelss_0 = k_nuss * Vss * ( (RyRoss_0) ) * (RyRcss_0) * RyRSRCass_0 * ( CaSR_0[4] -  Cass_0 )
+
+RyRSRCa_0 = [RyRSRCass_0, 0.0, 0.0, 0.0]
+RyRainf_0 = [RyRainfss_0, 0.0, 0.0, 0.0]
+RyRoinf_0 = [RyRoinfss_0, 0.0, 0.0, 0.0]
+RyRcinf_0 = [RyRcinfss_0, 0.0, 0.0, 0.0]
+for x in [1, 2, 3]:
+  RyRSRCa_0[x] = (1.0 - 1.0/(1.0 +  exp((CaSR_0[x]-0.3)/0.1)))
+  RyRainf_0[x] = 0.505-0.427/(1.0 + exp((CaCytosol_0[x]*1000.0-0.29)/0.082))
+  RyRoinf_0[x] = (1.0 - 1.0/(1.0 +  exp(( CaCytosol_0[x]*1000.0-(RyRa_0[x] + 0.22))/0.03)))
+  RyRcinf_0[x] = (1.0/(1.0 +  exp(( CaCytosol_0[x]*1000.0-(RyRa_0[x]+0.02))/0.01)))
+
+Jrel_0 = [Jrelss_0, 0.0, 0.0, 0.0]
+for x in [1, 2, 3]:
+  Jrel_0[x] = k_nu * Vcytosol[x] * ( RyRo_0[x] ) * RyRc_0[x] * RyRSRCa_0[x] * ( CaSR_0[x] -  CaCytosol_0[x] )
+
+# SR leak fluxes
+JSRCaleakss = kSRleak * ( CaSR_0[4] - Cass_0 ) * Vss
+JSRCaleak_0 = [JSRCaleakss, 0.0, 0.0, 0.0]
+for x in [1, 2, 3]:
+  JSRCaleak_0[x] = kSRleak * ( CaSR_0[x] - Cai_0[x] ) * Vcytosol[x]
+
+# Naflux in 1 nl volume
+JNa_0 = DNa * Aj_nj / xj_nj_Nai * (Nass_0 - Nai_0)* 1e-6
 
 }
 
@@ -224,7 +340,7 @@ System System( / )
     Name "time in component environment (second)";
 
     VariableReferenceList
-      [t :.:t  1];
+      [voi :.:t  1];
   }
 }
 
@@ -235,11 +351,9 @@ System System( /Cell )
 
   Variable Variable( SIZE )
   {
-    Value    @((Vcytosol + VSR1 + VSR2 + VSR3 + VSR4)*1.0E-9);
+    Value    @((sum( Vcytosol ) + sum( VSR ))*1.0E-9);
   }
 }
-
-@include('./Koivumaki-2011_Cell_Membrane.em')
 
 System System( /Cell/Cytosol )
 {
@@ -248,7 +362,7 @@ System System( /Cell/Cytosol )
 
   Variable Variable( SIZE )
   {
-    Value    @(Vcytosol * 1.0e-9);
+    Value    @(sum( Vcytosol ) * 1.0e-9);
   }
 
   Variable Variable(K_i)
@@ -259,92 +373,14 @@ System System( /Cell/Cytosol )
 
 } # END of /Cell/Cytosol
 
-System System( /Cell/Cytosol/ss )
-{
-  StepperID    Default;
-
-  Name "The the extracellular cleft space";
-
-  Variable Variable(SIZE)
-  {
-    Name "Vss in component cleft_space_ion_concentrations (litre)";
-    Value  @(Vss * 1.0e-9);
-  }
-
-  Variable Variable(Na_ss)
-  {
-    Name "Na_c in component cleft_space_ion_concentrations (molar)";
-    MolarConc  @(Nass_0 * 1e-3);
-  }
-
-  Variable Variable(Ca_ss)
-  {
-    Name "Ca_c in component cleft_space_ion_concentrations (molar)";
-    MolarConc  @(Cass_0 * 1e-3);
-  }
-
-  Process Koivumaki_2011_BufferFluxProcess(Na_buffer)
-  {
-    Name "Sodium buffering";
-
-    @{'''
-    beta = 1.0 / ( 1.0 + B * KdB / pow(( ion.MolarConc * 1000 + KdB ), 2 ) )
-    '''}
-
-    B    @BNa;
-    KdB  @KdBNa;
-
-    VariableReferenceList
-      [ion :../ss:Na_ss -1];
-  }
-
-  Process Koivumaki_2011_CassBufferFluxProcess(Ca_buffer)
-  {
-    @{'''
-    # Ca buffers
-    betass = ( 1 + SLlow*KdSLlow/(Cass + KdSLlow)**2 + SLhigh*KdSLhigh/(Cass + KdSLhigh)**2 + BCa*KdBCa/(Cass + KdBCa)**2  )**(-1)
-    dCass_dt = (1-betass) * ( JCass/Vss + (-ICaL - ICab - ICaP + 2*INaCa) / (2*Vss*F) )
-    '''}
-
-    F  @F;
-    SLlow  @SLlow;
-    KdSLlow  @KdSLlow;
-    SLhigh  @SLhigh;
-    KdSLhigh  @KdSLhigh;
-    BCa  @BCa;
-    KdBCa  @KdBCa;
-
-    VariableReferenceList
-      [Cass   :.:Ca_ss -1];
-  }
-
-  Process Koivumaki_2011_DiffusionJNjFluxProcess(Jj_nj)
-  {
-    Name "Ca diffusion from junct to non-junct";
-    @{'''
-    #  Diffusion from junct to non-junct (pmol/sec)
-    Jj_nj = DCa * Aj_nj / xj_nj * (Cass-Cai4)*1e-6
-    '''}
-
-    D  @DCa;
-    Aj_nj  @Aj_nj;
-    xj_nj  @xj_nj;
-
-    VariableReferenceList
-      [nj :../bulk_4:Ca  1]  # Cai4
-      [j  :.:Ca_ss      -1]; # Cass
-  }
-
-} # END of /Cell/Cytosol/ss
-
-System System( /Cell/Cytosol/bulk; )
+System System( /Cell/Cytosol/bulk )
 {
   StepperID    Default;
   Name "Cell";
 
   Variable Variable( SIZE )
   {
-    Value    @((Vnonjunct1 + Vnonjunct2 + Vnonjunct3 + Vnonjunct4) * 1.0e-9);
+    Value    @( sum(Vcytosol) * 1.0e-9);
   }
 
   Variable Variable(Na_i)
@@ -355,10 +391,10 @@ System System( /Cell/Cytosol/bulk; )
 
   Variable Variable(JNa)
   {
-    Value  0.0;
+    Value  @JNa_0;
   }
 
-  Process Koivumaki_2011_Jj_njAssignmentProcess(JNa)
+  Process Koivumaki_2011_Jj_njAssignmentProcess(JNa_assign)
   {
     StepperID    PSV;
     Name "Na diffusion from junct to non-junct";
@@ -372,26 +408,37 @@ System System( /Cell/Cytosol/bulk; )
     xj_nj  @xj_nj_Nai;
 
     VariableReferenceList
-      [Jj_nj :.:JNa        1]
-      [nj    :.:Na_i       0]
-      [j     :../ss:Na_ss  0];
+      [Jj_nj :.:JNa     1]
+      [nj    :.:Na_i    0]
+      [j     :../ss:Na  0];
   }
 
-  Process ZeroVariableAsFluxProcess(JNa_flux)
+  Process ZeroVariableAsFluxProcess(JNa)
   {
     VariableReferenceList
-      [JNa  :.:JNa        0] # pmol/sec
-      [Nai  :.:Na_i       1]
-      [Nass :../ss:Na_ss -1];
+      [JNa  :.:JNa     0] # pmol/sec
+      [Nai  :.:Na_i    1]
+      [Nass :../ss:Na -1];
 
     k @(N_A * 1e-12);  # pmol/sec -> NoM/sec
   }
 
 } # END of /Cell/Cytosol/bulk
 
-# /Cell/Cytoplasm/bulk_x
-@{x = 1}
+
+@{DEBUG_WITHOUT_PROCESS = 1}
+# /Cell/Membrane
+@include('./Koivumaki-2011_Cell_Membrane.em')
+
+# /Cell/Cytoplasm/{ss||bulk_x}
+@{x = 0}
 @[while x <= 4]
+@{
+if x == 0:
+  c = 'ss'
+else:
+  c = x
+}
 @include('./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em')
 @{x += 1}
 @[end while]

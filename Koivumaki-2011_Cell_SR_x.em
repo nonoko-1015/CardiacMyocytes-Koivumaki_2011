@@ -13,6 +13,7 @@ System System( /Cell/SR_@x )
     MolarConc    @(CaSR_0[x] * 1e-3);  # CaSR@x
   }
 
+  @[if not DEBUG_WITHOUT_PROCESS]
   Process Koivumaki_2011_CaSRDiffusionFluxProcess(Ca_diff)
   {
     Name "Ca buffering";
@@ -26,9 +27,25 @@ System System( /Cell/SR_@x )
     j      @x;
 
     VariableReferenceList
-      [Ca_up   :../bulk@(x+1):Ca             0]
-      [Ca_down :../bulk@(x==1 ? 1 : x-1):Ca  0]
-      [Ca      :.:Ca                         1];
+      [Ca_up   :../SR_@(x==4 ? x:x+1):Ca  0]
+      [Ca_down :../SR_@(x==1 ? x:x-1):Ca  0]
+      [Ca      :.:Ca                      1];
   }
 
-} END of /Cell/SR_@x
+  Process Koivumaki_2011_BufferFluxProcess(Ca_buffer)
+  {
+    Name "Ca buffering";
+
+    @{'''
+    betaSR1 = ( 1 + CSQN*KdCSQN/(CaSR1 + KdCSQN)**2 )**(-1)
+    '''}
+
+    B    @CSQN;
+    KdB  @KdCSQN;
+
+    VariableReferenceList
+      [ion :.:Ca -1];
+  }
+  @[end if]  @#{ENDIF DEBUG_WITHOUT_PROCESS}
+
+} # END of /Cell/SR_@x
