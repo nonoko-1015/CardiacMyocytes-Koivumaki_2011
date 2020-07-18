@@ -24,21 +24,21 @@ System System( / )
   Variable Variable( Nao )
   {
     MolarConc    0.13;
-%line 323 ./Koivumaki-2011.em
+%line 339 ./Koivumaki-2011.em
     Fixed  1;
   }
 
   Variable Variable( Ko )
   {
     MolarConc    0.0054;
-%line 329 ./Koivumaki-2011.em
+%line 345 ./Koivumaki-2011.em
     Fixed  1;
   }
 
   Variable Variable( Cao )
   {
     MolarConc    0.0018;
-%line 335 ./Koivumaki-2011.em
+%line 351 ./Koivumaki-2011.em
     Fixed  1;
   }
 
@@ -59,7 +59,7 @@ System System( /Cell )
   Variable Variable( SIZE )
   {
     Value    8.3322287625e-12;
-%line 355 ./Koivumaki-2011.em
+%line 371 ./Koivumaki-2011.em
   }
 }
 
@@ -71,7 +71,7 @@ System System( /Cell/Cytosol )
   Variable Variable( SIZE )
   {
     Value    8.14997753985e-12;
-%line 366 ./Koivumaki-2011.em
+%line 382 ./Koivumaki-2011.em
   }
 
   Variable Variable(K_i)
@@ -90,7 +90,7 @@ System System( /Cell/Cytosol/bulk )
   Variable Variable( SIZE )
   {
     Value    8.14997753985e-12;
-%line 384 ./Koivumaki-2011.em
+%line 400 ./Koivumaki-2011.em
   }
 
   Variable Variable(Na_i)
@@ -105,11 +105,11 @@ System System( /Cell/Cytosol/bulk )
     
 
     D  0.12;
-%line 401 ./Koivumaki-2011.em
+%line 417 ./Koivumaki-2011.em
     Aj_nj  2492.32441226;
-%line 402 ./Koivumaki-2011.em
+%line 418 ./Koivumaki-2011.em
     xj_nj  3.26;
-%line 403 ./Koivumaki-2011.em
+%line 419 ./Koivumaki-2011.em
 
     VariableReferenceList
       [nj    :.:Na_i    0]
@@ -120,7 +120,6 @@ System System( /Cell/Cytosol/bulk )
 
 
 # /Cell/Membrane
-
 System System( /Cell/Membrane )
 {
   StepperID    Default;
@@ -1118,12 +1117,11 @@ System System( /Cell/Membrane )
         %line 941 ./Koivumaki-2011_Cell_Membrane.em
 
 } # End of /Cell/Membrane
-%line 425 ./Koivumaki-2011.em
+%line 429 ./Koivumaki-2011.em
 
-%line 426 ./Koivumaki-2011.em
+%line 430 ./Koivumaki-2011.em
 
 # /Cell/Cytoplasm/{ss||bulk_x}
-
 
 
 
@@ -1418,7 +1416,7 @@ System System( /Cell/Cytosol/ss )
 
 } # END of /Cell/Cytosol/ss
 %line 352 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
-%line 439 ./Koivumaki-2011.em
+%line 442 ./Koivumaki-2011.em
 
 
 
@@ -1691,7 +1689,7 @@ System System( /Cell/Cytosol/bulk_1 )
 
 } # END of /Cell/Cytosol/bulk_1
 %line 352 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
-%line 439 ./Koivumaki-2011.em
+%line 442 ./Koivumaki-2011.em
 
 
 
@@ -1964,7 +1962,7 @@ System System( /Cell/Cytosol/bulk_2 )
 
 } # END of /Cell/Cytosol/bulk_2
 %line 352 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
-%line 439 ./Koivumaki-2011.em
+%line 442 ./Koivumaki-2011.em
 
 
 
@@ -2237,7 +2235,7 @@ System System( /Cell/Cytosol/bulk_3 )
 
 } # END of /Cell/Cytosol/bulk_3
 %line 352 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
-%line 439 ./Koivumaki-2011.em
+%line 442 ./Koivumaki-2011.em
 
 
 
@@ -2315,14 +2313,13 @@ System System( /Cell/Cytosol/bulk_4 )
 
 } # END of /Cell/Cytosol/bulk_4
 %line 352 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
-%line 439 ./Koivumaki-2011.em
+%line 442 ./Koivumaki-2011.em
 
 
 
-%line 440 ./Koivumaki-2011.em
+%line 443 ./Koivumaki-2011.em
 
 # /Cell/SR_x
-
 
 
 %line 1 ./Koivumaki-2011_Cell_SR_x.em
@@ -2386,7 +2383,7 @@ System System( /Cell/SR_1 )
 
 } # END of /Cell/SR_1
 %line 60 ./Koivumaki-2011_Cell_SR_x.em
-%line 447 ./Koivumaki-2011.em
+%line 449 ./Koivumaki-2011.em
 
 
 
@@ -2451,7 +2448,7 @@ System System( /Cell/SR_2 )
 
 } # END of /Cell/SR_2
 %line 60 ./Koivumaki-2011_Cell_SR_x.em
-%line 447 ./Koivumaki-2011.em
+%line 449 ./Koivumaki-2011.em
 
 
 
@@ -2516,7 +2513,7 @@ System System( /Cell/SR_3 )
 
 } # END of /Cell/SR_3
 %line 60 ./Koivumaki-2011_Cell_SR_x.em
-%line 447 ./Koivumaki-2011.em
+%line 449 ./Koivumaki-2011.em
 
 
 
@@ -2581,8 +2578,8 @@ System System( /Cell/SR_4 )
 
 } # END of /Cell/SR_4
 %line 60 ./Koivumaki-2011_Cell_SR_x.em
-%line 447 ./Koivumaki-2011.em
+%line 449 ./Koivumaki-2011.em
 
 
 
-%line 448 ./Koivumaki-2011.em
+%line 450 ./Koivumaki-2011.em

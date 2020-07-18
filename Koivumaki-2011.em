@@ -1,4 +1,19 @@
 @{
+# Debug flags
+DEBUG_WITHOUT_MEMBRANE_PROCESSES = 0
+DEBUG_WITHOUT_BULK_PROCESSES = 0
+DEBUG_WITHOUT_SR_PROCESSES = 0
+
+DEBUG_WITHOUT_INa   = 0
+DEBUG_WITHOUT_ICaL  = 0
+DEBUG_WITHOUT_It    = 0
+DEBUG_WITHOUT_Isus  = 0
+DEBUG_WITHOUT_IKs   = 0
+DEBUG_WITHOUT_IKr   = 0
+DEBUG_WITHOUT_If    = 0
+DEBUG_WITHOUT_ICab  = 0
+DEBUG_WITHOUT_J_mem = 0
+
 from math import exp, log, pi
 
 N_A = 6.02214076e+23
@@ -410,22 +425,9 @@ System System( /Cell/Cytosol/bulk )
 
 
 # /Cell/Membrane
-@{
-DEBUG_WITHOUT_PROCESS = 0
-DEBUG_WITHOUT_INa   = 0
-DEBUG_WITHOUT_ICaL  = 0
-DEBUG_WITHOUT_It    = 0
-DEBUG_WITHOUT_Isus  = 0
-DEBUG_WITHOUT_IKs   = 0
-DEBUG_WITHOUT_IKr   = 0
-DEBUG_WITHOUT_If    = 0
-DEBUG_WITHOUT_ICab  = 0
-DEBUG_WITHOUT_J_mem = 0
-}
 @include('./Koivumaki-2011_Cell_Membrane.em')
 
 # /Cell/Cytoplasm/{ss||bulk_x}
-@{DEBUG_WITHOUT_PROCESS = 0}
 @{x = 0}
 @[while x <= 4]
 @{
@@ -439,7 +441,6 @@ else:
 @[end while]
 
 # /Cell/SR_x
-@{DEBUG_WITHOUT_PROCESS = 0}
 @{x = 1}
 @[while x <= 4]
 @include('./Koivumaki-2011_Cell_SR_x.em')

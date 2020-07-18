@@ -400,7 +400,7 @@ System System( /Cell/Membrane )
   # Processes
   #**********************************************
 
-  @[if not DEBUG_WITHOUT_PROCESS]
+  @[if not DEBUG_WITHOUT_MEMBRANE_PROCESSES]
   # V
   Process Nygren_1998_VFluxProcess(dV_dt)
   {
@@ -937,6 +937,6 @@ System System( /Cell/Membrane )
       [Cass  :../Cytosol/ss:Ca   1];
   }
   @[end if]  @#{ENDIF DEBUG_WITHOUT_J_mem}
-  @[end if]  @#{ENDIF DEBUG_WITHOUT_PROCESS}
+  @[end if]  @#{ENDIF DEBUG_WITHOUT_MEMBRANE_PROCESSES}
 
 } # End of /Cell/Membrane

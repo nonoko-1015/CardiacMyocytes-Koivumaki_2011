@@ -118,7 +118,7 @@ System System( /Cell/Cytosol/@SystemName )
     Value    @(Jrel_0[x]);
   }
 
-  @[if not DEBUG_WITHOUT_PROCESS]
+  @[if not DEBUG_WITHOUT_BULK_PROCESSES]
   Process Koivumaki_2011_J_SERCAAssignmentProcess( J_SERCA )
   {
     StepperID    PSV;
@@ -249,10 +249,10 @@ System System( /Cell/Cytosol/@SystemName )
       [g_inf :.:RyRainf      0]
       [g_tau :.:RyRtauadapt  0];
   }
-  @[end if]  @#{ENDIF DEBUG_WITHOUT_PROCESS}
+  @[end if]  @#{ENDIF DEBUG_WITHOUT_BULK_PROCESSES}
   @[end if]  @#{ENDIF if x < 4}
 
-  @[if not DEBUG_WITHOUT_PROCESS]
+  @[if not DEBUG_WITHOUT_BULK_PROCESSES]
   @[if x > 0] # bulk_1-4
   Process Koivumaki_2011_CaBulkDiffusionFluxProcess(Ca_diff)
   {
@@ -346,6 +346,6 @@ System System( /Cell/Cytosol/@SystemName )
       [j  :.:Ca         -1]; # Cass
   }
   @[end if]
-  @[end if]  @#{ENDIF DEBUG_WITHOUT_PROCESS}
+  @[end if]  @#{ENDIF DEBUG_WITHOUT_BULK_PROCESSES}
 
 } # END of /Cell/Cytosol/@SystemName

@@ -20,7 +20,7 @@ System System( /Cell/SR_@x )
     Fixed 1;
   }
 
-  @[if not DEBUG_WITHOUT_PROCESS]
+  @[if not DEBUG_WITHOUT_SR_PROCESSES]
   Process Koivumaki_2011_CaSRDiffusionFluxProcess(Ca_diff)
   {
     Name "Ca buffering";
@@ -54,6 +54,6 @@ System System( /Cell/SR_@x )
       [ion    :.:Ca        -1]
       [buffer :.:Ca_buffer -1];
   }
-  @[end if]  @#{ENDIF DEBUG_WITHOUT_PROCESS}
+  @[end if]  @#{ENDIF DEBUG_WITHOUT_SR_PROCESSES}
 
 } # END of /Cell/SR_@x
