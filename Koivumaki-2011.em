@@ -14,10 +14,10 @@ Ko = 5.4
 Cm = 0.05 #nF
 
 stim_duration = 6.0e-3 # sec
-stim_amp = -280.0      # pA
+stim_amp = -1000.0      # pA
 BCL = 1.0              # sec
 stim_steepness = 5.0
-stim_offset = 1.0e-3   # sec
+stim_offset = 1.0e-2   # sec
 
 # Geometry
 Vss    = 4.99232e-5  # volume of the subspace (nanolitre) (Table 1)
@@ -409,11 +409,23 @@ System System( /Cell/Cytosol/bulk )
 } # END of /Cell/Cytosol/bulk
 
 
-@{DEBUG_WITHOUT_PROCESS = 0}
 # /Cell/Membrane
+@{
+DEBUG_WITHOUT_PROCESS = 0
+DEBUG_WITHOUT_INa   = 0
+DEBUG_WITHOUT_ICaL  = 0
+DEBUG_WITHOUT_It    = 0
+DEBUG_WITHOUT_Isus  = 0
+DEBUG_WITHOUT_IKs   = 0
+DEBUG_WITHOUT_IKr   = 0
+DEBUG_WITHOUT_If    = 0
+DEBUG_WITHOUT_ICab  = 0
+DEBUG_WITHOUT_J_mem = 0
+}
 @include('./Koivumaki-2011_Cell_Membrane.em')
 
 # /Cell/Cytoplasm/{ss||bulk_x}
+@{DEBUG_WITHOUT_PROCESS = 0}
 @{x = 0}
 @[while x <= 4]
 @{
@@ -427,6 +439,7 @@ else:
 @[end while]
 
 # /Cell/SR_x
+@{DEBUG_WITHOUT_PROCESS = 0}
 @{x = 1}
 @[while x <= 4]
 @include('./Koivumaki-2011_Cell_SR_x.em')

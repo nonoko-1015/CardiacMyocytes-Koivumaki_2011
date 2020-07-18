@@ -1,6 +1,9 @@
 #include "libecs.hpp"
 #include "ContinuousProcess.hpp"
 
+#include <gsl/gsl_errno.h>
+#include <gsl/gsl_math.h>
+
 USE_LIBECS;
 
 LIBECS_DM_CLASS( Koivumaki_2011_CassBufferFluxProcess, ContinuousProcess )
@@ -37,6 +40,7 @@ LIBECS_DM_CLASS( Koivumaki_2011_CassBufferFluxProcess, ContinuousProcess )
     Process::initialize();
 
     Cass = getVariableReference( "Cass" ).getVariable();
+    buffer = getVariableReference( "buffer" ).getVariable();
 
     SLlow_KdSLlow = SLlow * KdSLlow;
     SLhigh_KdSLhigh = SLhigh * KdSLhigh;
@@ -46,19 +50,17 @@ LIBECS_DM_CLASS( Koivumaki_2011_CassBufferFluxProcess, ContinuousProcess )
   virtual void fire()
   {
     Real Cass_mM = Cass->getMolarConc() * 1000;
-    Real Cass_KdSLlow = Cass_mM + KdSLlow;
-    Real Cass_KdSLhigh = Cass_mM + KdSLhigh;
-    Real Cass_KdBCa = Cass_mM + KdBCa;
-    Real betass = 1.0 /( 1.0 + SLlow_KdSLlow /( Cass_KdSLlow * Cass_KdSLlow )
-      + SLhigh_KdSLhigh /( Cass_KdSLhigh * Cass_KdSLhigh )
-      + BCa_KdBCa /( Cass_KdBCa * Cass_KdBCa ));
+    Real betass = 1.0 /( 1.0 + SLlow_KdSLlow / gsl_pow_2( Cass_mM + KdSLlow )
+      + SLhigh_KdSLhigh / gsl_pow_2( Cass_mM + KdSLhigh )
+      + BCa_KdBCa / gsl_pow_2( Cass_mM + KdBCa ));
 
-    setFlux(( 1.0 - betass ) * Cass->getVelocity());
+    setFlux(( 1.0 - betass ) * (Cass->getVelocity() - buffer->getVelocity()));
   }
 
  protected:
 
   Variable* Cass;
+  Variable* buffer;
 
   Real SLlow;
   Real KdSLlow;

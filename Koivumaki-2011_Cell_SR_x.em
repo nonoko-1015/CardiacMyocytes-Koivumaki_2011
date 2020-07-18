@@ -13,6 +13,13 @@ System System( /Cell/SR_@x )
     MolarConc    @(CaSR_0[x] * 1e-3);  # CaSR@x
   }
 
+  Variable Variable( Ca_buffer )
+  {
+    Name "Variable to hold Velocity of Ca buffering";
+    MolarConc    0.0;
+    Fixed 1;
+  }
+
   @[if not DEBUG_WITHOUT_PROCESS]
   Process Koivumaki_2011_CaSRDiffusionFluxProcess(Ca_diff)
   {
@@ -44,7 +51,8 @@ System System( /Cell/SR_@x )
     KdB  @KdCSQN;
 
     VariableReferenceList
-      [ion :.:Ca -1];
+      [ion    :.:Ca        -1]
+      [buffer :.:Ca_buffer -1];
   }
   @[end if]  @#{ENDIF DEBUG_WITHOUT_PROCESS}
 

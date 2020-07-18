@@ -29,6 +29,7 @@ LIBECS_DM_CLASS( Koivumaki_2011_BufferFluxProcess, ContinuousProcess )
     Process::initialize();
 
     ion  = getVariableReference( "ion" ).getVariable();
+    buffer = getVariableReference( "buffer" ).getVariable();
 
     B_KdB = B * KdB;
   }
@@ -40,12 +41,13 @@ LIBECS_DM_CLASS( Koivumaki_2011_BufferFluxProcess, ContinuousProcess )
 
     // pmol/sec -> NoM /sec
     setFlux(( 1.0 - ( 1.0 / ( 1.0 + B_KdB / ion_KdB * ion_KdB ) ))
-      * ion->getVelocity() );
+      * (ion->getVelocity() - buffer->getVelocity()) );
   }
 
  protected:
 
   Variable* ion;
+  Variable* buffer;
 
   Real B;
   Real KdB;

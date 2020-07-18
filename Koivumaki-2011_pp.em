@@ -1,4 +1,4 @@
-%line 1 Koivumaki-2011.em
+%line 1 ./Koivumaki-2011.em
 
 
 
@@ -24,21 +24,21 @@ System System( / )
   Variable Variable( Nao )
   {
     MolarConc    0.13;
-%line 323 Koivumaki-2011.em
+%line 323 ./Koivumaki-2011.em
     Fixed  1;
   }
 
   Variable Variable( Ko )
   {
     MolarConc    0.0054;
-%line 329 Koivumaki-2011.em
+%line 329 ./Koivumaki-2011.em
     Fixed  1;
   }
 
   Variable Variable( Cao )
   {
     MolarConc    0.0018;
-%line 335 Koivumaki-2011.em
+%line 335 ./Koivumaki-2011.em
     Fixed  1;
   }
 
@@ -59,7 +59,7 @@ System System( /Cell )
   Variable Variable( SIZE )
   {
     Value    8.3322287625e-12;
-%line 355 Koivumaki-2011.em
+%line 355 ./Koivumaki-2011.em
   }
 }
 
@@ -71,7 +71,7 @@ System System( /Cell/Cytosol )
   Variable Variable( SIZE )
   {
     Value    8.14997753985e-12;
-%line 366 Koivumaki-2011.em
+%line 366 ./Koivumaki-2011.em
   }
 
   Variable Variable(K_i)
@@ -90,7 +90,7 @@ System System( /Cell/Cytosol/bulk )
   Variable Variable( SIZE )
   {
     Value    8.14997753985e-12;
-%line 384 Koivumaki-2011.em
+%line 384 ./Koivumaki-2011.em
   }
 
   Variable Variable(Na_i)
@@ -105,11 +105,11 @@ System System( /Cell/Cytosol/bulk )
     
 
     D  0.12;
-%line 401 Koivumaki-2011.em
+%line 401 ./Koivumaki-2011.em
     Aj_nj  2492.32441226;
-%line 402 Koivumaki-2011.em
+%line 402 ./Koivumaki-2011.em
     xj_nj  3.26;
-%line 403 Koivumaki-2011.em
+%line 403 ./Koivumaki-2011.em
 
     VariableReferenceList
       [nj    :.:Na_i    0]
@@ -119,8 +119,8 @@ System System( /Cell/Cytosol/bulk )
 } # END of /Cell/Cytosol/bulk
 
 
-
 # /Cell/Membrane
+
 System System( /Cell/Membrane )
 {
   StepperID    Default;
@@ -652,7 +652,7 @@ System System( /Cell/Membrane )
       [i :../Cytosol/ss:Ca  0];
   }
 
-  # INa
+  # INa   
   Process Nygren_1998_INaAssignmentProcess(INa) # same as Nygren_1998
   {
     StepperID    PSV;
@@ -705,8 +705,9 @@ System System( /Cell/Membrane )
       [g_inf :.:INahinf   0]
       [g_tau :.:INah2tau  0];
   }
+  
 
-  # ICaL
+  # ICaL   
   Process Koivumaki_2011_ICaLAssignmentProcess(ICaL)
   {
     StepperID    PSV;
@@ -770,8 +771,9 @@ System System( /Cell/Membrane )
       [g_inf :.:ICaLfcainf  0]
       [g_tau :.:ICaLfcatau  0];
   }
+  
 
-  # It
+  # It   
   Process Koivumaki_2011_ItAssignmentProcess(It)
   {
     StepperID    PSV;
@@ -809,8 +811,9 @@ System System( /Cell/Membrane )
       [g_inf :.:Itsinf  0]
       [g_tau :.:Itstau  0];
   }
+  
 
-  # Isus
+  # Isus   
   Process Koivumaki_2011_IsusAssignmentProcess(Isus)
   {
     StepperID    PSV;
@@ -848,8 +851,9 @@ System System( /Cell/Membrane )
       [g_inf :.:Isussinf  0]
       [g_tau :.:Isusstau  0];
   }
+  
 
-  # IKs
+  # IKs   
   Process Nygren_1998_IKsAssignmentProcess(IKs)
   {
     StepperID    PSV;
@@ -874,8 +878,9 @@ System System( /Cell/Membrane )
       [g_inf :.:IKsninf  0]
       [g_tau :.:IKsntau  0];
   }
+  
 
-  # IKr
+  # IKr   
   Process Nygren_1998_IKrAssignmentProcess(IKr)
   {
     StepperID    PSV;
@@ -901,8 +906,9 @@ System System( /Cell/Membrane )
       [g_inf :.:IKrpainf  0]
       [g_tau :.:IKrpatau  0];
   }
+  
 
-  # If
+  # If   
   Process Koivumaki_2011_IfAssignmentProcess(If)
   {
     StepperID    PSV;
@@ -930,6 +936,7 @@ System System( /Cell/Membrane )
       [g_inf :.:Ifyinf  0]
       [g_tau :.:Ifytau  0];
   }
+  
 
   # IK1
   Process Nygren_1998i_K1AssignmentProcess(IK1)
@@ -976,6 +983,7 @@ System System( /Cell/Membrane )
       [E :.:ENa  0];
   }
 
+  
   Process Nygren_1998_BackgroudLeakAssignmentProcess(ICab)
   {
     StepperID    PSV;
@@ -987,6 +995,7 @@ System System( /Cell/Membrane )
       [V :.:V     0]
       [E :.:ECa  0];
   }
+  
 
   Process Nygren_1998i_CaPAssignmentProcess(ICaP)
   {
@@ -1030,17 +1039,18 @@ System System( /Cell/Membrane )
     
 
     stim_duration   0.006;
-    stim_amp        -280.0;
+    stim_amp        -1000.0;
     BCL             1.0;
     stim_steepness  5.0;
-    stim_offset     0.001;
+    stim_offset     0.01;
 
     VariableReferenceList
       [ist :.:ist  1]
       [t   :/:t    0];
   }
 
-  Process Koivumaki_2011_ZeroVariableAsCurrentFluxProcess(JNa_INa)
+ 
+  Process Koivumaki_2011_ZeroVariableAsCurrentFluxProcess(JNa_mem)
   {
     k -1;
     F 96487;
@@ -1058,7 +1068,7 @@ System System( /Cell/Membrane )
       [Nass  :../Cytosol/ss:Na   1];
   }
 
-  Process Koivumaki_2011_ZeroVariableAsCurrentFluxProcess(JK_IK)
+  Process Koivumaki_2011_ZeroVariableAsCurrentFluxProcess(JK_mem)
   {
     k -1;
     F 96487;
@@ -1084,7 +1094,7 @@ System System( /Cell/Membrane )
       [Ki   :../Cytosol:K_i    1];
   }
 
-  Process Koivumaki_2011_ZeroVariableAsCurrentFluxProcess(JCa_ICa)
+  Process Koivumaki_2011_ZeroVariableAsCurrentFluxProcess(JCa_mem)
   {
     k -0.5;
     F 96487;
@@ -1105,14 +1115,15 @@ System System( /Cell/Membrane )
       [INaCa :../Membrane:INaCa  0] # pA = pC/sec
       [Cass  :../Cytosol/ss:Ca   1];
   }
-    %line 930 ./Koivumaki-2011_Cell_Membrane.em
+        %line 941 ./Koivumaki-2011_Cell_Membrane.em
 
 } # End of /Cell/Membrane
-%line 414 Koivumaki-2011.em
+%line 425 ./Koivumaki-2011.em
 
-%line 415 Koivumaki-2011.em
+%line 426 ./Koivumaki-2011.em
 
 # /Cell/Cytoplasm/{ss||bulk_x}
+
 
 
 
@@ -1137,13 +1148,27 @@ System System( /Cell/Cytosol/ss )
     Name "Nass in component cleft_space_ion_concentrations (molar)";
     MolarConc  0.008691502;
   }
+
+  Variable Variable( Na_buffer )
+  {
+    Name "Variable to hold Velocity of Na buffering";
+    MolarConc    0.0;
+    Fixed 1;
+  }
   
-%line 24 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+%line 31 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
 
   Variable Variable( Ca )
   {
     MolarConc    1.62e-07;  # Cai1
-%line 28 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+%line 35 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+  }
+
+  Variable Variable( Ca_buffer )
+  {
+    Name "Variable to hold Velocity of Ca buffering";
+    MolarConc    0.0;
+    Fixed 1;
   }
 
   
@@ -1341,8 +1366,9 @@ System System( /Cell/Cytosol/ss )
       [g_inf :.:RyRainf      0]
       [g_tau :.:RyRtauadapt  0];
   }
-  
+        %line 254 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
 
+  
    # ss
   Process Koivumaki_2011_CassBufferFluxProcess(Ca_buffer)
   {
@@ -1356,7 +1382,8 @@ System System( /Cell/Cytosol/ss )
     KdBCa    0.00238;
 
     VariableReferenceList
-      [Cass   :.:Ca -1];
+      [Cass   :.:Ca        -1]
+      [buffer :.:Ca_buffer -1];
   }
 
   Process Koivumaki_2011_BufferFluxProcess(Na_buffer)
@@ -1369,7 +1396,8 @@ System System( /Cell/Cytosol/ss )
     KdB  10;
 
     VariableReferenceList
-      [ion :.:Na -1];
+      [ion    :.:Na        -1]
+      [buffer :.:Na_buffer -1];
   }
 
   Process Koivumaki_2011_DiffusionJNjFluxProcess(Jj_nj)
@@ -1386,11 +1414,11 @@ System System( /Cell/Cytosol/ss )
       [j  :.:Ca         -1]; # Cass
   }
   
-    %line 331 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+    %line 350 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
 
 } # END of /Cell/Cytosol/ss
-%line 333 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
-%line 427 Koivumaki-2011.em
+%line 352 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+%line 439 ./Koivumaki-2011.em
 
 
 
@@ -1411,12 +1439,19 @@ System System( /Cell/Cytosol/bulk_1 )
   }
 
   
-%line 24 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+%line 31 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
 
   Variable Variable( Ca )
   {
     MolarConc    1.35e-07;  # Cai1
-%line 28 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+%line 35 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+  }
+
+  Variable Variable( Ca_buffer )
+  {
+    Name "Variable to hold Velocity of Ca buffering";
+    MolarConc    0.0;
+    Fixed 1;
   }
 
   
@@ -1614,8 +1649,9 @@ System System( /Cell/Cytosol/bulk_1 )
       [g_inf :.:RyRainf      0]
       [g_tau :.:RyRtauadapt  0];
   }
-  
+        %line 254 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
 
+  
    # bulk_1-4
   Process Koivumaki_2011_CaBulkDiffusionFluxProcess(Ca_diff)
   {
@@ -1646,15 +1682,16 @@ System System( /Cell/Cytosol/bulk_1 )
     KdB  0.00238;
 
     VariableReferenceList
-      [ion :.:Ca -1];
+      [ion    :.:Ca        -1]
+      [buffer :.:Ca_buffer -1];
   }
 
   
-    %line 331 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+    %line 350 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
 
 } # END of /Cell/Cytosol/bulk_1
-%line 333 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
-%line 427 Koivumaki-2011.em
+%line 352 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+%line 439 ./Koivumaki-2011.em
 
 
 
@@ -1675,12 +1712,19 @@ System System( /Cell/Cytosol/bulk_2 )
   }
 
   
-%line 24 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+%line 31 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
 
   Variable Variable( Ca )
   {
     MolarConc    1.38e-07;  # Cai1
-%line 28 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+%line 35 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+  }
+
+  Variable Variable( Ca_buffer )
+  {
+    Name "Variable to hold Velocity of Ca buffering";
+    MolarConc    0.0;
+    Fixed 1;
   }
 
   
@@ -1878,8 +1922,9 @@ System System( /Cell/Cytosol/bulk_2 )
       [g_inf :.:RyRainf      0]
       [g_tau :.:RyRtauadapt  0];
   }
-  
+        %line 254 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
 
+  
    # bulk_1-4
   Process Koivumaki_2011_CaBulkDiffusionFluxProcess(Ca_diff)
   {
@@ -1910,15 +1955,16 @@ System System( /Cell/Cytosol/bulk_2 )
     KdB  0.00238;
 
     VariableReferenceList
-      [ion :.:Ca -1];
+      [ion    :.:Ca        -1]
+      [buffer :.:Ca_buffer -1];
   }
 
   
-    %line 331 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+    %line 350 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
 
 } # END of /Cell/Cytosol/bulk_2
-%line 333 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
-%line 427 Koivumaki-2011.em
+%line 352 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+%line 439 ./Koivumaki-2011.em
 
 
 
@@ -1939,12 +1985,19 @@ System System( /Cell/Cytosol/bulk_3 )
   }
 
   
-%line 24 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+%line 31 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
 
   Variable Variable( Ca )
   {
     MolarConc    1.44e-07;  # Cai1
-%line 28 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+%line 35 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+  }
+
+  Variable Variable( Ca_buffer )
+  {
+    Name "Variable to hold Velocity of Ca buffering";
+    MolarConc    0.0;
+    Fixed 1;
   }
 
   
@@ -2142,8 +2195,9 @@ System System( /Cell/Cytosol/bulk_3 )
       [g_inf :.:RyRainf      0]
       [g_tau :.:RyRtauadapt  0];
   }
-  
+        %line 254 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
 
+  
    # bulk_1-4
   Process Koivumaki_2011_CaBulkDiffusionFluxProcess(Ca_diff)
   {
@@ -2174,15 +2228,16 @@ System System( /Cell/Cytosol/bulk_3 )
     KdB  0.00238;
 
     VariableReferenceList
-      [ion :.:Ca -1];
+      [ion    :.:Ca        -1]
+      [buffer :.:Ca_buffer -1];
   }
 
   
-    %line 331 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+    %line 350 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
 
 } # END of /Cell/Cytosol/bulk_3
-%line 333 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
-%line 427 Koivumaki-2011.em
+%line 352 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+%line 439 ./Koivumaki-2011.em
 
 
 
@@ -2203,25 +2258,71 @@ System System( /Cell/Cytosol/bulk_4 )
   }
 
   
-%line 24 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+%line 31 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
 
   Variable Variable( Ca )
   {
     MolarConc    1.56e-07;  # Cai1
-%line 28 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+%line 35 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
   }
 
-    %line 331 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+  Variable Variable( Ca_buffer )
+  {
+    Name "Variable to hold Velocity of Ca buffering";
+    MolarConc    0.0;
+    Fixed 1;
+  }
+
+    %line 254 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+
+  
+   # bulk_1-4
+  Process Koivumaki_2011_CaBulkDiffusionFluxProcess(Ca_diff)
+  {
+    Name "Sodium buffering";
+
+    
+
+    DCa    780.0;
+    DCaBm  25.0;
+    BCa    0.024;
+    KdBCa  0.00238;
+    dx     1.625;
+    j      4;
+
+    VariableReferenceList
+      [Ca_up   :../bulk_4:Ca  0]
+      [Ca_down :../bulk_3:Ca  0]
+      [Ca      :.:Ca                        1];
+  }
+
+  Process Koivumaki_2011_BufferFluxProcess(Ca_buffer)
+  {
+    Name "Ca buffering";
+
+    
+
+    B    0.024;
+    KdB  0.00238;
+
+    VariableReferenceList
+      [ion    :.:Ca        -1]
+      [buffer :.:Ca_buffer -1];
+  }
+
+  
+    %line 350 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
 
 } # END of /Cell/Cytosol/bulk_4
-%line 333 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
-%line 427 Koivumaki-2011.em
+%line 352 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+%line 439 ./Koivumaki-2011.em
 
 
 
-%line 428 Koivumaki-2011.em
+%line 440 ./Koivumaki-2011.em
 
 # /Cell/SR_x
+
 
 
 %line 1 ./Koivumaki-2011_Cell_SR_x.em
@@ -2242,6 +2343,13 @@ System System( /Cell/SR_1 )
   {
     MolarConc    0.000618922;  # CaSR1
 %line 14 ./Koivumaki-2011_Cell_SR_x.em
+  }
+
+  Variable Variable( Ca_buffer )
+  {
+    Name "Variable to hold Velocity of Ca buffering";
+    MolarConc    0.0;
+    Fixed 1;
   }
 
   
@@ -2271,13 +2379,14 @@ System System( /Cell/SR_1 )
     KdB  0.8;
 
     VariableReferenceList
-      [ion :.:Ca -1];
+      [ion    :.:Ca        -1]
+      [buffer :.:Ca_buffer -1];
   }
-    %line 50 ./Koivumaki-2011_Cell_SR_x.em
+    %line 58 ./Koivumaki-2011_Cell_SR_x.em
 
 } # END of /Cell/SR_1
-%line 52 ./Koivumaki-2011_Cell_SR_x.em
-%line 434 Koivumaki-2011.em
+%line 60 ./Koivumaki-2011_Cell_SR_x.em
+%line 447 ./Koivumaki-2011.em
 
 
 
@@ -2299,6 +2408,13 @@ System System( /Cell/SR_2 )
   {
     MolarConc    0.000607629;  # CaSR2
 %line 14 ./Koivumaki-2011_Cell_SR_x.em
+  }
+
+  Variable Variable( Ca_buffer )
+  {
+    Name "Variable to hold Velocity of Ca buffering";
+    MolarConc    0.0;
+    Fixed 1;
   }
 
   
@@ -2328,13 +2444,14 @@ System System( /Cell/SR_2 )
     KdB  0.8;
 
     VariableReferenceList
-      [ion :.:Ca -1];
+      [ion    :.:Ca        -1]
+      [buffer :.:Ca_buffer -1];
   }
-    %line 50 ./Koivumaki-2011_Cell_SR_x.em
+    %line 58 ./Koivumaki-2011_Cell_SR_x.em
 
 } # END of /Cell/SR_2
-%line 52 ./Koivumaki-2011_Cell_SR_x.em
-%line 434 Koivumaki-2011.em
+%line 60 ./Koivumaki-2011_Cell_SR_x.em
+%line 447 ./Koivumaki-2011.em
 
 
 
@@ -2356,6 +2473,13 @@ System System( /Cell/SR_3 )
   {
     MolarConc    0.000590527;  # CaSR3
 %line 14 ./Koivumaki-2011_Cell_SR_x.em
+  }
+
+  Variable Variable( Ca_buffer )
+  {
+    Name "Variable to hold Velocity of Ca buffering";
+    MolarConc    0.0;
+    Fixed 1;
   }
 
   
@@ -2385,13 +2509,14 @@ System System( /Cell/SR_3 )
     KdB  0.8;
 
     VariableReferenceList
-      [ion :.:Ca -1];
+      [ion    :.:Ca        -1]
+      [buffer :.:Ca_buffer -1];
   }
-    %line 50 ./Koivumaki-2011_Cell_SR_x.em
+    %line 58 ./Koivumaki-2011_Cell_SR_x.em
 
 } # END of /Cell/SR_3
-%line 52 ./Koivumaki-2011_Cell_SR_x.em
-%line 434 Koivumaki-2011.em
+%line 60 ./Koivumaki-2011_Cell_SR_x.em
+%line 447 ./Koivumaki-2011.em
 
 
 
@@ -2413,6 +2538,13 @@ System System( /Cell/SR_4 )
   {
     MolarConc    0.000573811;  # CaSR4
 %line 14 ./Koivumaki-2011_Cell_SR_x.em
+  }
+
+  Variable Variable( Ca_buffer )
+  {
+    Name "Variable to hold Velocity of Ca buffering";
+    MolarConc    0.0;
+    Fixed 1;
   }
 
   
@@ -2442,14 +2574,15 @@ System System( /Cell/SR_4 )
     KdB  0.8;
 
     VariableReferenceList
-      [ion :.:Ca -1];
+      [ion    :.:Ca        -1]
+      [buffer :.:Ca_buffer -1];
   }
-    %line 50 ./Koivumaki-2011_Cell_SR_x.em
+    %line 58 ./Koivumaki-2011_Cell_SR_x.em
 
 } # END of /Cell/SR_4
-%line 52 ./Koivumaki-2011_Cell_SR_x.em
-%line 434 Koivumaki-2011.em
+%line 60 ./Koivumaki-2011_Cell_SR_x.em
+%line 447 ./Koivumaki-2011.em
 
 
 
-%line 435 Koivumaki-2011.em
+%line 448 ./Koivumaki-2011.em

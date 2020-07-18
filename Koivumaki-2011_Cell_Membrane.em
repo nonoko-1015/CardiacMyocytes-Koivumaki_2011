@@ -468,7 +468,7 @@ System System( /Cell/Membrane )
       [i :../Cytosol/ss:Ca  0];
   }
 
-  # INa
+  # INa   @[if not DEBUG_WITHOUT_INa]
   Process Nygren_1998_INaAssignmentProcess(INa) # same as Nygren_1998
   {
     StepperID    PSV;
@@ -521,8 +521,9 @@ System System( /Cell/Membrane )
       [g_inf :.:INahinf   0]
       [g_tau :.:INah2tau  0];
   }
+  @[end if]
 
-  # ICaL
+  # ICaL   @[if not DEBUG_WITHOUT_ICaL]
   Process Koivumaki_2011_ICaLAssignmentProcess(ICaL)
   {
     StepperID    PSV;
@@ -586,8 +587,9 @@ System System( /Cell/Membrane )
       [g_inf :.:ICaLfcainf  0]
       [g_tau :.:ICaLfcatau  0];
   }
+  @[end if]
 
-  # It
+  # It   @[if not DEBUG_WITHOUT_It]
   Process Koivumaki_2011_ItAssignmentProcess(It)
   {
     StepperID    PSV;
@@ -625,8 +627,9 @@ System System( /Cell/Membrane )
       [g_inf :.:Itsinf  0]
       [g_tau :.:Itstau  0];
   }
+  @[end if]
 
-  # Isus
+  # Isus   @[if not DEBUG_WITHOUT_Isus]
   Process Koivumaki_2011_IsusAssignmentProcess(Isus)
   {
     StepperID    PSV;
@@ -664,8 +667,9 @@ System System( /Cell/Membrane )
       [g_inf :.:Isussinf  0]
       [g_tau :.:Isusstau  0];
   }
+  @[end if]
 
-  # IKs
+  # IKs   @[if not DEBUG_WITHOUT_IKs]
   Process Nygren_1998_IKsAssignmentProcess(IKs)
   {
     StepperID    PSV;
@@ -690,8 +694,9 @@ System System( /Cell/Membrane )
       [g_inf :.:IKsninf  0]
       [g_tau :.:IKsntau  0];
   }
+  @[end if]
 
-  # IKr
+  # IKr   @[if not DEBUG_WITHOUT_IKr]
   Process Nygren_1998_IKrAssignmentProcess(IKr)
   {
     StepperID    PSV;
@@ -717,8 +722,9 @@ System System( /Cell/Membrane )
       [g_inf :.:IKrpainf  0]
       [g_tau :.:IKrpatau  0];
   }
+  @[end if]
 
-  # If
+  # If   @[if not DEBUG_WITHOUT_If]
   Process Koivumaki_2011_IfAssignmentProcess(If)
   {
     StepperID    PSV;
@@ -746,6 +752,7 @@ System System( /Cell/Membrane )
       [g_inf :.:Ifyinf  0]
       [g_tau :.:Ifytau  0];
   }
+  @[end if]
 
   # IK1
   Process Nygren_1998i_K1AssignmentProcess(IK1)
@@ -792,6 +799,7 @@ System System( /Cell/Membrane )
       [E :.:ENa  0];
   }
 
+  @[if not DEBUG_WITHOUT_ICab]
   Process Nygren_1998_BackgroudLeakAssignmentProcess(ICab)
   {
     StepperID    PSV;
@@ -803,6 +811,7 @@ System System( /Cell/Membrane )
       [V :.:V     0]
       [E :.:ECa  0];
   }
+  @[end if]
 
   Process Nygren_1998i_CaPAssignmentProcess(ICaP)
   {
@@ -861,7 +870,8 @@ System System( /Cell/Membrane )
       [t   :/:t    0];
   }
 
-  Process Koivumaki_2011_ZeroVariableAsCurrentFluxProcess(JNa_INa)
+ @[if not DEBUG_WITHOUT_J_mem]
+  Process Koivumaki_2011_ZeroVariableAsCurrentFluxProcess(JNa_mem)
   {
     k -1;
     F @F;
@@ -879,7 +889,7 @@ System System( /Cell/Membrane )
       [Nass  :../Cytosol/ss:Na   1];
   }
 
-  Process Koivumaki_2011_ZeroVariableAsCurrentFluxProcess(JK_IK)
+  Process Koivumaki_2011_ZeroVariableAsCurrentFluxProcess(JK_mem)
   {
     k -1;
     F @F;
@@ -905,7 +915,7 @@ System System( /Cell/Membrane )
       [Ki   :../Cytosol:K_i    1];
   }
 
-  Process Koivumaki_2011_ZeroVariableAsCurrentFluxProcess(JCa_ICa)
+  Process Koivumaki_2011_ZeroVariableAsCurrentFluxProcess(JCa_mem)
   {
     k -0.5;
     F @F;
@@ -926,6 +936,7 @@ System System( /Cell/Membrane )
       [INaCa :../Membrane:INaCa  0] # pA = pC/sec
       [Cass  :../Cytosol/ss:Ca   1];
   }
+  @[end if]  @#{ENDIF DEBUG_WITHOUT_J_mem}
   @[end if]  @#{ENDIF DEBUG_WITHOUT_PROCESS}
 
 } # End of /Cell/Membrane

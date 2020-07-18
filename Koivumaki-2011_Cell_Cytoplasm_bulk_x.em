@@ -20,11 +20,25 @@ System System( /Cell/Cytosol/@SystemName )
     Name "Nass in component cleft_space_ion_concentrations (molar)";
     MolarConc  @(Nass_0 * 1e-3);
   }
+
+  Variable Variable( Na_buffer )
+  {
+    Name "Variable to hold Velocity of Na buffering";
+    MolarConc    0.0;
+    Fixed 1;
+  }
   @[end if]
 
   Variable Variable( Ca )
   {
     MolarConc    @(CaCytosol_0[x] * 1e-3);  # Cai1
+  }
+
+  Variable Variable( Ca_buffer )
+  {
+    Name "Variable to hold Velocity of Ca buffering";
+    MolarConc    0.0;
+    Fixed 1;
   }
 
   @[if x < 4]
@@ -235,8 +249,10 @@ System System( /Cell/Cytosol/@SystemName )
       [g_inf :.:RyRainf      0]
       [g_tau :.:RyRtauadapt  0];
   }
-  @[end if]
+  @[end if]  @#{ENDIF DEBUG_WITHOUT_PROCESS}
+  @[end if]  @#{ENDIF if x < 4}
 
+  @[if not DEBUG_WITHOUT_PROCESS]
   @[if x > 0] # bulk_1-4
   Process Koivumaki_2011_CaBulkDiffusionFluxProcess(Ca_diff)
   {
@@ -272,7 +288,8 @@ System System( /Cell/Cytosol/@SystemName )
     KdB  @KdBCa;
 
     VariableReferenceList
-      [ion :.:Ca -1];
+      [ion    :.:Ca        -1]
+      [buffer :.:Ca_buffer -1];
   }
 
   @[else] # ss
@@ -292,7 +309,8 @@ System System( /Cell/Cytosol/@SystemName )
     KdBCa    @KdBCa;
 
     VariableReferenceList
-      [Cass   :.:Ca -1];
+      [Cass   :.:Ca        -1]
+      [buffer :.:Ca_buffer -1];
   }
 
   Process Koivumaki_2011_BufferFluxProcess(Na_buffer)
@@ -307,7 +325,8 @@ System System( /Cell/Cytosol/@SystemName )
     KdB  @KdBNa;
 
     VariableReferenceList
-      [ion :.:Na -1];
+      [ion    :.:Na        -1]
+      [buffer :.:Na_buffer -1];
   }
 
   Process Koivumaki_2011_DiffusionJNjFluxProcess(Jj_nj)
