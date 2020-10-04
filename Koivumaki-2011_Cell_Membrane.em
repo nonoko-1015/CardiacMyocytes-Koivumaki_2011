@@ -488,7 +488,7 @@ System System( /Cell/Membrane )
       [m          :.:INam            0]
       [h1         :.:INah1           0]
       [h2         :.:INah2           0]
-      [Na_c       :../Cytosol/ss:Na  0]
+      [Na_c       :/:Nao             0]  # Nao
       [V          :.:V               0]
       [E_Na       :.:ENa             0];
   }
