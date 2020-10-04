@@ -1,6 +1,7 @@
 
 #include "libecs.hpp"
 #include "Process.hpp"
+#include <gsl/gsl_math.h>
 
 USE_LIBECS;
 
@@ -65,13 +66,13 @@ LIBECS_DM_CLASS( Koivumaki_2011_ICaLAssignmentProcess, Process )
     ICaLfcatau = 2e-3
     */
     v = V->getValue();
-    ICaLfcainf->setValue( 1.0 - 1.0 / ( 1.0 + pow( kCa / Ca_ss->getMolarConc() * 1000, kCan)) );
+    ICaLfcainf->setValue( 1.0 - 1.0 / ( 1.0 + pow( kCa / Ca_ss->getMolarConc() * 1000.0, kCan)) );
     ICaL->setValue( g_Ca_L * ICaLd->getValue() * ICaLfca->getValue() * ICaLf1->getValue() * ICaLf2->getValue() * ( v - E_Ca_app ));
-    ICaLdinf->setValue( 1.00000/(1.00000+exp((v+9.00000)/-5.80000)) );
-    ICaLfinf->setValue( 1.00000/(1.00000+exp((v+27.4000)/7.10000)) );
-    ICaLdtau->setValue( 0.00270000*exp(-(pow((v+35.0000)/30.0000, 2.00000)))+0.00200000 );
-    ICaLf1tau->setValue( 0.98698 * exp( -pow( (( v + 30.16047 )/ 7.09396 ), 2 ) ) + 0.04275/( 1.0 + exp(( v - 51.61555)/ -80.61331)) + 0.03576 /( 1.0 + exp(( v + 29.57272 )/ 13.21758 )) - 0.00821 );
-    ICaLf2tau->setValue( 1.33230*exp(-(pow(( v + 40.0000 )/ 14.2000, 2.00000 ))) + 0.0626000 );
+    ICaLdinf->setValue( 1.0 /( 1.0 + exp(( v + 9.0 )/ -5.8 )));
+    ICaLfinf->setValue( 1.0 /( 1.0 + exp(( v + 27.4 )/ 7.1 )));
+    ICaLdtau->setValue( 0.0027 * exp( -gsl_pow_2(( v + 35.0 )/ 30.0 )) + 0.002 );
+    ICaLf1tau->setValue( 0.98698 * exp( -gsl_pow_2(( v + 30.16047 )/ 7.09396 ) ) + 0.04275/( 1.0 + exp(( v - 51.61555 )/ -80.61331 )) + 0.03576 /( 1.0 + exp(( v + 29.57272 )/ 13.21758 )) - 0.00821 );
+    ICaLf2tau->setValue( 1.3323 * exp( -gsl_pow_2(( v + 40.0 )/ 14.2 )) + 0.0626 );
     ICaLfcatau->setValue( 2.0e-3 );
   }
 
