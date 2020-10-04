@@ -479,18 +479,18 @@ System System( /Cell/Membrane )
     P_Na  @PNa; # 0.0016, P_Na in component sodium_current (nanolitre_per_second)
 
     VariableReferenceList
-      [i_Na       :.:INa             1]
-      [m_infinity :.:INaminf         1]
-      [tau_m      :.:INamtau         1]
-      [h_infinity :.:INahinf         1]
-      [tau_h1     :.:INah1tau        1]
-      [tau_h2     :.:INah2tau        1]
-      [m          :.:INam            0]
-      [h1         :.:INah1           0]
-      [h2         :.:INah2           0]
-      [Na_c       :/:Nao             0]  # Nao
-      [V          :.:V               0]
-      [E_Na       :.:ENa             0];
+      [i_Na       :.:INa       1]
+      [m_infinity :.:INaminf   1]
+      [tau_m      :.:INamtau   1]
+      [h_infinity :.:INahinf   1]
+      [tau_h1     :.:INah1tau  1]
+      [tau_h2     :.:INah2tau  1]
+      [m          :.:INam      0]
+      [h1         :.:INah1     0]
+      [h2         :.:INah2     0]
+      [Na_c       :/:Nao       0]  # Nao
+      [V          :.:V         0]
+      [E_Na       :.:ENa       0];
   }
 
   Process Nygren_1998_GatingFluxProcess(dINam_dt)
