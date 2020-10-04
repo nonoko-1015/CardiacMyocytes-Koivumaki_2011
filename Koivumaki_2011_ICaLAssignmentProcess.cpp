@@ -70,7 +70,7 @@ LIBECS_DM_CLASS( Koivumaki_2011_ICaLAssignmentProcess, Process )
     ICaLdinf->setValue( 1.00000/(1.00000+exp((v+9.00000)/-5.80000)) );
     ICaLfinf->setValue( 1.00000/(1.00000+exp((v+27.4000)/7.10000)) );
     ICaLdtau->setValue( 0.00270000*exp(-(pow((v+35.0000)/30.0000, 2.00000)))+0.00200000 );
-    ICaLf1tau->setValue( 0.98698 * exp( pow( -(( v + 30.16047 )/ 7.09396 ), 2 ) ) + 0.04275/( 1.0 + exp(( v - 51.61555)/ -80.61331)) + 0.03576 /( 1.0 + exp(( v + 29.57272 )/ 13.21758 )) - 0.00821 );
+    ICaLf1tau->setValue( 0.98698 * exp( -pow( (( v + 30.16047 )/ 7.09396 ), 2 ) ) + 0.04275/( 1.0 + exp(( v - 51.61555)/ -80.61331)) + 0.03576 /( 1.0 + exp(( v + 29.57272 )/ 13.21758 )) - 0.00821 );
     ICaLf2tau->setValue( 1.33230*exp(-(pow(( v + 40.0000 )/ 14.2000, 2.00000 ))) + 0.0626000 );
     ICaLfcatau->setValue( 2.0e-3 );
   }
