@@ -1,6 +1,9 @@
 #include "libecs.hpp"
 #include "ContinuousProcess.hpp"
 
+#include <gsl/gsl_errno.h>
+#include <gsl/gsl_math.h>
+
 USE_LIBECS;
 
 LIBECS_DM_CLASS( Koivumaki_2011_BufferFluxProcess, ContinuousProcess )
@@ -40,8 +43,8 @@ LIBECS_DM_CLASS( Koivumaki_2011_BufferFluxProcess, ContinuousProcess )
     // Real beta = 1.0 / ( 1.0 + B_KdB / ion_KdB * ion_KdB );
 
     // pmol/sec -> NoM /sec
-    setFlux(( 1.0 - ( 1.0 / ( 1.0 + B_KdB / ion_KdB * ion_KdB ) ))
-      * (ion->getVelocity() - buffer->getVelocity()) );
+    setFlux(( 1.0 - ( 1.0 / ( 1.0 + B_KdB / gsl_pow_2( ion_KdB ))))
+      * (ion->getVelocity() + buffer->getVelocity()) );
   }
 
  protected:

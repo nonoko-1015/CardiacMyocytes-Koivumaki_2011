@@ -301,7 +301,7 @@ System System( /Cell/Cytosol/@SystemName )
 
     VariableReferenceList
       [ion    :.:Ca        -1]
-      [buffer :.:Ca_buffer -1];
+      [buffer :.:Ca_buffer  1];
   }
 
   @[else] # ss
@@ -340,7 +340,7 @@ System System( /Cell/Cytosol/@SystemName )
 
     VariableReferenceList
       [ion    :.:Na        -1]
-      [buffer :.:Na_buffer -1];
+      [buffer :.:Na_buffer  1];
   }
 
   # ss only

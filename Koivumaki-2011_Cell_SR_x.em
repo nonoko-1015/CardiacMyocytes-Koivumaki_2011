@@ -52,7 +52,7 @@ System System( /Cell/SR_@x )
 
     VariableReferenceList
       [ion    :.:Ca        -1]
-      [buffer :.:Ca_buffer -1];
+      [buffer :.:Ca_buffer  1];
   }
   @[end if]  @#{ENDIF DEBUG_WITHOUT_SR_PROCESSES}
 
