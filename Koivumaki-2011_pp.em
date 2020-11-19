@@ -1,4 +1,4 @@
-%line 1 ./Koivumaki-2011.em
+%line 1 Koivumaki-2011.em
 
 
 
@@ -24,21 +24,21 @@ System System( / )
   Variable Variable( Nao )
   {
     MolarConc    0.13;
-%line 338 ./Koivumaki-2011.em
+%line 338 Koivumaki-2011.em
     Fixed  1;
   }
 
   Variable Variable( Ko )
   {
     MolarConc    0.0054;
-%line 344 ./Koivumaki-2011.em
+%line 344 Koivumaki-2011.em
     Fixed  1;
   }
 
   Variable Variable( Cao )
   {
     MolarConc    0.0018;
-%line 350 ./Koivumaki-2011.em
+%line 350 Koivumaki-2011.em
     Fixed  1;
   }
 
@@ -59,7 +59,7 @@ System System( /Cell )
   Variable Variable( SIZE )
   {
     Value    8.3322287625e-12;
-%line 370 ./Koivumaki-2011.em
+%line 370 Koivumaki-2011.em
   }
 }
 
@@ -71,7 +71,7 @@ System System( /Cell/Cytosol )
   Variable Variable( SIZE )
   {
     Value    8.14997753985e-12;
-%line 381 ./Koivumaki-2011.em
+%line 381 Koivumaki-2011.em
   }
 
   Variable Variable(K_i)
@@ -90,7 +90,7 @@ System System( /Cell/Cytosol/bulk )
   Variable Variable( SIZE )
   {
     Value    8.14997753985e-12;
-%line 399 ./Koivumaki-2011.em
+%line 399 Koivumaki-2011.em
   }
 
   Variable Variable(Na_i)
@@ -105,11 +105,11 @@ System System( /Cell/Cytosol/bulk )
     
 
     D  0.12;
-%line 416 ./Koivumaki-2011.em
+%line 416 Koivumaki-2011.em
     Aj_nj  2492.32441226;
-%line 417 ./Koivumaki-2011.em
+%line 417 Koivumaki-2011.em
     xj_nj  3.26;
-%line 418 ./Koivumaki-2011.em
+%line 418 Koivumaki-2011.em
 
     VariableReferenceList
       [nj    :.:Na_i    0]
@@ -612,27 +612,27 @@ System System( /Cell/Membrane )
   Process Nygren_1998_EAssignmentProcess(ENa)
   {
     StepperID    PSV;
-    F  96487;
+    F  96487.0;
     T  306.15;
     R  8314.0;
     z  1;
 
     VariableReferenceList
-      [E :.:ENa               1]
-      [o :/:Nao               0]
+      [E :.:ENa             1]
+      [o :/:Nao             0]
       [i :../Cytosol/ss:Na  0];
   }
 
   Process Nygren_1998_EAssignmentProcess(EK)
   {
     StepperID    PSV;
-    F  96487;
+    F  96487.0;
     T  306.15;
     R  8314.0;
     z  1;
 
     VariableReferenceList
-      [E :.:EK           1]
+      [E :.:EK            1]
       [o :/:Ko            0]
       [i :../Cytosol:K_i  0];
   }
@@ -640,14 +640,14 @@ System System( /Cell/Membrane )
   Process Nygren_1998_EAssignmentProcess(ECa)
   {
     StepperID    PSV;
-    F  96487;
+    F  96487.0;
     T  306.15;
     R  8314.0;
     z  2;
 
     VariableReferenceList
-      [E :.:ECa               1]
-      [o :/:Cao               0]
+      [E :.:ECa             1]
+      [o :/:Cao             0]
       [i :../Cytosol/ss:Ca  0];
   }
 
@@ -658,7 +658,7 @@ System System( /Cell/Membrane )
 
     T  306.15;
     R  8314.0;
-    F  96487;
+    F  96487.0;
     P_Na  0.0018; # 0.0016, P_Na in component sodium_current (nanolitre_per_second)
 
     VariableReferenceList
@@ -944,7 +944,7 @@ System System( /Cell/Membrane )
 
     T  306.15;
     R  8314.0;
-    F  96487;
+    F  96487.0;
     g_K1  3.4425; # 3, g_K1 in component inward_rectifier (nanoS)
 
     VariableReferenceList
@@ -1014,7 +1014,7 @@ System System( /Cell/Membrane )
 
     T  306.15;
     R  8314.0;
-    F  96487;
+    F  96487.0;
     gamma   0.45;   # 0.45, gamma in component Na_Ca_ion_exchanger_current (dimensionless)
     k_NaCa  0.0084; # 0.0374842, k_NaCa in component Na_Ca_ion_exchanger_current (picoA_per_millimolar_4)
     d_NaCa  0.0003; # 0.0003, d_NaCa in component Na_Ca_ion_exchanger_current (per_millimolar_4)
@@ -1052,7 +1052,7 @@ System System( /Cell/Membrane )
   Process Koivumaki_2011_ZeroVariableAsCurrentFluxProcess(JNa_mem)
   {
     k -1;
-    F 96487;
+    F 96487.0;
 
     VariableReferenceList
       [INa   :../Membrane:INa    0] # pA = pC/sec
@@ -1070,7 +1070,7 @@ System System( /Cell/Membrane )
   Process Koivumaki_2011_ZeroVariableAsCurrentFluxProcess(JK_mem)
   {
     k -1;
-    F 96487;
+    F 96487.0;
 
     VariableReferenceList
       [It   :../Membrane:It    0] # pA = pC/sec
@@ -1086,7 +1086,7 @@ System System( /Cell/Membrane )
   Process Koivumaki_2011_ZeroVariableAsCurrentFluxProcess(JK_INaK)
   {
     k 2;
-    F 96487;
+    F 96487.0;
 
     VariableReferenceList
       [INaK :../Membrane:INaK  0]
@@ -1096,7 +1096,7 @@ System System( /Cell/Membrane )
   Process Koivumaki_2011_ZeroVariableAsCurrentFluxProcess(JCa_mem)
   {
     k -0.5;
-    F 96487;
+    F 96487.0;
 
     VariableReferenceList
       [ICaL :../Membrane:ICaL  0] # pA = pC/sec
@@ -1108,7 +1108,7 @@ System System( /Cell/Membrane )
   Process Koivumaki_2011_ZeroVariableAsCurrentFluxProcess(JCa_INaCa)
   {
     k 1;
-    F 96487;
+    F 96487.0;
 
     VariableReferenceList
       [INaCa :../Membrane:INaCa  0] # pA = pC/sec
@@ -1117,9 +1117,9 @@ System System( /Cell/Membrane )
         %line 941 ./Koivumaki-2011_Cell_Membrane.em
 
 } # End of /Cell/Membrane
-%line 428 ./Koivumaki-2011.em
+%line 428 Koivumaki-2011.em
 
-%line 429 ./Koivumaki-2011.em
+%line 429 Koivumaki-2011.em
 
 # /Cell/Cytoplasm/{ss||bulk_x}
 
@@ -1141,13 +1141,13 @@ System System( /Cell/Cytosol/ss )
   }
 
   
-  Variable Variable(Na)
+  Variable Variable(Na) # ss only
   {
     Name "Nass in component cleft_space_ion_concentrations (molar)";
     MolarConc  0.008691502;
   }
 
-  Variable Variable( Na_buffer )
+  Variable Variable( Na_buffer ) # ss only
   {
     Name "Variable to hold Velocity of Na buffering";
     MolarConc    0.0;
@@ -1170,83 +1170,84 @@ System System( /Cell/Cytosol/ss )
   }
 
   
-  Variable Variable( SERCACa )
+  Variable Variable( SERCACa ) # ss, bulk_1-3
   {
     MolarConc    4.25e-06;  # SERCACa1
   }
 
-  Variable Variable( J_SERCASR )
+  Variable Variable( J_SERCASR ) # ss, bulk_1-3
   {
     Name "pmol/sec";
     Value    4.620180615e-07;
   }
 
-  Variable Variable( J_bulkSERCA )
+  Variable Variable( J_bulkSERCA ) # ss, bulk_1-3
   {
     Name "pmol/sec";
     Value    5.03673667104e-07;
   }
 
-  Variable Variable( JSRCaleak )
+  Variable Variable( JSRCaleak ) # ss, bulk_1-3
   {
     Value    1.71830362541e-07;
   }
 
-  Variable Variable( RyRa )
+  Variable Variable( RyRa ) # ss, bulk_1-3
   {
     Value    0.24553; # RyRa0
   }
 
-  Variable Variable( RyRo )
+  Variable Variable( RyRo ) # ss, bulk_1-3
   {
     Value    4e-05; # RyRo0
   }
 
-  Variable Variable( RyRc )
+  Variable Variable( RyRc ) # ss, bulk_1-3
   {
     Value    0.999972; # RyRc0
   }
 
-  Variable Variable( RyRainf )
+  Variable Variable( RyRainf ) # ss, bulk_1-3
   {
     Value    0.152087360021;
   }
 
-  Variable Variable( RyRoinf )
+  Variable Variable( RyRoinf ) # ss, bulk_1-3
   {
     Value    4.03585606442e-05;
   }
 
-  Variable Variable( RyRcinf )
+  Variable Variable( RyRcinf ) # ss, bulk_1-3
   {
     Value    0.999968104062;
   }
 
-  Variable Variable( RyRtauact )
+  Variable Variable( RyRtauact ) # ss, bulk_1-3
   {
     Value    0.01875;
     Fixed  1;
   }
 
-  Variable Variable( RyRtauinact )
+  Variable Variable( RyRtauinact ) # ss, bulk_1-3
   {
     Value    0.0875;
     Fixed  1;
   }
 
-  Variable Variable( RyRtauadapt )
+  Variable Variable( RyRtauadapt ) # ss, bulk_1-3
   {
     Value    1;
     Fixed  1;
   }
 
-  Variable Variable( Jrel )
+  Variable Variable( Jrel ) # ss, bulk_1-3
   {
     Name "pmol/sec";
     Value    6.72438095392e-07;
   }
 
   
+  # ss, bulk_1-3
   Process Koivumaki_2011_J_SERCAAssignmentProcess( J_SERCA )
   {
     StepperID    PSV;
@@ -1267,6 +1268,7 @@ System System( /Cell/Cytosol/ss )
       [Cai         :.:Ca                       0];
   }
 
+  # ss, bulk_1-3
   Process ZeroVariableAsFluxProcess(J_SERCASR)
   {
     VariableReferenceList
@@ -1277,6 +1279,7 @@ System System( /Cell/Cytosol/ss )
     k 3.01107038e+11;  # pmol/sec -> NoM/sec
   }
 
+  # ss, bulk_1-3
   Process ZeroVariableAsFluxProcess(J_bulkSERCA)
   {
     VariableReferenceList
@@ -1287,6 +1290,7 @@ System System( /Cell/Cytosol/ss )
     k 3.01107038e+11;  # pmol/sec -> NoM/sec
   }
 
+  # ss, bulk_1-3
   Process Koivumaki_2011_JSRCaleakAssignmentProcess( JSRCaleak_assign )
   {
     StepperID    PSV;
@@ -1301,6 +1305,7 @@ System System( /Cell/Cytosol/ss )
       [Cai       :.:Ca                       0];
   }
 
+  # ss, bulk_1-3
   Process ZeroVariableAsFluxProcess(JSRCaleak)
   {
     VariableReferenceList
@@ -1311,6 +1316,7 @@ System System( /Cell/Cytosol/ss )
     k 6.02214076e+11;  # pmol/sec -> NoM/sec
   }
 
+  # ss, bulk_1-3
   Process Koivumaki_2011_JrelAssignmentProcess( Jrel_assign )
   {
     StepperID    PSV;
@@ -1331,6 +1337,7 @@ System System( /Cell/Cytosol/ss )
       [Cai     :.:Ca                       0];
   }
 
+  # ss, bulk_1-3
   Process ZeroVariableAsFluxProcess(Jrel)
   {
     VariableReferenceList
@@ -1341,6 +1348,7 @@ System System( /Cell/Cytosol/ss )
     k 6.02214076e+11;  # pmol/sec -> NoM/sec
   }
 
+  # ss, bulk_1-3
   Process Nygren_1998_GatingFluxProcess(dRyRo_dt)
   {
     VariableReferenceList
@@ -1349,6 +1357,7 @@ System System( /Cell/Cytosol/ss )
       [g_tau :.:RyRtauact  0];
   }
 
+  # ss, bulk_1-3
   Process Nygren_1998_GatingFluxProcess(dRyRc_dt)
   {
     VariableReferenceList
@@ -1357,6 +1366,7 @@ System System( /Cell/Cytosol/ss )
       [g_tau :.:RyRtauinact  0];
   }
 
+  # ss, bulk_1-3
   Process Nygren_1998_GatingFluxProcess(dRyRa_dt)
   {
     VariableReferenceList
@@ -1364,10 +1374,11 @@ System System( /Cell/Cytosol/ss )
       [g_inf :.:RyRainf      0]
       [g_tau :.:RyRtauadapt  0];
   }
-        %line 254 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+        %line 264 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
 
   
    # ss
+  # ss only
   Process Koivumaki_2011_CassBufferFluxProcess(Ca_buffer)
   {
     
@@ -1384,6 +1395,7 @@ System System( /Cell/Cytosol/ss )
       [buffer :.:Ca_buffer -1];
   }
 
+  # ss only
   Process Koivumaki_2011_BufferFluxProcess(Na_buffer)
   {
     Name "Sodium buffering";
@@ -1395,9 +1407,10 @@ System System( /Cell/Cytosol/ss )
 
     VariableReferenceList
       [ion    :.:Na        -1]
-      [buffer :.:Na_buffer -1];
+      [buffer :.:Na_buffer  1];
   }
 
+  # ss only
   Process Koivumaki_2011_DiffusionJNjFluxProcess(Jj_nj)
   {
     Name "Ca diffusion from junct to non-junct";
@@ -1412,11 +1425,11 @@ System System( /Cell/Cytosol/ss )
       [j  :.:Ca         -1]; # Cass
   }
   
-    %line 350 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+    %line 365 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
 
 } # END of /Cell/Cytosol/ss
-%line 352 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
-%line 441 ./Koivumaki-2011.em
+%line 367 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+%line 441 Koivumaki-2011.em
 
 
 
@@ -1453,83 +1466,84 @@ System System( /Cell/Cytosol/bulk_1 )
   }
 
   
-  Variable Variable( SERCACa )
+  Variable Variable( SERCACa ) # ss, bulk_1-3
   {
     MolarConc    4.639e-06;  # SERCACa1
   }
 
-  Variable Variable( J_SERCASR )
+  Variable Variable( J_SERCASR ) # ss, bulk_1-3
   {
     Name "pmol/sec";
     Value    3.4800661513e-06;
   }
 
-  Variable Variable( J_bulkSERCA )
+  Variable Variable( J_bulkSERCA ) # ss, bulk_1-3
   {
     Name "pmol/sec";
     Value    2.69212944083e-06;
   }
 
-  Variable Variable( JSRCaleak )
+  Variable Variable( JSRCaleak ) # ss, bulk_1-3
   {
     Value    1.8795781218e-06;
   }
 
-  Variable Variable( RyRa )
+  Variable Variable( RyRa ) # ss, bulk_1-3
   {
     Value    0.192536; # RyRa1
   }
 
-  Variable Variable( RyRo )
+  Variable Variable( RyRo ) # ss, bulk_1-3
   {
     Value    9.5e-05; # RyRo1
   }
 
-  Variable Variable( RyRc )
+  Variable Variable( RyRc ) # ss, bulk_1-3
   {
     Value    0.999372; # RyRc1
   }
 
-  Variable Variable( RyRainf )
+  Variable Variable( RyRainf ) # ss, bulk_1-3
   {
     Value    0.134029514819;
   }
 
-  Variable Variable( RyRoinf )
+  Variable Variable( RyRoinf ) # ss, bulk_1-3
   {
     Value    9.59871728298e-05;
   }
 
-  Variable Variable( RyRcinf )
+  Variable Variable( RyRcinf ) # ss, bulk_1-3
   {
     Value    0.999570989474;
   }
 
-  Variable Variable( RyRtauact )
+  Variable Variable( RyRtauact ) # ss, bulk_1-3
   {
     Value    0.01875;
     Fixed  1;
   }
 
-  Variable Variable( RyRtauinact )
+  Variable Variable( RyRtauinact ) # ss, bulk_1-3
   {
     Value    0.0875;
     Fixed  1;
   }
 
-  Variable Variable( RyRtauadapt )
+  Variable Variable( RyRtauadapt ) # ss, bulk_1-3
   {
     Value    1;
     Fixed  1;
   }
 
-  Variable Variable( Jrel )
+  Variable Variable( Jrel ) # ss, bulk_1-3
   {
     Name "pmol/sec";
     Value    2.85643329524e-08;
   }
 
   
+  # ss, bulk_1-3
   Process Koivumaki_2011_J_SERCAAssignmentProcess( J_SERCA )
   {
     StepperID    PSV;
@@ -1550,6 +1564,7 @@ System System( /Cell/Cytosol/bulk_1 )
       [Cai         :.:Ca                       0];
   }
 
+  # ss, bulk_1-3
   Process ZeroVariableAsFluxProcess(J_SERCASR)
   {
     VariableReferenceList
@@ -1560,6 +1575,7 @@ System System( /Cell/Cytosol/bulk_1 )
     k 3.01107038e+11;  # pmol/sec -> NoM/sec
   }
 
+  # ss, bulk_1-3
   Process ZeroVariableAsFluxProcess(J_bulkSERCA)
   {
     VariableReferenceList
@@ -1570,6 +1586,7 @@ System System( /Cell/Cytosol/bulk_1 )
     k 3.01107038e+11;  # pmol/sec -> NoM/sec
   }
 
+  # ss, bulk_1-3
   Process Koivumaki_2011_JSRCaleakAssignmentProcess( JSRCaleak_assign )
   {
     StepperID    PSV;
@@ -1584,6 +1601,7 @@ System System( /Cell/Cytosol/bulk_1 )
       [Cai       :.:Ca                       0];
   }
 
+  # ss, bulk_1-3
   Process ZeroVariableAsFluxProcess(JSRCaleak)
   {
     VariableReferenceList
@@ -1594,6 +1612,7 @@ System System( /Cell/Cytosol/bulk_1 )
     k 6.02214076e+11;  # pmol/sec -> NoM/sec
   }
 
+  # ss, bulk_1-3
   Process Koivumaki_2011_JrelAssignmentProcess( Jrel_assign )
   {
     StepperID    PSV;
@@ -1614,6 +1633,7 @@ System System( /Cell/Cytosol/bulk_1 )
       [Cai     :.:Ca                       0];
   }
 
+  # ss, bulk_1-3
   Process ZeroVariableAsFluxProcess(Jrel)
   {
     VariableReferenceList
@@ -1624,6 +1644,7 @@ System System( /Cell/Cytosol/bulk_1 )
     k 6.02214076e+11;  # pmol/sec -> NoM/sec
   }
 
+  # ss, bulk_1-3
   Process Nygren_1998_GatingFluxProcess(dRyRo_dt)
   {
     VariableReferenceList
@@ -1632,6 +1653,7 @@ System System( /Cell/Cytosol/bulk_1 )
       [g_tau :.:RyRtauact  0];
   }
 
+  # ss, bulk_1-3
   Process Nygren_1998_GatingFluxProcess(dRyRc_dt)
   {
     VariableReferenceList
@@ -1640,6 +1662,7 @@ System System( /Cell/Cytosol/bulk_1 )
       [g_tau :.:RyRtauinact  0];
   }
 
+  # ss, bulk_1-3
   Process Nygren_1998_GatingFluxProcess(dRyRa_dt)
   {
     VariableReferenceList
@@ -1647,10 +1670,11 @@ System System( /Cell/Cytosol/bulk_1 )
       [g_inf :.:RyRainf      0]
       [g_tau :.:RyRtauadapt  0];
   }
-        %line 254 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+        %line 264 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
 
   
    # bulk_1-4
+  # bulk_1-4
   Process Koivumaki_2011_CaBulkDiffusionFluxProcess(Ca_diff)
   {
     Name "Sodium buffering";
@@ -1670,6 +1694,7 @@ System System( /Cell/Cytosol/bulk_1 )
       [Ca      :.:Ca                        1];
   }
 
+  # bulk_1-4
   Process Koivumaki_2011_BufferFluxProcess(Ca_buffer)
   {
     Name "Ca buffering";
@@ -1681,15 +1706,15 @@ System System( /Cell/Cytosol/bulk_1 )
 
     VariableReferenceList
       [ion    :.:Ca        -1]
-      [buffer :.:Ca_buffer -1];
+      [buffer :.:Ca_buffer  1];
   }
 
   
-    %line 350 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+    %line 365 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
 
 } # END of /Cell/Cytosol/bulk_1
-%line 352 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
-%line 441 ./Koivumaki-2011.em
+%line 367 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+%line 441 Koivumaki-2011.em
 
 
 
@@ -1726,83 +1751,84 @@ System System( /Cell/Cytosol/bulk_2 )
   }
 
   
-  Variable Variable( SERCACa )
+  Variable Variable( SERCACa ) # ss, bulk_1-3
   {
     MolarConc    4.512e-06;  # SERCACa1
   }
 
-  Variable Variable( J_SERCASR )
+  Variable Variable( J_SERCASR ) # ss, bulk_1-3
   {
     Name "pmol/sec";
     Value    1.0661197287e-05;
   }
 
-  Variable Variable( J_bulkSERCA )
+  Variable Variable( J_bulkSERCA ) # ss, bulk_1-3
   {
     Name "pmol/sec";
     Value    8.9720789739e-06;
   }
 
-  Variable Variable( JSRCaleak )
+  Variable Variable( JSRCaleak ) # ss, bulk_1-3
   {
     Value    5.53579887484e-06;
   }
 
-  Variable Variable( RyRa )
+  Variable Variable( RyRa ) # ss, bulk_1-3
   {
     Value    0.201034; # RyRa2
   }
 
-  Variable Variable( RyRo )
+  Variable Variable( RyRo ) # ss, bulk_1-3
   {
     Value    7.8e-05; # RyRo2
   }
 
-  Variable Variable( RyRc )
+  Variable Variable( RyRc ) # ss, bulk_1-3
   {
     Value    0.999509; # RyRc2
   }
 
-  Variable Variable( RyRainf )
+  Variable Variable( RyRainf ) # ss, bulk_1-3
   {
     Value    0.135834551649;
   }
 
-  Variable Variable( RyRoinf )
+  Variable Variable( RyRoinf ) # ss, bulk_1-3
   {
     Value    7.99150322259e-05;
   }
 
-  Variable Variable( RyRcinf )
+  Variable Variable( RyRcinf ) # ss, bulk_1-3
   {
     Value    0.999752388022;
   }
 
-  Variable Variable( RyRtauact )
+  Variable Variable( RyRtauact ) # ss, bulk_1-3
   {
     Value    0.01875;
     Fixed  1;
   }
 
-  Variable Variable( RyRtauinact )
+  Variable Variable( RyRtauinact ) # ss, bulk_1-3
   {
     Value    0.0875;
     Fixed  1;
   }
 
-  Variable Variable( RyRtauadapt )
+  Variable Variable( RyRtauadapt ) # ss, bulk_1-3
   {
     Value    1;
     Fixed  1;
   }
 
-  Variable Variable( Jrel )
+  Variable Variable( Jrel ) # ss, bulk_1-3
   {
     Name "pmol/sec";
     Value    6.87582276757e-08;
   }
 
   
+  # ss, bulk_1-3
   Process Koivumaki_2011_J_SERCAAssignmentProcess( J_SERCA )
   {
     StepperID    PSV;
@@ -1823,6 +1849,7 @@ System System( /Cell/Cytosol/bulk_2 )
       [Cai         :.:Ca                       0];
   }
 
+  # ss, bulk_1-3
   Process ZeroVariableAsFluxProcess(J_SERCASR)
   {
     VariableReferenceList
@@ -1833,6 +1860,7 @@ System System( /Cell/Cytosol/bulk_2 )
     k 3.01107038e+11;  # pmol/sec -> NoM/sec
   }
 
+  # ss, bulk_1-3
   Process ZeroVariableAsFluxProcess(J_bulkSERCA)
   {
     VariableReferenceList
@@ -1843,6 +1871,7 @@ System System( /Cell/Cytosol/bulk_2 )
     k 3.01107038e+11;  # pmol/sec -> NoM/sec
   }
 
+  # ss, bulk_1-3
   Process Koivumaki_2011_JSRCaleakAssignmentProcess( JSRCaleak_assign )
   {
     StepperID    PSV;
@@ -1857,6 +1886,7 @@ System System( /Cell/Cytosol/bulk_2 )
       [Cai       :.:Ca                       0];
   }
 
+  # ss, bulk_1-3
   Process ZeroVariableAsFluxProcess(JSRCaleak)
   {
     VariableReferenceList
@@ -1867,6 +1897,7 @@ System System( /Cell/Cytosol/bulk_2 )
     k 6.02214076e+11;  # pmol/sec -> NoM/sec
   }
 
+  # ss, bulk_1-3
   Process Koivumaki_2011_JrelAssignmentProcess( Jrel_assign )
   {
     StepperID    PSV;
@@ -1887,6 +1918,7 @@ System System( /Cell/Cytosol/bulk_2 )
       [Cai     :.:Ca                       0];
   }
 
+  # ss, bulk_1-3
   Process ZeroVariableAsFluxProcess(Jrel)
   {
     VariableReferenceList
@@ -1897,6 +1929,7 @@ System System( /Cell/Cytosol/bulk_2 )
     k 6.02214076e+11;  # pmol/sec -> NoM/sec
   }
 
+  # ss, bulk_1-3
   Process Nygren_1998_GatingFluxProcess(dRyRo_dt)
   {
     VariableReferenceList
@@ -1905,6 +1938,7 @@ System System( /Cell/Cytosol/bulk_2 )
       [g_tau :.:RyRtauact  0];
   }
 
+  # ss, bulk_1-3
   Process Nygren_1998_GatingFluxProcess(dRyRc_dt)
   {
     VariableReferenceList
@@ -1913,6 +1947,7 @@ System System( /Cell/Cytosol/bulk_2 )
       [g_tau :.:RyRtauinact  0];
   }
 
+  # ss, bulk_1-3
   Process Nygren_1998_GatingFluxProcess(dRyRa_dt)
   {
     VariableReferenceList
@@ -1920,10 +1955,11 @@ System System( /Cell/Cytosol/bulk_2 )
       [g_inf :.:RyRainf      0]
       [g_tau :.:RyRtauadapt  0];
   }
-        %line 254 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+        %line 264 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
 
   
    # bulk_1-4
+  # bulk_1-4
   Process Koivumaki_2011_CaBulkDiffusionFluxProcess(Ca_diff)
   {
     Name "Sodium buffering";
@@ -1943,6 +1979,7 @@ System System( /Cell/Cytosol/bulk_2 )
       [Ca      :.:Ca                        1];
   }
 
+  # bulk_1-4
   Process Koivumaki_2011_BufferFluxProcess(Ca_buffer)
   {
     Name "Ca buffering";
@@ -1954,15 +1991,15 @@ System System( /Cell/Cytosol/bulk_2 )
 
     VariableReferenceList
       [ion    :.:Ca        -1]
-      [buffer :.:Ca_buffer -1];
+      [buffer :.:Ca_buffer  1];
   }
 
   
-    %line 350 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+    %line 365 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
 
 } # END of /Cell/Cytosol/bulk_2
-%line 352 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
-%line 441 ./Koivumaki-2011.em
+%line 367 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+%line 441 Koivumaki-2011.em
 
 
 
@@ -1999,83 +2036,84 @@ System System( /Cell/Cytosol/bulk_3 )
   }
 
   
-  Variable Variable( SERCACa )
+  Variable Variable( SERCACa ) # ss, bulk_1-3
   {
     MolarConc    4.326e-06;  # SERCACa1
   }
 
-  Variable Variable( J_SERCASR )
+  Variable Variable( J_SERCASR ) # ss, bulk_1-3
   {
     Name "pmol/sec";
     Value    1.84680120815e-05;
   }
 
-  Variable Variable( J_bulkSERCA )
+  Variable Variable( J_bulkSERCA ) # ss, bulk_1-3
   {
     Name "pmol/sec";
     Value    1.78211724535e-05;
   }
 
-  Variable Variable( JSRCaleak )
+  Variable Variable( JSRCaleak ) # ss, bulk_1-3
   {
     Value    8.96650196498e-06;
   }
 
-  Variable Variable( RyRa )
+  Variable Variable( RyRa ) # ss, bulk_1-3
   {
     Value    0.216312; # RyRa3
   }
 
-  Variable Variable( RyRo )
+  Variable Variable( RyRo ) # ss, bulk_1-3
   {
     Value    5.7e-05; # RyRo3
   }
 
-  Variable Variable( RyRc )
+  Variable Variable( RyRc ) # ss, bulk_1-3
   {
     Value    0.99956; # RyRc3
   }
 
-  Variable Variable( RyRainf )
+  Variable Variable( RyRainf ) # ss, bulk_1-3
   {
     Value    0.139591722793;
   }
 
-  Variable Variable( RyRoinf )
+  Variable Variable( RyRoinf ) # ss, bulk_1-3
   {
     Value    5.86576830742e-05;
   }
 
-  Variable Variable( RyRcinf )
+  Variable Variable( RyRcinf ) # ss, bulk_1-3
   {
     Value    0.999902073948;
   }
 
-  Variable Variable( RyRtauact )
+  Variable Variable( RyRtauact ) # ss, bulk_1-3
   {
     Value    0.01875;
     Fixed  1;
   }
 
-  Variable Variable( RyRtauinact )
+  Variable Variable( RyRtauinact ) # ss, bulk_1-3
   {
     Value    0.0875;
     Fixed  1;
   }
 
-  Variable Variable( RyRtauadapt )
+  Variable Variable( RyRtauadapt ) # ss, bulk_1-3
   {
     Value    1;
     Fixed  1;
   }
 
-  Variable Variable( Jrel )
+  Variable Variable( Jrel ) # ss, bulk_1-3
   {
     Name "pmol/sec";
     Value    8.07258397356e-08;
   }
 
   
+  # ss, bulk_1-3
   Process Koivumaki_2011_J_SERCAAssignmentProcess( J_SERCA )
   {
     StepperID    PSV;
@@ -2096,6 +2134,7 @@ System System( /Cell/Cytosol/bulk_3 )
       [Cai         :.:Ca                       0];
   }
 
+  # ss, bulk_1-3
   Process ZeroVariableAsFluxProcess(J_SERCASR)
   {
     VariableReferenceList
@@ -2106,6 +2145,7 @@ System System( /Cell/Cytosol/bulk_3 )
     k 3.01107038e+11;  # pmol/sec -> NoM/sec
   }
 
+  # ss, bulk_1-3
   Process ZeroVariableAsFluxProcess(J_bulkSERCA)
   {
     VariableReferenceList
@@ -2116,6 +2156,7 @@ System System( /Cell/Cytosol/bulk_3 )
     k 3.01107038e+11;  # pmol/sec -> NoM/sec
   }
 
+  # ss, bulk_1-3
   Process Koivumaki_2011_JSRCaleakAssignmentProcess( JSRCaleak_assign )
   {
     StepperID    PSV;
@@ -2130,6 +2171,7 @@ System System( /Cell/Cytosol/bulk_3 )
       [Cai       :.:Ca                       0];
   }
 
+  # ss, bulk_1-3
   Process ZeroVariableAsFluxProcess(JSRCaleak)
   {
     VariableReferenceList
@@ -2140,6 +2182,7 @@ System System( /Cell/Cytosol/bulk_3 )
     k 6.02214076e+11;  # pmol/sec -> NoM/sec
   }
 
+  # ss, bulk_1-3
   Process Koivumaki_2011_JrelAssignmentProcess( Jrel_assign )
   {
     StepperID    PSV;
@@ -2160,6 +2203,7 @@ System System( /Cell/Cytosol/bulk_3 )
       [Cai     :.:Ca                       0];
   }
 
+  # ss, bulk_1-3
   Process ZeroVariableAsFluxProcess(Jrel)
   {
     VariableReferenceList
@@ -2170,6 +2214,7 @@ System System( /Cell/Cytosol/bulk_3 )
     k 6.02214076e+11;  # pmol/sec -> NoM/sec
   }
 
+  # ss, bulk_1-3
   Process Nygren_1998_GatingFluxProcess(dRyRo_dt)
   {
     VariableReferenceList
@@ -2178,6 +2223,7 @@ System System( /Cell/Cytosol/bulk_3 )
       [g_tau :.:RyRtauact  0];
   }
 
+  # ss, bulk_1-3
   Process Nygren_1998_GatingFluxProcess(dRyRc_dt)
   {
     VariableReferenceList
@@ -2186,6 +2232,7 @@ System System( /Cell/Cytosol/bulk_3 )
       [g_tau :.:RyRtauinact  0];
   }
 
+  # ss, bulk_1-3
   Process Nygren_1998_GatingFluxProcess(dRyRa_dt)
   {
     VariableReferenceList
@@ -2193,10 +2240,11 @@ System System( /Cell/Cytosol/bulk_3 )
       [g_inf :.:RyRainf      0]
       [g_tau :.:RyRtauadapt  0];
   }
-        %line 254 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+        %line 264 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
 
   
    # bulk_1-4
+  # bulk_1-4
   Process Koivumaki_2011_CaBulkDiffusionFluxProcess(Ca_diff)
   {
     Name "Sodium buffering";
@@ -2216,6 +2264,7 @@ System System( /Cell/Cytosol/bulk_3 )
       [Ca      :.:Ca                        1];
   }
 
+  # bulk_1-4
   Process Koivumaki_2011_BufferFluxProcess(Ca_buffer)
   {
     Name "Ca buffering";
@@ -2227,15 +2276,15 @@ System System( /Cell/Cytosol/bulk_3 )
 
     VariableReferenceList
       [ion    :.:Ca        -1]
-      [buffer :.:Ca_buffer -1];
+      [buffer :.:Ca_buffer  1];
   }
 
   
-    %line 350 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+    %line 365 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
 
 } # END of /Cell/Cytosol/bulk_3
-%line 352 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
-%line 441 ./Koivumaki-2011.em
+%line 367 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+%line 441 Koivumaki-2011.em
 
 
 
@@ -2271,10 +2320,11 @@ System System( /Cell/Cytosol/bulk_4 )
     Fixed 1;
   }
 
-    %line 254 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+    %line 264 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
 
   
    # bulk_1-4
+  # bulk_1-4
   Process Koivumaki_2011_CaBulkDiffusionFluxProcess(Ca_diff)
   {
     Name "Sodium buffering";
@@ -2294,6 +2344,7 @@ System System( /Cell/Cytosol/bulk_4 )
       [Ca      :.:Ca                        1];
   }
 
+  # bulk_1-4
   Process Koivumaki_2011_BufferFluxProcess(Ca_buffer)
   {
     Name "Ca buffering";
@@ -2305,19 +2356,19 @@ System System( /Cell/Cytosol/bulk_4 )
 
     VariableReferenceList
       [ion    :.:Ca        -1]
-      [buffer :.:Ca_buffer -1];
+      [buffer :.:Ca_buffer  1];
   }
 
   
-    %line 350 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+    %line 365 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
 
 } # END of /Cell/Cytosol/bulk_4
-%line 352 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
-%line 441 ./Koivumaki-2011.em
+%line 367 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+%line 441 Koivumaki-2011.em
 
 
 
-%line 442 ./Koivumaki-2011.em
+%line 442 Koivumaki-2011.em
 
 # /Cell/SR_x
 
@@ -2377,13 +2428,13 @@ System System( /Cell/SR_1 )
 
     VariableReferenceList
       [ion    :.:Ca        -1]
-      [buffer :.:Ca_buffer -1];
+      [buffer :.:Ca_buffer  1];
   }
     %line 58 ./Koivumaki-2011_Cell_SR_x.em
 
 } # END of /Cell/SR_1
 %line 60 ./Koivumaki-2011_Cell_SR_x.em
-%line 448 ./Koivumaki-2011.em
+%line 448 Koivumaki-2011.em
 
 
 
@@ -2442,13 +2493,13 @@ System System( /Cell/SR_2 )
 
     VariableReferenceList
       [ion    :.:Ca        -1]
-      [buffer :.:Ca_buffer -1];
+      [buffer :.:Ca_buffer  1];
   }
     %line 58 ./Koivumaki-2011_Cell_SR_x.em
 
 } # END of /Cell/SR_2
 %line 60 ./Koivumaki-2011_Cell_SR_x.em
-%line 448 ./Koivumaki-2011.em
+%line 448 Koivumaki-2011.em
 
 
 
@@ -2507,13 +2558,13 @@ System System( /Cell/SR_3 )
 
     VariableReferenceList
       [ion    :.:Ca        -1]
-      [buffer :.:Ca_buffer -1];
+      [buffer :.:Ca_buffer  1];
   }
     %line 58 ./Koivumaki-2011_Cell_SR_x.em
 
 } # END of /Cell/SR_3
 %line 60 ./Koivumaki-2011_Cell_SR_x.em
-%line 448 ./Koivumaki-2011.em
+%line 448 Koivumaki-2011.em
 
 
 
@@ -2572,14 +2623,14 @@ System System( /Cell/SR_4 )
 
     VariableReferenceList
       [ion    :.:Ca        -1]
-      [buffer :.:Ca_buffer -1];
+      [buffer :.:Ca_buffer  1];
   }
     %line 58 ./Koivumaki-2011_Cell_SR_x.em
 
 } # END of /Cell/SR_4
 %line 60 ./Koivumaki-2011_Cell_SR_x.em
-%line 448 ./Koivumaki-2011.em
+%line 448 Koivumaki-2011.em
 
 
 
-%line 449 ./Koivumaki-2011.em
+%line 449 Koivumaki-2011.em
