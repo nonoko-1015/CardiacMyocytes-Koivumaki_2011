@@ -20,7 +20,7 @@ N_A = 6.02214076e+23
 
 R  = 8314.0  # R in component membrane (millijoule_per_mole_kelvin)
 T  = 306.15  # T in component membrane (kelvin)
-F  = 96487   # F in component membrane (coulomb_per_mole)
+F  = 96487.0 # F in component membrane (coulomb_per_mole)
 
 Nao = 130
 Cao = 1.8
@@ -70,7 +70,7 @@ VSR2 = 0.05*Vnonjunct2/2*0.9
 VSR3 = 0.05*Vnonjunct3/2*0.9
 VSR4 = 0.05*Vnonjunct4/2*0.9
 
-VSR = [ 0, VSR1, VSR2, VSR3, VSR4]
+VSR = [ 0.0, VSR1, VSR2, VSR3, VSR4]
 
 # Vnonjunct_Nai = 16 * Vnonjunct1
 Vnonjunct_Nai = sum( Vcytosol )
@@ -198,7 +198,7 @@ CaSR_0 = [ 0, 0.618922, 0.607629, 0.590527, 0.573811 ]
 
 ENa_0 = R*T/F * log ( Nao / Nass_0 )
 EK_0 = R*T/F * log ( Ko / Ki_0 )
-ECa_0 = R*T/F/2 * log ( Cao / Cass_0 )
+ECa_0 = R*T/F/2.0 * log ( Cao / Cass_0 )
 
 # INa
 INa_0 = PNa * INam_0**3 * ( 0.9*INah1_0 + 0.1*INah2_0) * Nao * V_0 * F**2/(R*T) * ( exp( (V_0-ENa_0)*F/R/T ) - 1) / ( exp( V_0*F/R/T ) - 1)
