@@ -1392,7 +1392,7 @@ System System( /Cell/Cytosol/ss )
 
     VariableReferenceList
       [Cass   :.:Ca        -1]
-      [buffer :.:Ca_buffer -1];
+      [buffer :.:Ca_buffer  1];
   }
 
   # ss only

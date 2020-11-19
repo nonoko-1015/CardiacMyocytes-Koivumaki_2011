@@ -54,7 +54,7 @@ LIBECS_DM_CLASS( Koivumaki_2011_CassBufferFluxProcess, ContinuousProcess )
       + SLhigh_KdSLhigh / gsl_pow_2( Cass_mM + KdSLhigh )
       + BCa_KdBCa / gsl_pow_2( Cass_mM + KdBCa ));
 
-    setFlux(( 1.0 - betass ) * (Cass->getVelocity() - buffer->getVelocity()));
+    setFlux(( 1.0 - betass ) * (Cass->getVelocity() + buffer->getVelocity()));
   }
 
  protected:
