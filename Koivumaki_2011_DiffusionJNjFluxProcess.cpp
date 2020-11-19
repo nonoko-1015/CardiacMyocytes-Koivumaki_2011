@@ -37,6 +37,7 @@ LIBECS_DM_CLASS( Koivumaki_2011_DiffusionJNjFluxProcess, ContinuousProcess )
     j  = getVariableReference( "j" ).getVariable();
 
     D_x_NA = D * Aj_nj / xj_nj * 1e-15 * N_A;
+    // L/mol/sec = um/sec * aL / um * 1e-15 * mol^-1
   }
 
   virtual void fire()
