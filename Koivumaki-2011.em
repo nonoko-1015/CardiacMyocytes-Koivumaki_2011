@@ -73,7 +73,7 @@ VSR4 = 0.05*Vnonjunct4/2*0.9
 VSR = [ 0.0, VSR1, VSR2, VSR3, VSR4]
 
 # Vnonjunct_Nai = 16 * Vnonjunct1
-Vnonjunct_Nai = sum( Vcytosol )
+Vnonjunct_Nai = sum( Vcytosol[1:] )
 
 
 # Cytosol Ca Buffers
