@@ -435,8 +435,8 @@ System System( /Cell/Membrane )
     z  1;
 
     VariableReferenceList
-      [E :.:ENa               1]
-      [o :/:Nao               0]
+      [E :.:ENa             1]
+      [o :/:Nao             0]
       [i :../Cytosol/ss:Na  0];
   }
 
@@ -449,7 +449,7 @@ System System( /Cell/Membrane )
     z  1;
 
     VariableReferenceList
-      [E :.:EK           1]
+      [E :.:EK            1]
       [o :/:Ko            0]
       [i :../Cytosol:K_i  0];
   }
@@ -463,8 +463,8 @@ System System( /Cell/Membrane )
     z  2;
 
     VariableReferenceList
-      [E :.:ECa               1]
-      [o :/:Cao               0]
+      [E :.:ECa             1]
+      [o :/:Cao             0]
       [i :../Cytosol/ss:Ca  0];
   }
 
