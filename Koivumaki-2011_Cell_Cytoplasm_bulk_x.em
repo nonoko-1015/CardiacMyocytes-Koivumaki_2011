@@ -15,13 +15,13 @@ System System( /Cell/Cytosol/@SystemName )
   }
 
   @[if x == 0]
-  Variable Variable(Na)
+  Variable Variable(Na) # ss only
   {
     Name "Nass in component cleft_space_ion_concentrations (molar)";
     MolarConc  @(Nass_0 * 1e-3);
   }
 
-  Variable Variable( Na_buffer )
+  Variable Variable( Na_buffer ) # ss only
   {
     Name "Variable to hold Velocity of Na buffering";
     MolarConc    0.0;
@@ -42,83 +42,84 @@ System System( /Cell/Cytosol/@SystemName )
   }
 
   @[if x < 4]
-  Variable Variable( SERCACa )
+  Variable Variable( SERCACa ) # ss, bulk_1-3
   {
     MolarConc    @(SERCACa_0[x] * 1e-3);  # SERCACa1
   }
 
-  Variable Variable( J_SERCASR )
+  Variable Variable( J_SERCASR ) # ss, bulk_1-3
   {
     Name "pmol/sec";
     Value    @(J_SERCASR_0[x]);
   }
 
-  Variable Variable( J_bulkSERCA )
+  Variable Variable( J_bulkSERCA ) # ss, bulk_1-3
   {
     Name "pmol/sec";
     Value    @(J_bulkSERCA_0[x]);
   }
 
-  Variable Variable( JSRCaleak )
+  Variable Variable( JSRCaleak ) # ss, bulk_1-3
   {
     Value    @(JSRCaleak_0[x]);
   }
 
-  Variable Variable( RyRa )
+  Variable Variable( RyRa ) # ss, bulk_1-3
   {
     Value    @(RyRa_0[x]); # RyRa@x
   }
 
-  Variable Variable( RyRo )
+  Variable Variable( RyRo ) # ss, bulk_1-3
   {
     Value    @(RyRo_0[x]); # RyRo@x
   }
 
-  Variable Variable( RyRc )
+  Variable Variable( RyRc ) # ss, bulk_1-3
   {
     Value    @(RyRc_0[x]); # RyRc@x
   }
 
-  Variable Variable( RyRainf )
+  Variable Variable( RyRainf ) # ss, bulk_1-3
   {
     Value    @(RyRainf_0[x]);
   }
 
-  Variable Variable( RyRoinf )
+  Variable Variable( RyRoinf ) # ss, bulk_1-3
   {
     Value    @(RyRoinf_0[x]);
   }
 
-  Variable Variable( RyRcinf )
+  Variable Variable( RyRcinf ) # ss, bulk_1-3
   {
     Value    @(RyRcinf_0[x]);
   }
 
-  Variable Variable( RyRtauact )
+  Variable Variable( RyRtauact ) # ss, bulk_1-3
   {
     Value    @RyRtauact;
     Fixed  1;
   }
 
-  Variable Variable( RyRtauinact )
+  Variable Variable( RyRtauinact ) # ss, bulk_1-3
   {
     Value    @RyRtauinact;
     Fixed  1;
   }
 
-  Variable Variable( RyRtauadapt )
+  Variable Variable( RyRtauadapt ) # ss, bulk_1-3
   {
     Value    @RyRtauadapt;
     Fixed  1;
   }
 
-  Variable Variable( Jrel )
+  Variable Variable( Jrel ) # ss, bulk_1-3
   {
     Name "pmol/sec";
     Value    @(Jrel_0[x]);
   }
 
   @[if not DEBUG_WITHOUT_BULK_PROCESSES]
+  # ss, bulk_1-3
   Process Koivumaki_2011_J_SERCAAssignmentProcess( J_SERCA )
   {
     StepperID    PSV;
@@ -143,6 +144,7 @@ System System( /Cell/Cytosol/@SystemName )
       [Cai         :.:Ca                       0];
   }
 
+  # ss, bulk_1-3
   Process ZeroVariableAsFluxProcess(J_SERCASR)
   {
     VariableReferenceList
@@ -153,6 +155,7 @@ System System( /Cell/Cytosol/@SystemName )
     k @(N_A * 1e-12 * 0.5);  # pmol/sec -> NoM/sec
   }
 
+  # ss, bulk_1-3
   Process ZeroVariableAsFluxProcess(J_bulkSERCA)
   {
     VariableReferenceList
@@ -163,6 +166,7 @@ System System( /Cell/Cytosol/@SystemName )
     k @(N_A * 1e-12 * 0.5);  # pmol/sec -> NoM/sec
   }
 
+  # ss, bulk_1-3
   Process Koivumaki_2011_JSRCaleakAssignmentProcess( JSRCaleak_assign )
   {
     StepperID    PSV;
@@ -179,6 +183,7 @@ System System( /Cell/Cytosol/@SystemName )
       [Cai       :.:Ca                       0];
   }
 
+  # ss, bulk_1-3
   Process ZeroVariableAsFluxProcess(JSRCaleak)
   {
     VariableReferenceList
@@ -189,6 +194,7 @@ System System( /Cell/Cytosol/@SystemName )
     k @(N_A * 1e-12);  # pmol/sec -> NoM/sec
   }
 
+  # ss, bulk_1-3
   Process Koivumaki_2011_JrelAssignmentProcess( Jrel_assign )
   {
     StepperID    PSV;
@@ -216,6 +222,7 @@ System System( /Cell/Cytosol/@SystemName )
       [Cai     :.:Ca                       0];
   }
 
+  # ss, bulk_1-3
   Process ZeroVariableAsFluxProcess(Jrel)
   {
     VariableReferenceList
@@ -226,6 +233,7 @@ System System( /Cell/Cytosol/@SystemName )
     k @(N_A * 1e-12);  # pmol/sec -> NoM/sec
   }
 
+  # ss, bulk_1-3
   Process Nygren_1998_GatingFluxProcess(dRyRo_dt)
   {
     VariableReferenceList
@@ -234,6 +242,7 @@ System System( /Cell/Cytosol/@SystemName )
       [g_tau :.:RyRtauact  0];
   }
 
+  # ss, bulk_1-3
   Process Nygren_1998_GatingFluxProcess(dRyRc_dt)
   {
     VariableReferenceList
@@ -242,6 +251,7 @@ System System( /Cell/Cytosol/@SystemName )
       [g_tau :.:RyRtauinact  0];
   }
 
+  # ss, bulk_1-3
   Process Nygren_1998_GatingFluxProcess(dRyRa_dt)
   {
     VariableReferenceList
@@ -254,6 +264,7 @@ System System( /Cell/Cytosol/@SystemName )
 
   @[if not DEBUG_WITHOUT_BULK_PROCESSES]
   @[if x > 0] # bulk_1-4
+  # bulk_1-4
   Process Koivumaki_2011_CaBulkDiffusionFluxProcess(Ca_diff)
   {
     Name "Sodium buffering";
@@ -276,6 +287,7 @@ System System( /Cell/Cytosol/@SystemName )
       [Ca      :.:Ca                        1];
   }
 
+  # bulk_1-4
   Process Koivumaki_2011_BufferFluxProcess(Ca_buffer)
   {
     Name "Ca buffering";
@@ -293,6 +305,7 @@ System System( /Cell/Cytosol/@SystemName )
   }
 
   @[else] # ss
+  # ss only
   Process Koivumaki_2011_CassBufferFluxProcess(Ca_buffer)
   {
     @{'''
@@ -313,6 +326,7 @@ System System( /Cell/Cytosol/@SystemName )
       [buffer :.:Ca_buffer -1];
   }
 
+  # ss only
   Process Koivumaki_2011_BufferFluxProcess(Na_buffer)
   {
     Name "Sodium buffering";
@@ -329,6 +343,7 @@ System System( /Cell/Cytosol/@SystemName )
       [buffer :.:Na_buffer -1];
   }
 
+  # ss only
   Process Koivumaki_2011_DiffusionJNjFluxProcess(Jj_nj)
   {
     Name "Ca diffusion from junct to non-junct";
