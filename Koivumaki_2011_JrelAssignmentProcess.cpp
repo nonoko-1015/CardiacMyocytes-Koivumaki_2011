@@ -55,7 +55,9 @@ LIBECS_DM_CLASS( Koivumaki_2011_JrelAssignmentProcess, Process )
     Real RyRa_val = RyRa->getValue(); // nondim
     Real RyRSRCa = 1.0 - 1.0 /( 1.0 + exp(( CaSR_mM - 0.3 )/ 0.1 )); // nondim
 
-    RyRainf->setValue( 0.505 - 0.427 /( 1.0 + exp(( Cai_uM - 0.29 )/ 0.082 )));
+    RyRainf->setValue(
+      0.505 - 0.427 /( 1.0 + exp(( Cai_uM - 0.29 )/ 0.082 ))
+    );
     RyRoinf->setValue(
       ( 1.0 - 1.0 /( 1.0 + exp(( Cai_uM - ( RyRa_val + 0.22 ))/ 0.03 )))
     );

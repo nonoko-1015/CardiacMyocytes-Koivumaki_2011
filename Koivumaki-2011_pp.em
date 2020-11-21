@@ -1224,13 +1224,13 @@ System System( /Cell/Cytosol/ss )
 
   Variable Variable( RyRtauact ) # ss, bulk_1-3
   {
-    Value    0.01875;
+    Value    0.005;
     Fixed  1;
   }
 
   Variable Variable( RyRtauinact ) # ss, bulk_1-3
   {
-    Value    0.0875;
+    Value    0.015;
     Fixed  1;
   }
 
@@ -1323,7 +1323,7 @@ System System( /Cell/Cytosol/ss )
     Name "";
     
 
-    k_nu  1.0;  # k_nuss in SR4
+    k_nu  625.0;  # k_nuss in SR4
 
     VariableReferenceList
       [Jrel    :.:Jrel                     1]

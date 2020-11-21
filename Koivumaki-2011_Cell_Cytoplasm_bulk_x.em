@@ -96,13 +96,13 @@ System System( /Cell/Cytosol/@SystemName )
 
   Variable Variable( RyRtauact ) # ss, bulk_1-3
   {
-    Value    @RyRtauact;
+    Value    @(x==0 ? RyRtauactss:RyRtauact);
     Fixed  1;
   }
 
   Variable Variable( RyRtauinact ) # ss, bulk_1-3
   {
-    Value    @RyRtauinact;
+    Value    @(x==0 ? RyRtauinactss:RyRtauinact);
     Fixed  1;
   }
 
@@ -208,7 +208,7 @@ System System( /Cell/Cytosol/@SystemName )
     Jrel1 = nu1 * ( RyRo1 ) * RyRc1 * RyRSRCa1 * ( CaSR1 -  Cai1 )
     '''}
 
-    k_nu  @k_nu;  # k_nuss in SR4
+    k_nu  @(x==0 ? k_nuss:k_nu);  # k_nuss in SR4
 
     VariableReferenceList
       [Jrel    :.:Jrel                     1]
