@@ -28,19 +28,54 @@ Ko = 5.4
 
 Cm = 0.05 #nF
 
-stim_duration = 6.0e-3 # sec
-stim_amp = -1000.0      # pA
+stim_duration = 1.0e-3 # sec
+stim_amp = -2820.0      # pA
 BCL = 1.0              # sec
-stim_steepness = 5.0
+stim_steepness = 20.0
 stim_offset = 1.0e-2   # sec
 
+#**********************************************
+# Model variant
+#**********************************************
+
+"""
+# nSR
+cAF_lcell = 1.
+cAF_gCaL = 1.
+cAF_gt = 1.
+cAF_gsus = 1.
+cAF_gK1 = 1.
+cAF_kNaCa = 1.
+cAF_cpumps = 1.
+cAF_PLB = 1.
+cAF_SLN = 1.
+cAF_phos = 1.
+cAF_RyR = 1.
+"""
+# cAF
+cAF_lcell = 1.10
+cAF_gCaL = 0.41
+cAF_gt = 0.38
+cAF_gsus = 0.62
+cAF_gK1 = 1.62
+cAF_kNaCa = 1.50
+cAF_cpumps = 0.84
+cAF_PLB = 1.18
+cAF_SLN = 0.60
+cAF_phos = 2.
+cAF_RyR = 2.
+
+# Cell dilation in cAF
+Ddcell = (cAF_lcell - 1.) * (20./10.) + 1.
+Dvcell = cAF_lcell * Ddcell**2
+
 # Geometry
-Vss    = 4.99232e-5  # volume of the subspace (nanolitre) (Table 1)
-rjunct = 6.5         # radius of the bulk cytosol (micrometer) (Table 1)
-lcell  = 122.051     # length of the cell (micrometer) (Table 1)
+Vss    = 4.99232e-5 * Dvcell  # volume of the subspace (nanolitre)
+rjunct = 6.5 * Ddcell         # radius of the bulk cytosol (micrometer)
+lcell  = 122.051 * cAF_lcell  # length of the cell (micrometer)
 
 # Ca diffusion grid
-dx = 1.625  # width of bulk cytosol compartment (micrometer) (Table 1)
+dx = 1.625 * Ddcell  # width of bulk cytosol compartment (micrometer) (Table 1)
 
 '''
 Area between junct and nonjunct (Text S1, Eqn. 16)(micrometer**2) '''
@@ -48,11 +83,11 @@ Aj_nj = pi * rjunct * 2 * lcell * 0.5
 '''
 diffusion distance from center to center of junct to first njunct
 (Text S1, Eqn. 17)(micrometer) '''
-xj_nj = 0.02/2 + dx/2
+xj_nj = 0.02/2 * Ddcell + dx/2
 '''
 diffusion distance from center of junct to center of njunct
 (between 2nd and 3rd njunct)(micrometer) '''
-xj_nj_Nai = 0.02/2 + 2*dx
+xj_nj_Nai = 0.02/2 * Ddcell + 2*dx
 
 # Diffusion compartment volumes (uses j^2-(j-1)^2 = 2*j - 1) (Text S1, Eqn. 42)
 # (nL)
@@ -65,10 +100,10 @@ Vcytosol = [ Vss, Vnonjunct1, Vnonjunct2, Vnonjunct3, Vnonjunct4]
 
 # Vcytosol = 16 * Vnonjunct1 + Vss
 
-VSR1 = 0.05*Vnonjunct1/2*0.9  # Accessible volume of SR compartment (Text S1, Eqn. 42)
-VSR2 = 0.05*Vnonjunct2/2*0.9
-VSR3 = 0.05*Vnonjunct3/2*0.9
-VSR4 = 0.05*Vnonjunct4/2*0.9
+VSR1 = 0.05*Vnonjunct1/2*0.9 / Dvcell  # Accessible volume of SR compartment (Text S1, Eqn. 42)
+VSR2 = 0.05*Vnonjunct2/2*0.9 / Dvcell
+VSR3 = 0.05*Vnonjunct3/2*0.9 / Dvcell
+VSR4 = 0.05*Vnonjunct4/2*0.9 / Dvcell
 
 VSR = [ 0.0, VSR1, VSR2, VSR3, VSR4]
 
@@ -165,36 +200,36 @@ RyRtauact = 18.75e-3
 RyRtauinact = 87.5e-3
 
 ### status
-V_0 = -75.319410
-INam_0 = 0.002779
-INah1_0 = 0.903910
-INah2_0 = 0.903967
-ICaLd_0 = 0.000011
-ICaLf1_0 = 0.998857
-ICaLf2_0 = 0.998862
-ICaLfca_0 = 0.974437
-Itr_0 = 0.000959
-Its_0 = 0.954338
-Isusr_0 = 0.000311
-Isuss_0 = 0.975109
-IKsn_0 = 0.004110
-IKrpa_0 = 0.000042
-Ify_0 = 0.056207
-Nai_0 = 9.286860
-Ki_0 = 134.631300
-Nass_0 = 8.691502
-Cass_0 = 0.000162
+V_0 = -78.48
+INam_0 = 0.001916
+INah1_0 = 0.9434
+INah2_0 = 0.9421
+ICaLd_0 = 0.000006272
+ICaLf1_0 = 0.9983
+ICaLf2_0 = 0.9983
+ICaLfca_0 = 0.9445
+Itr_0 = 0.0007272
+Its_0 = 0.9646
+Isusr_0 = 0.0002184
+Isuss_0 = 0.9473
+IKsn_0 = 0.007782
+IKrpa_0 = 0.00002528
+Ify_0 = 0.06449
+Nai_0 = 9.9033
+Ki_0 = 138.2
+Nass_0 = 8.993
+Cass_0 = 0.0001454
 Cai_0 = [ Cass_0, 0.000135, 0.000138, 0.000144, 0.000156 ]
-RyRoss_0 = 0.000040
-RyRcss_0 = 0.999972
-RyRass_0 = 0.245530
-RyRo_0 = [ RyRoss_0, 0.000095, 0.000078, 0.000057 ]
-RyRc_0 = [ RyRcss_0, 0.999372, 0.999509, 0.999560 ]
-RyRa_0 = [ RyRass_0, 0.192536, 0.201034, 0.216312 ]
-SERCACass_0 = 0.004250
-SERCACa_0 = [ SERCACass_0, 0.004639, 0.004512, 0.004326, 0.004250 ]
-CaCytosol_0 = [ Cass_0, 0.000135, 0.000138, 0.000144, 0.000156 ]
-CaSR_0 = [ 0, 0.618922, 0.607629, 0.590527, 0.573811 ]
+RyRoss_0 = 0.002010
+RyRcss_0 = 0.9999
+RyRass_0 = 0.2212
+RyRo_0 = [ RyRoss_0, 0.005833, 0.005244, 0.003932 ]
+RyRc_0 = [ RyRcss_0, 0.9978, 0.9983, 0.9990 ]
+RyRa_0 = [ RyRass_0, 0.1631, 0.1683, 0.1824 ]
+SERCACass_0 =
+SERCACa_0 = [ SERCACass_0, 0.0009545, 0.0009013, 0.0008056, 0.0007291 ]
+CaCytosol_0 = [ Cass_0, 0.0001193, 0.0001214, 0.0001270, 0.0001395 ]
+CaSR_0 = [ 0, 0.3326, 0.3181, 0.2903, 0.2529 ]
 
 ENa_0 = R*T/F * log ( Nao / Nass_0 )
 EK_0 = R*T/F * log ( Ko / Ki_0 )
