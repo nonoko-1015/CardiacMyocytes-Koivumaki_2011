@@ -14,14 +14,18 @@ LIBECS_DM_CLASS( Koivumaki_2011_JrelAssignmentProcess, Process )
     INHERIT_PROPERTIES( Process );
 
     PROPERTYSLOT_SET_GET( Real, k_nu );
+    PROPERTYSLOT_SET_GET( Real, k_Ca );
   }
 
   Koivumaki_2011_JrelAssignmentProcess()
+    :
+    k_Ca( 1.0 )
   {
     // do nothing
   }
 
   SIMPLE_SET_GET_METHOD( Real, k_nu );
+  SIMPLE_SET_GET_METHOD( Real, k_Ca );
 
   virtual void initialize()
   {
@@ -53,13 +57,13 @@ LIBECS_DM_CLASS( Koivumaki_2011_JrelAssignmentProcess, Process )
     Real Cai_mM = Cai->getMolarConc() * 1e+3; // mM
     Real Cai_uM = Cai_mM * 1e+3; // uM (micromolar)
     Real RyRa_val = RyRa->getValue(); // nondim
-    Real RyRSRCa = 1.0 - 1.0 /( 1.0 + exp(( CaSR_mM - 0.3 )/ 0.1 )); // nondim
+    Real RyRSRCa = 1.0 - 1.0 /( 1.0 + exp(( CaSR_mM - 0.3 / k_Ca )/ 0.1 )); // nondim
 
     RyRainf->setValue(
       0.505 - 0.427 /( 1.0 + exp(( Cai_uM - 0.29 )/ 0.082 ))
     );
     RyRoinf->setValue(
-      ( 1.0 - 1.0 /( 1.0 + exp(( Cai_uM - ( RyRa_val + 0.22 ))/ 0.03 )))
+      ( 1.0 - 1.0 /( 1.0 + exp(( Cai_uM - ( RyRa_val + 0.22 / k_Ca ))/ 0.03 )))
     );
     RyRcinf->setValue(
       ( 1.0 /( 1.0 + exp(( Cai_uM -( RyRa_val + 0.02 ))/ 0.01 )))
@@ -82,6 +86,7 @@ LIBECS_DM_CLASS( Koivumaki_2011_JrelAssignmentProcess, Process )
   Variable* Cai;
 
   Real k_nu;
+  Real k_Ca;
 };
 
 LIBECS_DM_INIT( Koivumaki_2011_JrelAssignmentProcess, Process );

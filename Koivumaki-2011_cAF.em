@@ -134,20 +134,40 @@ KdBNa = 10
 
 PNa = 0.0018  # INa:P_Na
 
-ECa_app = 60    # ICaL:ECa_app
-gCaL = 25.3125  # ICaL:ECa_app
+ECa_app = 60           # ICaL:ECa_app
+gCaL = 15. * cAF_gCaL  # ICaL:ECa_app
 kCan = 2
-kCa = 1e-3      # ICaL:k_Ca
-
+kCa = 0.6e-3           # ICaL:k_Ca
+h_ICaLf1 = 0.
+#            k1     k2      k3           k4    k5      k6   k7            k8  k9
+# ICaLfinf = 0.00 + 1.00 / (1 + exp((V + 27.4)/7.1)) + 0 / (1 + exp(-(V - 0.)/1.0e10))
+# ICaLfinf = 0.04 + 0.96 / (1 + exp((V + 25.5)/8.4)) + 1 / (1 + exp(-(V - 60)/8.0)) # cAF
+k_ICaLfinf1 = 0.04
+k_ICaLfinf2 = 0.96
+k_ICaLfinf4 = 25.5
+k_ICaLfinf5 = 8.4
+k_ICaLfinf6 = 1.
+k_ICaLfinf8 = 60.
+k_ICaLfinf9 = 8.
+#            k1                 k2  k3   k4    k5
+# ICaLdtau = 0.0027 * exp( -((V+35)/30)**2 ) + 0.002
+# ICaLdtau = 0.00065* exp( -((V+35)/30)**2 ) + 0.0005
+k_ICaLdtau1 = 0.00065
+k_ICaLdtau5 = 0.0005
+#             k1               k2  k3     k4    k5
+# ICaLf2tau = 1.3323*exp( -((V+40)/14.2)**2 ) + 0.0626
+# ICaLf2tau = 1.34  *exp( -((V+40)/14.2)**2 ) + 0.04  # cAF
+k_ICaLf2tau1 = 1.34
+k_ICaLf2tau5 = 0.04
 
 #gt = 7.5
-gt = 1.09*7.5      # It:g_t     Increased by ~9# in Maleckar et al.
+gt = 8.25 * cAF_gt  # It:g_t     Increased by ~9# in Maleckar et al.
 #gsus = 2.75
-gsus = 0.89*2.75   # Isus:g_sus Decreased by ~11# in Maleckar et al.
+gsus = 2.25 * cAF_gsus  # Isus:g_sus Decreased by ~11# in Maleckar et al.
 gKs = 1            # IKs:g_Ks
 gKr = 0.5          # IKr:g_Kr
 #gK1 = 3.825
-gK1 = 3.825 * 0.90 # IK1:g_K1   3 in Nygren et al. 9 in Courtemanche et al.
+gK1 = 3.45 * cAF_gK1  # IK1:g_K1   3 in Nygren et al. 9 in Courtemanche et al.
 gNab = 0.060599    # INab:g_B_Na
 gCab = 0.0952      # ICab:g_B_Ca
 
@@ -158,7 +178,7 @@ kNaKNa = 11        # INaK:k_NaK_Na
 ICaPmax = 2.0      # ICaP:i_CaP_max
 kCaP = 0.0005      # ICaP:k_CaP
 
-kNaCa = 0.0084     # INaCa:k_NaCa
+kNaCa = 0.0084 * cAF_kNaCa  # INaCa:k_NaCa
 gam = 0.45         # INaCa:gamma
 dNaCa = 0.0003     # INaCa:d_NaCa
 
@@ -174,22 +194,34 @@ DCaBm = 25.0 # diffusion coefficient for Ca2+-buffer complex (micrometer**2/sec)
 DNa = 0.12
 
 # SERCA parameters
-SERCAKmf = 0.25e-3  # SERCA half-maximal binding in cytosol (mM, Table S1)
-SERCAKmr = 1.8  # SERCA half-maximal binding in SR (mM, Table S1)
-k4 = 7.5  # pump rate (sec^-1, Table S1)
+base_phos = 0.1 * cAF_phos  # Baseline phosphorylation
+PLB_SERCA_ratio = cAF_PLB
+SLN_SERCA_ratio = cAF_SLN
+Kmf_PLBKO = 0.15e-3
+Kmf_PLB = 0.12e-3
+Kmf_SLN = 0.07e-3
+Kmr_PLBKO = 2.5
+Kmr_PLB = 0.88
+Kmr_SLN = 0.5
+
+# SERCA half-maximal binding in cytosol (mM, Table S1)
+SERCAKmf = Kmf_PLBKO + Kmf_PLB * PLB_SERCA_ratio * (1. - base_phos) + Kmf_SLN * SLN_SERCA_ratio * (1. - base_phos)
+# SERCA half-maximal binding in SR (mM, Table S1)
+SERCAKmr = Kmr_PLBKO - Kmr_PLB * PLB_SERCA_ratio * (1. - base_phos) - Kmr_SLN * SLN_SERCA_ratio * (1. - base_phos)
+k4 = 13.  # pump rate (sec^-1, Table S1)
 
 k3 = k4 / SERCAKmr**2
 k1 = 1000**2 * k4
 k2 = k1 * SERCAKmf**2
 
-cpumps = 40e-3 # pump concentration in cytosol volume (mM, Table S1)
+cpumps = 30e-3 / Dvcell * cAF_cpumps # pump concentration in cytosol volume (mM, Table S1)
 
 # SR Ca leak
 kSRleak = 6e-3
 
 # RyR
-k_nu = 1.0
-k_nuss = 625.0
+k_nu = 1.0 / Dvcell
+k_nuss = 625.0 / Dvcell
 
 RyRtauadapt = 1
 
@@ -316,7 +348,7 @@ for x in [1, 2, 3]:
 
 # RyR
 
-RyRSRCass_0 = (1.0 - 1.0/(1.0 +  exp((CaSR_0[4]-0.3)/0.1)))
+RyRSRCass_0 = (1.0 - 1.0/(1.0 +  exp((CaSR_0[4]-0.3/cAF_RyR)/0.1)))
 RyRainfss_0 = 0.505-0.427/(1.0 + exp((Cass_0*1000.0-0.29)/0.082))
 RyRoinfss_0 = (1.0 - 1.0/(1.0 +  exp((Cass_0*1000.0-((RyRass_0) + 0.22))/0.03)))
 RyRcinfss_0 = (1.0/(1.0 + exp((Cass_0*1000.0-((RyRass_0)+0.02))/0.01)))

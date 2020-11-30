@@ -209,6 +209,7 @@ System System( /Cell/Cytosol/@SystemName )
     '''}
 
     k_nu  @(x==0 ? k_nuss:k_nu);  # k_nuss in SR4
+    k_Ca  @cAF_RyR;
 
     VariableReferenceList
       [Jrel    :.:Jrel                     1]
