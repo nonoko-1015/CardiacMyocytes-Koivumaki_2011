@@ -1,4 +1,4 @@
-%line 1 ./Koivumaki-2011.em
+%line 1 ./Koivumaki-2011_cAF.em
 
 
 
@@ -24,21 +24,21 @@ System System( / )
   Variable Variable( Nao )
   {
     MolarConc    0.13;
-%line 338 ./Koivumaki-2011.em
+%line 409 ./Koivumaki-2011_cAF.em
     Fixed  1;
   }
 
   Variable Variable( Ko )
   {
     MolarConc    0.0054;
-%line 344 ./Koivumaki-2011.em
+%line 415 ./Koivumaki-2011_cAF.em
     Fixed  1;
   }
 
   Variable Variable( Cao )
   {
     MolarConc    0.0018;
-%line 350 ./Koivumaki-2011.em
+%line 421 ./Koivumaki-2011_cAF.em
     Fixed  1;
   }
 
@@ -58,8 +58,8 @@ System System( /Cell )
 
   Variable Variable( SIZE )
   {
-    Value    8.3322287625e-12;
-%line 370 ./Koivumaki-2011.em
+    Value    1.30918156458e-11;
+%line 441 ./Koivumaki-2011_cAF.em
   }
 }
 
@@ -70,8 +70,8 @@ System System( /Cell/Cytosol )
 
   Variable Variable( SIZE )
   {
-    Value    8.14997753985e-12;
-%line 381 ./Koivumaki-2011.em
+    Value    1.29095644231e-11;
+%line 452 ./Koivumaki-2011_cAF.em
   }
 
   Variable Variable(K_i)
@@ -89,8 +89,8 @@ System System( /Cell/Cytosol/bulk )
 
   Variable Variable( SIZE )
   {
-    Value    8.14997753985e-12;
-%line 399 ./Koivumaki-2011.em
+    Value    1.29095644231e-11;
+%line 470 ./Koivumaki-2011_cAF.em
   }
 
   Variable Variable(Na_i)
@@ -105,11 +105,11 @@ System System( /Cell/Cytosol/bulk )
     
 
     D  0.12;
-%line 416 ./Koivumaki-2011.em
-    Aj_nj  2492.32441226;
-%line 417 ./Koivumaki-2011.em
-    xj_nj  3.26;
-%line 418 ./Koivumaki-2011.em
+%line 487 ./Koivumaki-2011_cAF.em
+    Aj_nj  3289.86822419;
+%line 488 ./Koivumaki-2011_cAF.em
+    xj_nj  3.912;
+%line 489 ./Koivumaki-2011_cAF.em
 
     VariableReferenceList
       [nj    :.:Na_i    0]
@@ -127,35 +127,35 @@ System System( /Cell/Membrane )
 
   Variable Variable( SIZE )
   {
-    Value    4.99232e-05; # dummy
+    Value    7.90783488e-05; # dummy
 %line 9 ./Koivumaki-2011_Cell_Membrane.em
   }
 
   Variable Variable(V)
   {
     Name "V in component membrane (millivolt)";
-    Value  -75.31941;
+    Value  -78.48;
 %line 15 ./Koivumaki-2011_Cell_Membrane.em
   }
 
   Variable Variable(ENa)
   {
     Name "ENa in component sodium_current (millivolt)";
-    Value  71.3629907465;
+    Value  70.4634120549;
 %line 21 ./Koivumaki-2011_Cell_Membrane.em
   }
 
   Variable Variable(EK)
   {
     Name "EK in component Ca_independent_transient_outward_K_current (millivolt)";
-    Value  -84.8419336484;
+    Value  -85.532087784;
 %line 27 ./Koivumaki-2011_Cell_Membrane.em
   }
 
   Variable Variable(ECa)
   {
     Name "ECa in component background_currents (millivolt)";
-    Value  122.874289736;
+    Value  124.300233488;
 %line 33 ./Koivumaki-2011_Cell_Membrane.em
   }
 
@@ -170,63 +170,63 @@ System System( /Cell/Membrane )
   Variable Variable(INa)
   {
     Name "INa in component sodium_current (picoA)";
-    Value  -0.00132182961579;
+    Value  -0.00046796177874;
 %line 47 ./Koivumaki-2011_Cell_Membrane.em
   }
 
   Variable Variable(INam)
   {
     Name "INam in component sodium_current_m_gate (dimensionless)";
-    Value  0.002779;
+    Value  0.001916;
 %line 53 ./Koivumaki-2011_Cell_Membrane.em
   }
 
   Variable Variable(INah1)
   {
     Name "INah1 in component sodium_current_h1_gate (dimensionless)";
-    Value  0.90391;
+    Value  0.9434;
 %line 59 ./Koivumaki-2011_Cell_Membrane.em
   }
 
   Variable Variable(INah2)
   {
     Name "INah2 in component sodium_current_h2_gate (dimensionless)";
-    Value  0.903967;
+    Value  0.9421;
 %line 65 ./Koivumaki-2011_Cell_Membrane.em
   }
 
   Variable Variable(INaminf)
   {
     Name "INaminf in component sodium_current_m_gate (dimensionless)";
-    Value  0.00281263393065;
+    Value  0.00191564077255;
 %line 71 ./Koivumaki-2011_Cell_Membrane.em
   }
 
   Variable Variable(INahinf)
   {
     Name "INahinf in component sodium_current_h1_gate (dimensionless)";
-    Value  0.901251615234;
+    Value  0.943082298988;
 %line 77 ./Koivumaki-2011_Cell_Membrane.em
   }
 
   Variable Variable(INamtau)
   {
     Name "INamtau in component sodium_current_m_gate (second)";
-    Value  2.61248985717e-05;
+    Value  2.54369736777e-05;
 %line 83 ./Koivumaki-2011_Cell_Membrane.em
   }
 
   Variable Variable(INah1tau)
   {
     Name "INah1tau in component sodium_current_h1_gate (second)";
-    Value  0.0302998956095;
+    Value  0.0302999611209;
 %line 89 ./Koivumaki-2011_Cell_Membrane.em
   }
 
   Variable Variable(INah2tau)
   {
     Name "INah2tau in component sodium_current_h2_gate (second)";
-    Value  0.122999582438;
+    Value  0.122999844484;
 %line 95 ./Koivumaki-2011_Cell_Membrane.em
   }
 
@@ -234,49 +234,49 @@ System System( /Cell/Membrane )
 
   Variable Variable(ICaLfcainf)
   {
-    Value  0.974427134288; # ICaLfcainf
+    Value  0.944531941919; # ICaLfcainf
 %line 102 ./Koivumaki-2011_Cell_Membrane.em
   }
 
   Variable Variable(ICaL)
   {
     Name "ICaL in component L_type_Ca_channel (picoA)";
-    Value  -0.0366311367697;
+    Value  -0.00503652801144;
 %line 108 ./Koivumaki-2011_Cell_Membrane.em
   }
 
   Variable Variable(ICaLdinf)
   {
     Name "ICaLdinf in component L_type_Ca_channel_d_L_gate (dimensionless)";
-    Value  1.08169971419e-05;
+    Value  6.27261881005e-06;
 %line 114 ./Koivumaki-2011_Cell_Membrane.em
   }
 
   Variable Variable(ICaLfinf)
   {
     Name "ICaLfinf in component L_type_Ca_channel_f_L1_gate (dimensionless)";
-    Value  0.998829569667;
+    Value  0.998252910129;
 %line 120 ./Koivumaki-2011_Cell_Membrane.em
   }
 
   Variable Variable(ICaLdtau)
   {
     Name "ICaLdtau in component L_type_Ca_channel_d_L_gate (second)";
-    Value  0.00244351158165;
+    Value  0.000579551551001;
 %line 126 ./Koivumaki-2011_Cell_Membrane.em
   }
 
   Variable Variable(ICaLf1tau)
   {
     Name "ICaLf1tau in component L_type_Ca_channel_f_L1_gate (second)";
-    Value  0.033795592997;
+    Value  0.0337863662797;
 %line 132 ./Koivumaki-2011_Cell_Membrane.em
   }
 
   Variable Variable(ICaLf2tau)
   {
     Name "ICaLf2tau in component L_type_Ca_channel_f_L2_gate (second)";
-    Value  0.0653403573775;
+    Value  0.0408668305663;
 %line 138 ./Koivumaki-2011_Cell_Membrane.em
   }
 
@@ -289,28 +289,28 @@ System System( /Cell/Membrane )
   Variable Variable(ICaLd)
   {
     Name "ICaLd in component L_type_Ca_channel_d_L_gate (dimensionless)";
-    Value  1.1e-05;
+    Value  6.272e-06;
 %line 149 ./Koivumaki-2011_Cell_Membrane.em
   }
 
   Variable Variable(ICaLf1)
   {
     Name "ICaLf1 in component L_type_Ca_channel_f_L1_gate (dimensionless)";
-    Value  0.998857;
+    Value  0.9983;
 %line 155 ./Koivumaki-2011_Cell_Membrane.em
   }
 
   Variable Variable(ICaLf2)
   {
     Name "ICaLf2 in component L_type_Ca_channel_f_L2_gate (dimensionless)";
-    Value  0.998862;
+    Value  0.9983;
 %line 161 ./Koivumaki-2011_Cell_Membrane.em
   }
 
   Variable Variable(ICaLfca)
   {
     Name "ICaLfca in component L_type_Ca_channel (dimensionless)";
-    Value  0.974437;
+    Value  0.9445;
 %line 167 ./Koivumaki-2011_Cell_Membrane.em
   }
 
@@ -319,49 +319,49 @@ System System( /Cell/Membrane )
   Variable Variable(It)
   {
     Name "It in component Ca_independent_transient_outward_K_current (picoA)";
-    Value  0.0712460260524;
+    Value  0.0155080210811;
 %line 175 ./Koivumaki-2011_Cell_Membrane.em
   }
 
   Variable Variable(Itrinf)
   {
     Name "Itrinf in component Ca_independent_transient_outward_K_current_r_gate (dimensionless)";
-    Value  0.000969143568724;
+    Value  0.000727292296804;
 %line 181 ./Koivumaki-2011_Cell_Membrane.em
   }
 
   Variable Variable(Itsinf)
   {
     Name "Itsinf in component Ca_independent_transient_outward_K_current_s_gate (dimensionless)";
-    Value  0.953813243192;
+    Value  0.964518195981;
 %line 187 ./Koivumaki-2011_Cell_Membrane.em
   }
 
   Variable Variable(Itrtau)
   {
     Name "Itrtau in component Ca_independent_transient_outward_K_current_r_gate (second)";
-    Value  0.00150640558258;
+    Value  0.00150373244027;
 %line 193 ./Koivumaki-2011_Cell_Membrane.em
   }
 
   Variable Variable(Itstau)
   {
     Name "Itstau in component Ca_independent_transient_outward_K_current_s_gate (second)";
-    Value  0.0173641290919;
+    Value  0.0158871708145;
 %line 199 ./Koivumaki-2011_Cell_Membrane.em
   }
 
   Variable Variable(Itr)
   {
     Name "Itr in component Ca_independent_transient_outward_K_current_r_gate (dimensionless)";
-    Value  0.000959;
+    Value  0.0007272;
 %line 205 ./Koivumaki-2011_Cell_Membrane.em
   }
 
   Variable Variable(Its)
   {
     Name "Its in component Ca_independent_transient_outward_K_current_s_gate (dimensionless)";
-    Value  0.954338;
+    Value  0.9646;
 %line 211 ./Koivumaki-2011_Cell_Membrane.em
   }
 
@@ -370,49 +370,49 @@ System System( /Cell/Membrane )
   Variable Variable(Isus)
   {
     Name "Isus in component sustained_outward_K_current (picoA)";
-    Value  0.00706786611635;
+    Value  0.00203531713413;
 %line 219 ./Koivumaki-2011_Cell_Membrane.em
   }
 
   Variable Variable(Isusrinf)
   {
     Name "Isusrinf in component sustained_outward_K_current_r_sus_gate (dimensionless)";
-    Value  0.000315701862341;
+    Value  0.000218630901441;
 %line 225 ./Koivumaki-2011_Cell_Membrane.em
   }
 
   Variable Variable(Isussinf)
   {
     Name "Isussinf in component sustained_outward_K_current_s_sus_gate (dimensionless)";
-    Value  0.998867213134;
+    Value  0.999173926178;
 %line 231 ./Koivumaki-2011_Cell_Membrane.em
   }
 
   Variable Variable(Isusrtau)
   {
     Name "Isusrtau in component sustained_outward_K_current_r_sus_gate (second)";
-    Value  0.00947441051061;
+    Value  0.00948032285559;
 %line 237 ./Koivumaki-2011_Cell_Membrane.em
   }
 
   Variable Variable(Isusstau)
   {
     Name "Isusstau in component sustained_outward_K_current_s_sus_gate (second)";
-    Value  3.53515117564;
+    Value  3.55969634433;
 %line 243 ./Koivumaki-2011_Cell_Membrane.em
   }
 
   Variable Variable(Isusr)
   {
     Name "Isusr in component sustained_outward_K_current_r_sus_gate (dimensionless)";
-    Value  0.000311;
+    Value  0.0002184;
 %line 249 ./Koivumaki-2011_Cell_Membrane.em
   }
 
   Variable Variable(Isuss)
   {
     Name "Isuss in component sustained_outward_K_current_s_sus_gate (dimensionless)";
-    Value  0.975109;
+    Value  0.9473;
 %line 255 ./Koivumaki-2011_Cell_Membrane.em
   }
 
@@ -421,28 +421,28 @@ System System( /Cell/Membrane )
   Variable Variable(IKs)
   {
     Name "IKs in component delayed_rectifier_K_currents (picoA)";
-    Value  0.039137572195;
+    Value  0.0548793471353;
 %line 263 ./Koivumaki-2011_Cell_Membrane.em
   }
 
   Variable Variable(IKsninf)
   {
     Name "IKsninf in component delayed_rectifier_K_currents_n_gate (dimensionless)";
-    Value  0.000554110959637;
+    Value  0.000432084722949;
 %line 269 ./Koivumaki-2011_Cell_Membrane.em
   }
 
   Variable Variable(IKsntau)
   {
     Name "IKsntau in component delayed_rectifier_K_currents_n_gate (second)";
-    Value  0.700000000055;
+    Value  0.700000000012;
 %line 275 ./Koivumaki-2011_Cell_Membrane.em
   }
 
   Variable Variable(IKsn)
   {
     Name "IKsn in component delayed_rectifier_K_currents_n_gate (dimensionless)";
-    Value  0.00411;
+    Value  0.007782;
 %line 281 ./Koivumaki-2011_Cell_Membrane.em
   }
 
@@ -451,35 +451,35 @@ System System( /Cell/Membrane )
   Variable Variable(IKrpi)
   {
     Name "IKrpi in component delayed_rectifier_K_currents_pi_gate (dimensionless)";
-    Value  0.699862268759;
+    Value  0.726777388098;
 %line 289 ./Koivumaki-2011_Cell_Membrane.em
   }
 
   Variable Variable(IKr)
   {
     Name "IKr in component delayed_rectifier_K_currents (picoA)";
-    Value  0.000139953555103;
+    Value  6.47837659655e-05;
 %line 295 ./Koivumaki-2011_Cell_Membrane.em
   }
 
   Variable Variable(IKrpainf)
   {
     Name "IKrpainf in component delayed_rectifier_K_currents_pa_gate (dimensionless)";
-    Value  4.30444159914e-05;
+    Value  2.54187003894e-05;
 %line 301 ./Koivumaki-2011_Cell_Membrane.em
   }
 
   Variable Variable(IKrpatau)
   {
     Name "IKrpatau in component delayed_rectifier_K_currents_pa_gate (second)";
-    Value  0.0316302117864;
+    Value  0.0313973827192;
 %line 307 ./Koivumaki-2011_Cell_Membrane.em
   }
 
   Variable Variable(IKrpa)
   {
     Name "IKrpa in component delayed_rectifier_K_currents_pa_gate (dimensionless)";
-    Value  4.2e-05;
+    Value  2.528e-05;
 %line 313 ./Koivumaki-2011_Cell_Membrane.em
   }
 
@@ -488,7 +488,7 @@ System System( /Cell/Membrane )
   Variable Variable(IK1)
   {
     Name "IK1 in component inward_rectifier (picoA)";
-    Value  22.3587988235;
+    Value  29.5057915894;
 %line 321 ./Koivumaki-2011_Cell_Membrane.em
   }
 
@@ -497,14 +497,14 @@ System System( /Cell/Membrane )
   Variable Variable(INab)
   {
     Name "INab in component background_currents (picoA)";
-    Value  -8.88880680284;
+    Value  -9.02582182711;
 %line 329 ./Koivumaki-2011_Cell_Membrane.em
   }
 
   Variable Variable(ICab)
   {
     Name "ICab in component background_currents (picoA)";
-    Value  -18.8680402149;
+    Value  -19.304678228;
 %line 335 ./Koivumaki-2011_Cell_Membrane.em
   }
 
@@ -513,7 +513,7 @@ System System( /Cell/Membrane )
   Variable Variable(INaK)
   {
     Name "INaK in component sodium_potassium_pump (picoA)";
-    Value  14.7677937671;
+    Value  14.9485056445;
 %line 343 ./Koivumaki-2011_Cell_Membrane.em
   }
 
@@ -522,7 +522,7 @@ System System( /Cell/Membrane )
   Variable Variable(INaCa)
   {
     Name "INaCa in component Na_Ca_ion_exchanger_current (picoA)";
-    Value  -7.95738919335;
+    Value  -10.9816033639;
 %line 351 ./Koivumaki-2011_Cell_Membrane.em
   }
 
@@ -531,7 +531,7 @@ System System( /Cell/Membrane )
   Variable Variable(ICaP)
   {
     Name "ICaP in component sarcolemmal_calcium_pump_current (picoA)";
-    Value  0.489425981873;
+    Value  0.450573287883;
 %line 359 ./Koivumaki-2011_Cell_Membrane.em
   }
 
@@ -540,42 +540,42 @@ System System( /Cell/Membrane )
   Variable Variable(Ifyinf)
   {
     Name "";
-    Value  0.14141387977;
+    Value  0.175035903389;
 %line 367 ./Koivumaki-2011_Cell_Membrane.em
   }
 
   Variable Variable(Ifytau)
   {
     Name "";
-    Value  1.76978039843;
+    Value  1.70073076345;
 %line 373 ./Koivumaki-2011_Cell_Membrane.em
   }
 
   Variable Variable(Ify)
   {
     Name "";
-    Value  0.056207;
+    Value  0.06449;
 %line 379 ./Koivumaki-2011_Cell_Membrane.em
   }
 
   Variable Variable(IfNa)
   {
     Name "";
-    Value  -2.20707344996;
+    Value  -2.57135504424;
 %line 385 ./Koivumaki-2011_Cell_Membrane.em
   }
 
   Variable Variable(IfK)
   {
     Name "";
-    Value  0.391950750016;
+    Value  0.333042088095;
 %line 391 ./Koivumaki-2011_Cell_Membrane.em
   }
 
   Variable Variable(If)
   {
     Name "";
-    Value  -1.81512269994;
+    Value  -2.23831295615;
 %line 397 ./Koivumaki-2011_Cell_Membrane.em
   }
 
@@ -712,8 +712,8 @@ System System( /Cell/Membrane )
     StepperID    PSV;
 
     E_Ca_app 60; # 60,    E_Ca_app in component L_type_Ca_channel (millivolt)
-    g_Ca_L   25.3125;    # 6.75,  g_Ca_L in component L_type_Ca_channel (nanoS)
-    kCa      0.001;     # 0.025, k_Ca in component L_type_Ca_channel (millimolar)
+    g_Ca_L   6.15;    # 6.75,  g_Ca_L in component L_type_Ca_channel (nanoS)
+    kCa      0.0006;     # 0.025, k_Ca in component L_type_Ca_channel (millimolar)
     kCan     2;
 
     VariableReferenceList
@@ -777,7 +777,7 @@ System System( /Cell/Membrane )
   {
     StepperID    PSV;
 
-    g_t  8.175; # 7.5, g_t in component Ca_independent_transient_outward_K_current (nanoS)
+    g_t  3.135; # 7.5, g_t in component Ca_independent_transient_outward_K_current (nanoS)
 
     VariableReferenceList
       [It     :.:It      1]
@@ -817,7 +817,7 @@ System System( /Cell/Membrane )
   {
     StepperID    PSV;
 
-    g_sus  2.4475; # 2.75, g_sus in component sustained_outward_K_current (nanoS)
+    g_sus  1.395; # 2.75, g_sus in component sustained_outward_K_current (nanoS)
 
     VariableReferenceList
       [Isusrtau :.:Isusrtau  1]
@@ -945,7 +945,7 @@ System System( /Cell/Membrane )
     T  306.15;
     R  8314.0;
     F  96487.0;
-    g_K1  3.4425; # 3, g_K1 in component inward_rectifier (nanoS)
+    g_K1  5.589; # 3, g_K1 in component inward_rectifier (nanoS)
 
     VariableReferenceList
       [i_K1 :.:IK1  1]
@@ -1016,7 +1016,7 @@ System System( /Cell/Membrane )
     R  8314.0;
     F  96487.0;
     gamma   0.45;   # 0.45, gamma in component Na_Ca_ion_exchanger_current (dimensionless)
-    k_NaCa  0.0084; # 0.0374842, k_NaCa in component Na_Ca_ion_exchanger_current (picoA_per_millimolar_4)
+    k_NaCa  0.0126; # 0.0374842, k_NaCa in component Na_Ca_ion_exchanger_current (picoA_per_millimolar_4)
     d_NaCa  0.0003; # 0.0003, d_NaCa in component Na_Ca_ion_exchanger_current (per_millimolar_4)
     # fCaNCX  1;
 
@@ -1037,10 +1037,10 @@ System System( /Cell/Membrane )
 
     
 
-    stim_duration   0.006;
-    stim_amp        -1000.0;
+    stim_duration   0.001;
+    stim_amp        -2820.0;
     BCL             1.0;
-    stim_steepness  5.0;
+    stim_steepness  20.0;
     stim_offset     0.01;
 
     VariableReferenceList
@@ -1117,9 +1117,9 @@ System System( /Cell/Membrane )
         %line 941 ./Koivumaki-2011_Cell_Membrane.em
 
 } # End of /Cell/Membrane
-%line 428 ./Koivumaki-2011.em
+%line 499 ./Koivumaki-2011_cAF.em
 
-%line 429 ./Koivumaki-2011.em
+%line 500 ./Koivumaki-2011_cAF.em
 
 # /Cell/Cytoplasm/{ss||bulk_x}
 
@@ -1136,7 +1136,7 @@ System System( /Cell/Cytosol/ss )
 
   Variable Variable( SIZE )
   {
-    Value    4.99232e-14;
+    Value    7.90783488e-14;
 %line 15 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
   }
 
@@ -1144,7 +1144,7 @@ System System( /Cell/Cytosol/ss )
   Variable Variable(Na) # ss only
   {
     Name "Nass in component cleft_space_ion_concentrations (molar)";
-    MolarConc  0.008691502;
+    MolarConc  0.008993;
   }
 
   Variable Variable( Na_buffer ) # ss only
@@ -1158,7 +1158,7 @@ System System( /Cell/Cytosol/ss )
 
   Variable Variable( Ca )
   {
-    MolarConc    1.62e-07;  # Cai1
+    MolarConc    1.454e-07;  # Cai1
 %line 35 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
   }
 
@@ -1178,48 +1178,48 @@ System System( /Cell/Cytosol/ss )
   Variable Variable( J_SERCASR ) # ss, bulk_1-3
   {
     Name "pmol/sec";
-    Value    4.620180615e-07;
+    Value    7.98764379041e-06;
   }
 
   Variable Variable( J_bulkSERCA ) # ss, bulk_1-3
   {
     Name "pmol/sec";
-    Value    5.03673667104e-07;
+    Value    -2.63375603367e-07;
   }
 
   Variable Variable( JSRCaleak ) # ss, bulk_1-3
   {
-    Value    1.71830362541e-07;
+    Value    7.57099106803e-08;
   }
 
   Variable Variable( RyRa ) # ss, bulk_1-3
   {
-    Value    0.24553; # RyRa0
+    Value    0.2212; # RyRa0
   }
 
   Variable Variable( RyRo ) # ss, bulk_1-3
   {
-    Value    4e-05; # RyRo0
+    Value    0.00201; # RyRo0
   }
 
   Variable Variable( RyRc ) # ss, bulk_1-3
   {
-    Value    0.999972; # RyRc0
+    Value    0.9999; # RyRc0
   }
 
   Variable Variable( RyRainf ) # ss, bulk_1-3
   {
-    Value    0.152087360021;
+    Value    0.14049708494;
   }
 
   Variable Variable( RyRoinf ) # ss, bulk_1-3
   {
-    Value    4.03585606442e-05;
+    Value    0.00203884001162;
   }
 
   Variable Variable( RyRcinf ) # ss, bulk_1-3
   {
-    Value    0.999968104062;
+    Value    0.999930907826;
   }
 
   Variable Variable( RyRtauact ) # ss, bulk_1-3
@@ -1243,7 +1243,7 @@ System System( /Cell/Cytosol/ss )
   Variable Variable( Jrel ) # ss, bulk_1-3
   {
     Name "pmol/sec";
-    Value    6.72438095392e-07;
+    Value    1.16771740421e-05;
   }
 
   
@@ -1254,11 +1254,11 @@ System System( /Cell/Cytosol/ss )
     Name "";
     
 
-    k1      7500000.0;
-    k2      0.46875;
-    k3      2.31481481481;
-    k4      7.5;
-    cpumps  0.04;
+    k1      13000000.0;
+    k2      1.1457905472;
+    k3      6.36368565826;
+    k4      13.0;
+    cpumps  0.0159090909091;
 
     VariableReferenceList
       [J_SERCASR   :.:J_SERCASR                1]
@@ -1297,7 +1297,7 @@ System System( /Cell/Cytosol/ss )
     Name "";
     
 
-    kSRleak  0.006;
+    kSRleak  0.00378787878788;
 
     VariableReferenceList
       [JSRCaleak :.:JSRCaleak                1]
@@ -1323,7 +1323,7 @@ System System( /Cell/Cytosol/ss )
     Name "";
     
 
-    k_nu  625.0;  # k_nuss in SR4
+    k_nu  394.570707071;  # k_nuss in SR4
 
     VariableReferenceList
       [Jrel    :.:Jrel                     1]
@@ -1417,8 +1417,8 @@ System System( /Cell/Cytosol/ss )
     
 
     D  780.0;
-    Aj_nj  2492.32441226;
-    xj_nj  0.8225;
+    Aj_nj  3289.86822419;
+    xj_nj  0.987;
 
     VariableReferenceList
       [nj :../bulk_4:Ca  1]  # Cai4
@@ -1429,7 +1429,7 @@ System System( /Cell/Cytosol/ss )
 
 } # END of /Cell/Cytosol/ss
 %line 367 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
-%line 441 ./Koivumaki-2011.em
+%line 512 ./Koivumaki-2011_cAF.em
 
 
 
@@ -1445,7 +1445,7 @@ System System( /Cell/Cytosol/bulk_1 )
 
   Variable Variable( SIZE )
   {
-    Value    5.06253396241e-13;
+    Value    8.01905379645e-13;
 %line 15 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
   }
 
@@ -1454,7 +1454,7 @@ System System( /Cell/Cytosol/bulk_1 )
 
   Variable Variable( Ca )
   {
-    MolarConc    1.35e-07;  # Cai1
+    MolarConc    1.193e-07;  # Cai1
 %line 35 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
   }
 
@@ -1468,54 +1468,54 @@ System System( /Cell/Cytosol/bulk_1 )
   
   Variable Variable( SERCACa ) # ss, bulk_1-3
   {
-    MolarConc    4.639e-06;  # SERCACa1
+    MolarConc    9.545e-07;  # SERCACa1
   }
 
   Variable Variable( J_SERCASR ) # ss, bulk_1-3
   {
     Name "pmol/sec";
-    Value    3.4800661513e-06;
+    Value    3.01667100603e-06;
   }
 
   Variable Variable( J_bulkSERCA ) # ss, bulk_1-3
   {
     Name "pmol/sec";
-    Value    2.69212944083e-06;
+    Value    2.68361929514e-06;
   }
 
   Variable Variable( JSRCaleak ) # ss, bulk_1-3
   {
-    Value    1.8795781218e-06;
+    Value    1.00986921229e-06;
   }
 
   Variable Variable( RyRa ) # ss, bulk_1-3
   {
-    Value    0.192536; # RyRa1
+    Value    0.1631; # RyRa1
   }
 
   Variable Variable( RyRo ) # ss, bulk_1-3
   {
-    Value    9.5e-05; # RyRo1
+    Value    0.005833; # RyRo1
   }
 
   Variable Variable( RyRc ) # ss, bulk_1-3
   {
-    Value    0.999372; # RyRc1
+    Value    0.9978; # RyRc1
   }
 
   Variable Variable( RyRainf ) # ss, bulk_1-3
   {
-    Value    0.134029514819;
+    Value    0.125348974425;
   }
 
   Variable Variable( RyRoinf ) # ss, bulk_1-3
   {
-    Value    9.59871728298e-05;
+    Value    0.00590128336981;
   }
 
   Variable Variable( RyRcinf ) # ss, bulk_1-3
   {
-    Value    0.999570989474;
+    Value    0.998307745623;
   }
 
   Variable Variable( RyRtauact ) # ss, bulk_1-3
@@ -1539,7 +1539,7 @@ System System( /Cell/Cytosol/bulk_1 )
   Variable Variable( Jrel ) # ss, bulk_1-3
   {
     Name "pmol/sec";
-    Value    2.85643329524e-08;
+    Value    8.43755291008e-07;
   }
 
   
@@ -1550,11 +1550,11 @@ System System( /Cell/Cytosol/bulk_1 )
     Name "";
     
 
-    k1      7500000.0;
-    k2      0.46875;
-    k3      2.31481481481;
-    k4      7.5;
-    cpumps  0.04;
+    k1      13000000.0;
+    k2      1.1457905472;
+    k3      6.36368565826;
+    k4      13.0;
+    cpumps  0.0159090909091;
 
     VariableReferenceList
       [J_SERCASR   :.:J_SERCASR                1]
@@ -1593,7 +1593,7 @@ System System( /Cell/Cytosol/bulk_1 )
     Name "";
     
 
-    kSRleak  0.006;
+    kSRleak  0.00378787878788;
 
     VariableReferenceList
       [JSRCaleak :.:JSRCaleak                1]
@@ -1619,7 +1619,7 @@ System System( /Cell/Cytosol/bulk_1 )
     Name "";
     
 
-    k_nu  1.0;  # k_nuss in SR4
+    k_nu  0.631313131313;  # k_nuss in SR4
 
     VariableReferenceList
       [Jrel    :.:Jrel                     1]
@@ -1685,7 +1685,7 @@ System System( /Cell/Cytosol/bulk_1 )
     DCaBm  25.0;
     BCa    0.024;
     KdBCa  0.00238;
-    dx     1.625;
+    dx     1.95;
     j      1;
 
     VariableReferenceList
@@ -1714,7 +1714,7 @@ System System( /Cell/Cytosol/bulk_1 )
 
 } # END of /Cell/Cytosol/bulk_1
 %line 367 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
-%line 441 ./Koivumaki-2011.em
+%line 512 ./Koivumaki-2011_cAF.em
 
 
 
@@ -1730,7 +1730,7 @@ System System( /Cell/Cytosol/bulk_2 )
 
   Variable Variable( SIZE )
   {
-    Value    1.51876018872e-12;
+    Value    2.40571613894e-12;
 %line 15 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
   }
 
@@ -1739,7 +1739,7 @@ System System( /Cell/Cytosol/bulk_2 )
 
   Variable Variable( Ca )
   {
-    MolarConc    1.38e-07;  # Cai1
+    MolarConc    1.214e-07;  # Cai1
 %line 35 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
   }
 
@@ -1753,54 +1753,54 @@ System System( /Cell/Cytosol/bulk_2 )
   
   Variable Variable( SERCACa ) # ss, bulk_1-3
   {
-    MolarConc    4.512e-06;  # SERCACa1
+    MolarConc    9.013e-07;  # SERCACa1
   }
 
   Variable Variable( J_SERCASR ) # ss, bulk_1-3
   {
     Name "pmol/sec";
-    Value    1.0661197287e-05;
+    Value    9.87782760481e-06;
   }
 
   Variable Variable( J_bulkSERCA ) # ss, bulk_1-3
   {
     Name "pmol/sec";
-    Value    8.9720789739e-06;
+    Value    8.86599675085e-06;
   }
 
   Variable Variable( JSRCaleak ) # ss, bulk_1-3
   {
-    Value    5.53579887484e-06;
+    Value    2.89744816276e-06;
   }
 
   Variable Variable( RyRa ) # ss, bulk_1-3
   {
-    Value    0.201034; # RyRa2
+    Value    0.1683; # RyRa2
   }
 
   Variable Variable( RyRo ) # ss, bulk_1-3
   {
-    Value    7.8e-05; # RyRo2
+    Value    0.005244; # RyRo2
   }
 
   Variable Variable( RyRc ) # ss, bulk_1-3
   {
-    Value    0.999509; # RyRc2
+    Value    0.9983; # RyRc2
   }
 
   Variable Variable( RyRainf ) # ss, bulk_1-3
   {
-    Value    0.135834551649;
+    Value    0.126437900086;
   }
 
   Variable Variable( RyRoinf ) # ss, bulk_1-3
   {
-    Value    7.99150322259e-05;
+    Value    0.00532501768574;
   }
 
   Variable Variable( RyRcinf ) # ss, bulk_1-3
   {
-    Value    0.999752388022;
+    Value    0.99875826106;
   }
 
   Variable Variable( RyRtauact ) # ss, bulk_1-3
@@ -1824,7 +1824,7 @@ System System( /Cell/Cytosol/bulk_2 )
   Variable Variable( Jrel ) # ss, bulk_1-3
   {
     Name "pmol/sec";
-    Value    6.87582276757e-08;
+    Value    2.1313630717e-06;
   }
 
   
@@ -1835,11 +1835,11 @@ System System( /Cell/Cytosol/bulk_2 )
     Name "";
     
 
-    k1      7500000.0;
-    k2      0.46875;
-    k3      2.31481481481;
-    k4      7.5;
-    cpumps  0.04;
+    k1      13000000.0;
+    k2      1.1457905472;
+    k3      6.36368565826;
+    k4      13.0;
+    cpumps  0.0159090909091;
 
     VariableReferenceList
       [J_SERCASR   :.:J_SERCASR                1]
@@ -1878,7 +1878,7 @@ System System( /Cell/Cytosol/bulk_2 )
     Name "";
     
 
-    kSRleak  0.006;
+    kSRleak  0.00378787878788;
 
     VariableReferenceList
       [JSRCaleak :.:JSRCaleak                1]
@@ -1904,7 +1904,7 @@ System System( /Cell/Cytosol/bulk_2 )
     Name "";
     
 
-    k_nu  1.0;  # k_nuss in SR4
+    k_nu  0.631313131313;  # k_nuss in SR4
 
     VariableReferenceList
       [Jrel    :.:Jrel                     1]
@@ -1970,7 +1970,7 @@ System System( /Cell/Cytosol/bulk_2 )
     DCaBm  25.0;
     BCa    0.024;
     KdBCa  0.00238;
-    dx     1.625;
+    dx     1.95;
     j      2;
 
     VariableReferenceList
@@ -1999,7 +1999,7 @@ System System( /Cell/Cytosol/bulk_2 )
 
 } # END of /Cell/Cytosol/bulk_2
 %line 367 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
-%line 441 ./Koivumaki-2011.em
+%line 512 ./Koivumaki-2011_cAF.em
 
 
 
@@ -2015,7 +2015,7 @@ System System( /Cell/Cytosol/bulk_3 )
 
   Variable Variable( SIZE )
   {
-    Value    2.5312669812e-12;
+    Value    4.00952689823e-12;
 %line 15 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
   }
 
@@ -2024,7 +2024,7 @@ System System( /Cell/Cytosol/bulk_3 )
 
   Variable Variable( Ca )
   {
-    MolarConc    1.44e-07;  # Cai1
+    MolarConc    1.27e-07;  # Cai1
 %line 35 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
   }
 
@@ -2038,54 +2038,54 @@ System System( /Cell/Cytosol/bulk_3 )
   
   Variable Variable( SERCACa ) # ss, bulk_1-3
   {
-    MolarConc    4.326e-06;  # SERCACa1
+    MolarConc    8.056e-07;  # SERCACa1
   }
 
   Variable Variable( J_SERCASR ) # ss, bulk_1-3
   {
     Name "pmol/sec";
-    Value    1.84680120815e-05;
+    Value    1.90283421603e-05;
   }
 
   Variable Variable( J_bulkSERCA ) # ss, bulk_1-3
   {
     Name "pmol/sec";
-    Value    1.78211724535e-05;
+    Value    1.79931994071e-05;
   }
 
   Variable Variable( JSRCaleak ) # ss, bulk_1-3
   {
-    Value    8.96650196498e-06;
+    Value    4.40677381319e-06;
   }
 
   Variable Variable( RyRa ) # ss, bulk_1-3
   {
-    Value    0.216312; # RyRa3
+    Value    0.1824; # RyRa3
   }
 
   Variable Variable( RyRo ) # ss, bulk_1-3
   {
-    Value    5.7e-05; # RyRo3
+    Value    0.003932; # RyRo3
   }
 
   Variable Variable( RyRc ) # ss, bulk_1-3
   {
-    Value    0.99956; # RyRc3
+    Value    0.999; # RyRc3
   }
 
   Variable Variable( RyRainf ) # ss, bulk_1-3
   {
-    Value    0.139591722793;
+    Value    0.129448926564;
   }
 
   Variable Variable( RyRoinf ) # ss, bulk_1-3
   {
-    Value    5.86576830742e-05;
+    Value    0.00401644592026;
   }
 
   Variable Variable( RyRcinf ) # ss, bulk_1-3
   {
-    Value    0.999902073948;
+    Value    0.999468884612;
   }
 
   Variable Variable( RyRtauact ) # ss, bulk_1-3
@@ -2109,7 +2109,7 @@ System System( /Cell/Cytosol/bulk_3 )
   Variable Variable( Jrel ) # ss, bulk_1-3
   {
     Name "pmol/sec";
-    Value    8.07258397356e-08;
+    Value    2.31582270618e-06;
   }
 
   
@@ -2120,11 +2120,11 @@ System System( /Cell/Cytosol/bulk_3 )
     Name "";
     
 
-    k1      7500000.0;
-    k2      0.46875;
-    k3      2.31481481481;
-    k4      7.5;
-    cpumps  0.04;
+    k1      13000000.0;
+    k2      1.1457905472;
+    k3      6.36368565826;
+    k4      13.0;
+    cpumps  0.0159090909091;
 
     VariableReferenceList
       [J_SERCASR   :.:J_SERCASR                1]
@@ -2163,7 +2163,7 @@ System System( /Cell/Cytosol/bulk_3 )
     Name "";
     
 
-    kSRleak  0.006;
+    kSRleak  0.00378787878788;
 
     VariableReferenceList
       [JSRCaleak :.:JSRCaleak                1]
@@ -2189,7 +2189,7 @@ System System( /Cell/Cytosol/bulk_3 )
     Name "";
     
 
-    k_nu  1.0;  # k_nuss in SR4
+    k_nu  0.631313131313;  # k_nuss in SR4
 
     VariableReferenceList
       [Jrel    :.:Jrel                     1]
@@ -2255,7 +2255,7 @@ System System( /Cell/Cytosol/bulk_3 )
     DCaBm  25.0;
     BCa    0.024;
     KdBCa  0.00238;
-    dx     1.625;
+    dx     1.95;
     j      3;
 
     VariableReferenceList
@@ -2284,7 +2284,7 @@ System System( /Cell/Cytosol/bulk_3 )
 
 } # END of /Cell/Cytosol/bulk_3
 %line 367 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
-%line 441 ./Koivumaki-2011.em
+%line 512 ./Koivumaki-2011_cAF.em
 
 
 
@@ -2300,7 +2300,7 @@ System System( /Cell/Cytosol/bulk_4 )
 
   Variable Variable( SIZE )
   {
-    Value    3.54377377368e-12;
+    Value    5.61333765752e-12;
 %line 15 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
   }
 
@@ -2309,7 +2309,7 @@ System System( /Cell/Cytosol/bulk_4 )
 
   Variable Variable( Ca )
   {
-    MolarConc    1.56e-07;  # Cai1
+    MolarConc    1.395e-07;  # Cai1
 %line 35 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
   }
 
@@ -2335,7 +2335,7 @@ System System( /Cell/Cytosol/bulk_4 )
     DCaBm  25.0;
     BCa    0.024;
     KdBCa  0.00238;
-    dx     1.625;
+    dx     1.95;
     j      4;
 
     VariableReferenceList
@@ -2364,11 +2364,11 @@ System System( /Cell/Cytosol/bulk_4 )
 
 } # END of /Cell/Cytosol/bulk_4
 %line 367 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
-%line 441 ./Koivumaki-2011.em
+%line 512 ./Koivumaki-2011_cAF.em
 
 
 
-%line 442 ./Koivumaki-2011.em
+%line 513 ./Koivumaki-2011_cAF.em
 
 # /Cell/SR_x
 
@@ -2389,7 +2389,7 @@ System System( /Cell/SR_1 )
 
   Variable Variable( Ca )
   {
-    MolarConc    0.000618922;  # CaSR1
+    MolarConc    0.0003326;  # CaSR1
 %line 14 ./Koivumaki-2011_Cell_SR_x.em
   }
 
@@ -2408,7 +2408,7 @@ System System( /Cell/SR_1 )
     
 
     DCa    44.0;
-    dx     1.625;
+    dx     1.95;
     j      1;
 
     VariableReferenceList
@@ -2434,7 +2434,7 @@ System System( /Cell/SR_1 )
 
 } # END of /Cell/SR_1
 %line 60 ./Koivumaki-2011_Cell_SR_x.em
-%line 448 ./Koivumaki-2011.em
+%line 519 ./Koivumaki-2011_cAF.em
 
 
 
@@ -2454,7 +2454,7 @@ System System( /Cell/SR_2 )
 
   Variable Variable( Ca )
   {
-    MolarConc    0.000607629;  # CaSR2
+    MolarConc    0.0003181;  # CaSR2
 %line 14 ./Koivumaki-2011_Cell_SR_x.em
   }
 
@@ -2473,7 +2473,7 @@ System System( /Cell/SR_2 )
     
 
     DCa    44.0;
-    dx     1.625;
+    dx     1.95;
     j      2;
 
     VariableReferenceList
@@ -2499,7 +2499,7 @@ System System( /Cell/SR_2 )
 
 } # END of /Cell/SR_2
 %line 60 ./Koivumaki-2011_Cell_SR_x.em
-%line 448 ./Koivumaki-2011.em
+%line 519 ./Koivumaki-2011_cAF.em
 
 
 
@@ -2519,7 +2519,7 @@ System System( /Cell/SR_3 )
 
   Variable Variable( Ca )
   {
-    MolarConc    0.000590527;  # CaSR3
+    MolarConc    0.0002903;  # CaSR3
 %line 14 ./Koivumaki-2011_Cell_SR_x.em
   }
 
@@ -2538,7 +2538,7 @@ System System( /Cell/SR_3 )
     
 
     DCa    44.0;
-    dx     1.625;
+    dx     1.95;
     j      3;
 
     VariableReferenceList
@@ -2564,7 +2564,7 @@ System System( /Cell/SR_3 )
 
 } # END of /Cell/SR_3
 %line 60 ./Koivumaki-2011_Cell_SR_x.em
-%line 448 ./Koivumaki-2011.em
+%line 519 ./Koivumaki-2011_cAF.em
 
 
 
@@ -2584,7 +2584,7 @@ System System( /Cell/SR_4 )
 
   Variable Variable( Ca )
   {
-    MolarConc    0.000573811;  # CaSR4
+    MolarConc    0.0002529;  # CaSR4
 %line 14 ./Koivumaki-2011_Cell_SR_x.em
   }
 
@@ -2603,7 +2603,7 @@ System System( /Cell/SR_4 )
     
 
     DCa    44.0;
-    dx     1.625;
+    dx     1.95;
     j      4;
 
     VariableReferenceList
@@ -2629,8 +2629,8 @@ System System( /Cell/SR_4 )
 
 } # END of /Cell/SR_4
 %line 60 ./Koivumaki-2011_Cell_SR_x.em
-%line 448 ./Koivumaki-2011.em
+%line 519 ./Koivumaki-2011_cAF.em
 
 
 
-%line 449 ./Koivumaki-2011.em
+%line 520 ./Koivumaki-2011_cAF.em

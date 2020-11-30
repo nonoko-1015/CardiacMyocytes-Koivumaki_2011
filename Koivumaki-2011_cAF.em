@@ -217,7 +217,7 @@ k2 = k1 * SERCAKmf**2
 cpumps = 30e-3 / Dvcell * cAF_cpumps # pump concentration in cytosol volume (mM, Table S1)
 
 # SR Ca leak
-kSRleak = 6e-3
+kSRleak = 6e-3 / Dvcell
 
 # RyR
 k_nu = 1.0 / Dvcell
@@ -258,7 +258,7 @@ RyRass_0 = 0.2212
 RyRo_0 = [ RyRoss_0, 0.005833, 0.005244, 0.003932 ]
 RyRc_0 = [ RyRcss_0, 0.9978, 0.9983, 0.9990 ]
 RyRa_0 = [ RyRass_0, 0.1631, 0.1683, 0.1824 ]
-SERCACass_0 =
+SERCACass_0 = 0.004250
 SERCACa_0 = [ SERCACass_0, 0.0009545, 0.0009013, 0.0008056, 0.0007291 ]
 CaCytosol_0 = [ Cass_0, 0.0001193, 0.0001214, 0.0001270, 0.0001395 ]
 CaSR_0 = [ 0, 0.3326, 0.3181, 0.2903, 0.2529 ]
@@ -277,12 +277,16 @@ INah2tau_0 = 0.12/(1+exp((V_0+35.1)/3.2)) + 0.003
 
 # ICaL
 ICaLfcainf_0 = 1-1 / ( 1 + (kCa/Cass_0)**(kCan))
-ICaL_0 = gCaL *(ICaLd_0) * (ICaLfca_0)*(ICaLf1_0)* (ICaLf2_0) * (V_0 - ECa_app)
+# ICaL_0 = gCaL *(ICaLd_0) * (ICaLfca_0)*(ICaLf1_0)* (ICaLf2_0) * (V_0 - ECa_app)
+ICaL_0 = gCaL *(ICaLd_0) * (ICaLfca_0) * (ICaLf2_0) * (V_0 - ECa_app)
 ICaLdinf_0 = 1/(1+exp((V_0+9)/-5.8))
-ICaLfinf_0 = 1/(1+exp((V_0+27.4)/7.1))
-ICaLdtau_0 = 0.0027*exp( -((V_0+35)/30)**2 ) + 0.002
+# ICaLfinf_0 = 1/(1+exp((V_0+27.4)/7.1))
+ICaLfinf_0 = 0.04 + 0.96 / (1 + exp((V_0 + 25.5)/8.4)) + 1 / (1 + exp(-(V_0 - 60)/8.0))
+# ICaLdtau_0 = 0.0027*exp( -((V_0+35)/30)**2 ) + 0.002
+ICaLdtau_0 = 0.00065*exp( -((V_0+35)/30)**2 ) + 0.0005
 ICaLf1tau_0 = 0.98698*exp( -((V_0+30.16047)/7.09396)**2 ) + 0.04275/(1+exp((V_0-51.61555)/-80.61331)) + 0.03576/(1+exp((V_0+29.57272)/13.21758)) - 0.00821
-ICaLf2tau_0 = 1.3323*exp( -((V_0+40)/14.2)**2 ) + 0.0626
+# ICaLf2tau_0 = 1.3323*exp( -((V_0+40)/14.2)**2 ) + 0.0626
+ICaLf2tau_0 = 1.34*exp( -((V_0+40)/14.2)**2 ) + 0.04
 ICaLfcatau_0 = 2e-3
 
 # It
@@ -350,7 +354,7 @@ for x in [1, 2, 3]:
 
 RyRSRCass_0 = (1.0 - 1.0/(1.0 +  exp((CaSR_0[4]-0.3/cAF_RyR)/0.1)))
 RyRainfss_0 = 0.505-0.427/(1.0 + exp((Cass_0*1000.0-0.29)/0.082))
-RyRoinfss_0 = (1.0 - 1.0/(1.0 +  exp((Cass_0*1000.0-((RyRass_0) + 0.22))/0.03)))
+RyRoinfss_0 = (1.0 - 1.0/(1.0 +  exp((Cass_0*1000.0-((RyRass_0) + 0.22/cAF_RyR))/0.03)))
 RyRcinfss_0 = (1.0/(1.0 + exp((Cass_0*1000.0-((RyRass_0)+0.02))/0.01)))
 Jrelss_0 = k_nuss * Vss * ( (RyRoss_0) ) * (RyRcss_0) * RyRSRCass_0 * ( CaSR_0[4] -  Cass_0 )
 
@@ -359,9 +363,9 @@ RyRainf_0 = [RyRainfss_0, 0.0, 0.0, 0.0]
 RyRoinf_0 = [RyRoinfss_0, 0.0, 0.0, 0.0]
 RyRcinf_0 = [RyRcinfss_0, 0.0, 0.0, 0.0]
 for x in [1, 2, 3]:
-  RyRSRCa_0[x] = (1.0 - 1.0/(1.0 +  exp((CaSR_0[x]-0.3)/0.1)))
+  RyRSRCa_0[x] = (1.0 - 1.0/(1.0 +  exp((CaSR_0[x]-0.3/cAF_RyR)/0.1)))
   RyRainf_0[x] = 0.505-0.427/(1.0 + exp((CaCytosol_0[x]*1000.0-0.29)/0.082))
-  RyRoinf_0[x] = (1.0 - 1.0/(1.0 +  exp(( CaCytosol_0[x]*1000.0-(RyRa_0[x] + 0.22))/0.03)))
+  RyRoinf_0[x] = (1.0 - 1.0/(1.0 +  exp(( CaCytosol_0[x]*1000.0-(RyRa_0[x] + 0.22/cAF_RyR))/0.03)))
   RyRcinf_0[x] = (1.0/(1.0 +  exp(( CaCytosol_0[x]*1000.0-(RyRa_0[x]+0.02))/0.01)))
 
 Jrel_0 = [Jrelss_0, 0.0, 0.0, 0.0]
