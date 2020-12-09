@@ -496,7 +496,7 @@ System System( /Cell/Cytosol/bulk )
 
 
 # /Cell/Membrane
-@include('./Koivumaki-2011_Cell_Membrane.em')
+@include('./Koivumaki-2011_cAF_Cell_Membrane.em')
 
 # /Cell/Cytoplasm/{ss||bulk_x}
 @{x = 0}
@@ -507,7 +507,7 @@ if x == 0:
 else:
   c = x
 }
-@include('./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em')
+@include('./Koivumaki-2011_cAF_Cell_Cytoplasm_bulk_x.em')
 @{x += 1}
 @[end while]
 

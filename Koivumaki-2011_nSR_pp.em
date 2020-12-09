@@ -128,35 +128,35 @@ System System( /Cell/Membrane )
   Variable Variable( SIZE )
   {
     Value    4.99232e-05; # dummy
-%line 9 ./Koivumaki-2011_Cell_Membrane.em
+%line 9 ./Koivumaki-2011_cAF_Cell_Membrane.em
   }
 
   Variable Variable(V)
   {
     Name "V in component membrane (millivolt)";
     Value  -75.2;
-%line 15 ./Koivumaki-2011_Cell_Membrane.em
+%line 15 ./Koivumaki-2011_cAF_Cell_Membrane.em
   }
 
   Variable Variable(ENa)
   {
     Name "ENa in component sodium_current (millivolt)";
     Value  71.9104124866;
-%line 21 ./Koivumaki-2011_Cell_Membrane.em
+%line 21 ./Koivumaki-2011_cAF_Cell_Membrane.em
   }
 
   Variable Variable(EK)
   {
     Name "EK in component Ca_independent_transient_outward_K_current (millivolt)";
     Value  -84.9531316601;
-%line 27 ./Koivumaki-2011_Cell_Membrane.em
+%line 27 ./Koivumaki-2011_cAF_Cell_Membrane.em
   }
 
   Variable Variable(ECa)
   {
     Name "ECa in component background_currents (millivolt)";
     Value  121.954505548;
-%line 33 ./Koivumaki-2011_Cell_Membrane.em
+%line 33 ./Koivumaki-2011_cAF_Cell_Membrane.em
   }
 
   Variable Variable(ist)
@@ -171,63 +171,63 @@ System System( /Cell/Membrane )
   {
     Name "INa in component sodium_current (picoA)";
     Value  -0.00142397536159;
-%line 47 ./Koivumaki-2011_Cell_Membrane.em
+%line 47 ./Koivumaki-2011_cAF_Cell_Membrane.em
   }
 
   Variable Variable(INam)
   {
     Name "INam in component sodium_current_m_gate (dimensionless)";
     Value  0.002854;
-%line 53 ./Koivumaki-2011_Cell_Membrane.em
+%line 53 ./Koivumaki-2011_cAF_Cell_Membrane.em
   }
 
   Variable Variable(INah1)
   {
     Name "INah1 in component sodium_current_h1_gate (dimensionless)";
     Value  0.9001;
-%line 59 ./Koivumaki-2011_Cell_Membrane.em
+%line 59 ./Koivumaki-2011_cAF_Cell_Membrane.em
   }
 
   Variable Variable(INah2)
   {
     Name "INah2 in component sodium_current_h2_gate (dimensionless)";
     Value  0.9003;
-%line 65 ./Koivumaki-2011_Cell_Membrane.em
+%line 65 ./Koivumaki-2011_cAF_Cell_Membrane.em
   }
 
   Variable Variable(INaminf)
   {
     Name "INaminf in component sodium_current_m_gate (dimensionless)";
     Value  0.00285372351439;
-%line 71 ./Koivumaki-2011_Cell_Membrane.em
+%line 71 ./Koivumaki-2011_cAF_Cell_Membrane.em
   }
 
   Variable Variable(INahinf)
   {
     Name "INahinf in component sodium_current_h1_gate (dimensionless)";
     Value  0.899228286994;
-%line 77 ./Koivumaki-2011_Cell_Membrane.em
+%line 77 ./Koivumaki-2011_cAF_Cell_Membrane.em
   }
 
   Variable Variable(INamtau)
   {
     Name "INamtau in component sodium_current_m_gate (second)";
     Value  2.61555182622e-05;
-%line 83 ./Koivumaki-2011_Cell_Membrane.em
+%line 83 ./Koivumaki-2011_cAF_Cell_Membrane.em
   }
 
   Variable Variable(INah1tau)
   {
     Name "INah1tau in component sodium_current_h1_gate (second)";
     Value  0.0302998916405;
-%line 89 ./Koivumaki-2011_Cell_Membrane.em
+%line 89 ./Koivumaki-2011_cAF_Cell_Membrane.em
   }
 
   Variable Variable(INah2tau)
   {
     Name "INah2tau in component sodium_current_h2_gate (second)";
     Value  0.122999566562;
-%line 95 ./Koivumaki-2011_Cell_Membrane.em
+%line 95 ./Koivumaki-2011_cAF_Cell_Membrane.em
   }
 
   # ICaL
@@ -235,83 +235,83 @@ System System( /Cell/Membrane )
   Variable Variable(ICaLfcainf)
   {
     Value  0.922670735029; # ICaLfcainf
-%line 102 ./Koivumaki-2011_Cell_Membrane.em
+%line 102 ./Koivumaki-2011_cAF_Cell_Membrane.em
   }
 
   Variable Variable(ICaL)
   {
     Name "ICaL in component L_type_Ca_channel (picoA)";
     Value  -0.0206314146695;
-%line 108 ./Koivumaki-2011_Cell_Membrane.em
+%line 108 ./Koivumaki-2011_cAF_Cell_Membrane.em
   }
 
   Variable Variable(ICaLdinf)
   {
     Name "ICaLdinf in component L_type_Ca_channel_d_L_gate (dimensionless)";
     Value  1.10420025241e-05;
-%line 114 ./Koivumaki-2011_Cell_Membrane.em
+%line 114 ./Koivumaki-2011_cAF_Cell_Membrane.em
   }
 
   Variable Variable(ICaLfinf)
   {
     Name "ICaLfinf in component L_type_Ca_channel_f_L1_gate (dimensionless)";
     Value  0.997420596071;
-%line 120 ./Koivumaki-2011_Cell_Membrane.em
+%line 120 ./Koivumaki-2011_cAF_Cell_Membrane.em
   }
 
   Variable Variable(ICaLdtau)
   {
     Name "ICaLdtau in component L_type_Ca_channel_d_L_gate (second)";
     Value  0.000607918073752;
-%line 126 ./Koivumaki-2011_Cell_Membrane.em
+%line 126 ./Koivumaki-2011_cAF_Cell_Membrane.em
   }
 
   Variable Variable(ICaLf1tau)
   {
     Name "ICaLf1tau in component L_type_Ca_channel_f_L1_gate (second)";
     Value  0.0337950219027;
-%line 132 ./Koivumaki-2011_Cell_Membrane.em
+%line 132 ./Koivumaki-2011_cAF_Cell_Membrane.em
   }
 
   Variable Variable(ICaLf2tau)
   {
     Name "ICaLf2tau in component L_type_Ca_channel_f_L2_gate (second)";
     Value  0.042873734363;
-%line 138 ./Koivumaki-2011_Cell_Membrane.em
+%line 138 ./Koivumaki-2011_cAF_Cell_Membrane.em
   }
 
   Variable Variable(ICaLfcatau)
   {
     Value  0.002;
-%line 143 ./Koivumaki-2011_Cell_Membrane.em
+%line 143 ./Koivumaki-2011_cAF_Cell_Membrane.em
   }
 
   Variable Variable(ICaLd)
   {
     Name "ICaLd in component L_type_Ca_channel_d_L_gate (dimensionless)";
     Value  1.104e-05;
-%line 149 ./Koivumaki-2011_Cell_Membrane.em
+%line 149 ./Koivumaki-2011_cAF_Cell_Membrane.em
   }
 
   Variable Variable(ICaLf1)
   {
     Name "ICaLf1 in component L_type_Ca_channel_f_L1_gate (dimensionless)";
     Value  0.9988;
-%line 155 ./Koivumaki-2011_Cell_Membrane.em
+%line 155 ./Koivumaki-2011_cAF_Cell_Membrane.em
   }
 
   Variable Variable(ICaLf2)
   {
     Name "ICaLf2 in component L_type_Ca_channel_f_L2_gate (dimensionless)";
     Value  0.9988;
-%line 161 ./Koivumaki-2011_Cell_Membrane.em
+%line 161 ./Koivumaki-2011_cAF_Cell_Membrane.em
   }
 
   Variable Variable(ICaLfca)
   {
     Name "ICaLfca in component L_type_Ca_channel (dimensionless)";
     Value  0.9226;
-%line 167 ./Koivumaki-2011_Cell_Membrane.em
+%line 167 ./Koivumaki-2011_cAF_Cell_Membrane.em
   }
 
   # It
@@ -320,49 +320,49 @@ System System( /Cell/Membrane )
   {
     Name "It in component Ca_independent_transient_outward_K_current (picoA)";
     Value  0.075148994346;
-%line 175 ./Koivumaki-2011_Cell_Membrane.em
+%line 175 ./Koivumaki-2011_cAF_Cell_Membrane.em
   }
 
   Variable Variable(Itrinf)
   {
     Name "Itrinf in component Ca_independent_transient_outward_K_current_r_gate (dimensionless)";
     Value  0.00097971100905;
-%line 181 ./Koivumaki-2011_Cell_Membrane.em
+%line 181 ./Koivumaki-2011_cAF_Cell_Membrane.em
   }
 
   Variable Variable(Itsinf)
   {
     Name "Itsinf in component Ca_independent_transient_outward_K_current_s_gate (dimensionless)";
     Value  0.953353652679;
-%line 187 ./Koivumaki-2011_Cell_Membrane.em
+%line 187 ./Koivumaki-2011_cAF_Cell_Membrane.em
   }
 
   Variable Variable(Itrtau)
   {
     Name "Itrtau in component Ca_independent_transient_outward_K_current_r_gate (second)";
     Value  0.00150653479168;
-%line 193 ./Koivumaki-2011_Cell_Membrane.em
+%line 193 ./Koivumaki-2011_cAF_Cell_Membrane.em
   }
 
   Variable Variable(Itstau)
   {
     Name "Itstau in component Ca_independent_transient_outward_K_current_s_gate (second)";
     Value  0.0174345094914;
-%line 199 ./Koivumaki-2011_Cell_Membrane.em
+%line 199 ./Koivumaki-2011_cAF_Cell_Membrane.em
   }
 
   Variable Variable(Itr)
   {
     Name "Itr in component Ca_independent_transient_outward_K_current_r_gate (dimensionless)";
     Value  0.0009795;
-%line 205 ./Koivumaki-2011_Cell_Membrane.em
+%line 205 ./Koivumaki-2011_cAF_Cell_Membrane.em
   }
 
   Variable Variable(Its)
   {
     Name "Its in component Ca_independent_transient_outward_K_current_s_gate (dimensionless)";
     Value  0.9535;
-%line 211 ./Koivumaki-2011_Cell_Membrane.em
+%line 211 ./Koivumaki-2011_cAF_Cell_Membrane.em
   }
 
   # Isus
@@ -371,49 +371,49 @@ System System( /Cell/Membrane )
   {
     Name "Isus in component sustained_outward_K_current (picoA)";
     Value  0.00682130770762;
-%line 219 ./Koivumaki-2011_Cell_Membrane.em
+%line 219 ./Koivumaki-2011_cAF_Cell_Membrane.em
   }
 
   Variable Variable(Isusrinf)
   {
     Name "Isusrinf in component sustained_outward_K_current_r_sus_gate (dimensionless)";
     Value  0.000320114506405;
-%line 225 ./Koivumaki-2011_Cell_Membrane.em
+%line 225 ./Koivumaki-2011_cAF_Cell_Membrane.em
   }
 
   Variable Variable(Isussinf)
   {
     Name "Isussinf in component sustained_outward_K_current_s_sus_gate (dimensionless)";
     Value  0.998853621042;
-%line 231 ./Koivumaki-2011_Cell_Membrane.em
+%line 231 ./Koivumaki-2011_cAF_Cell_Membrane.em
   }
 
   Variable Variable(Isusrtau)
   {
     Name "Isusrtau in component sustained_outward_K_current_r_sus_gate (second)";
     Value  0.0094741553376;
-%line 237 ./Koivumaki-2011_Cell_Membrane.em
+%line 237 ./Koivumaki-2011_cAF_Cell_Membrane.em
   }
 
   Variable Variable(Isusstau)
   {
     Name "Isusstau in component sustained_outward_K_current_s_sus_gate (second)";
     Value  3.53411770355;
-%line 243 ./Koivumaki-2011_Cell_Membrane.em
+%line 243 ./Koivumaki-2011_cAF_Cell_Membrane.em
   }
 
   Variable Variable(Isusr)
   {
     Name "Isusr in component sustained_outward_K_current_r_sus_gate (dimensionless)";
     Value  0.0003196;
-%line 249 ./Koivumaki-2011_Cell_Membrane.em
+%line 249 ./Koivumaki-2011_cAF_Cell_Membrane.em
   }
 
   Variable Variable(Isuss)
   {
     Name "Isuss in component sustained_outward_K_current_s_sus_gate (dimensionless)";
     Value  0.9726;
-%line 255 ./Koivumaki-2011_Cell_Membrane.em
+%line 255 ./Koivumaki-2011_cAF_Cell_Membrane.em
   }
 
   # IKs
@@ -422,28 +422,28 @@ System System( /Cell/Membrane )
   {
     Name "IKs in component delayed_rectifier_K_currents (picoA)";
     Value  0.0431185950694;
-%line 263 ./Koivumaki-2011_Cell_Membrane.em
+%line 263 ./Koivumaki-2011_cAF_Cell_Membrane.em
   }
 
   Variable Variable(IKsninf)
   {
     Name "IKsninf in component delayed_rectifier_K_currents_n_gate (dimensionless)";
     Value  0.000559342553563;
-%line 269 ./Koivumaki-2011_Cell_Membrane.em
+%line 269 ./Koivumaki-2011_cAF_Cell_Membrane.em
   }
 
   Variable Variable(IKsntau)
   {
     Name "IKsntau in component delayed_rectifier_K_currents_n_gate (second)";
     Value  0.700000000058;
-%line 275 ./Koivumaki-2011_Cell_Membrane.em
+%line 275 ./Koivumaki-2011_cAF_Cell_Membrane.em
   }
 
   Variable Variable(IKsn)
   {
     Name "IKsn in component delayed_rectifier_K_currents_n_gate (dimensionless)";
     Value  0.004421;
-%line 281 ./Koivumaki-2011_Cell_Membrane.em
+%line 281 ./Koivumaki-2011_cAF_Cell_Membrane.em
   }
 
   # IKr
@@ -452,35 +452,35 @@ System System( /Cell/Membrane )
   {
     Name "IKrpi in component delayed_rectifier_K_currents_pi_gate (dimensionless)";
     Value  0.698816119115;
-%line 289 ./Koivumaki-2011_Cell_Membrane.em
+%line 289 ./Koivumaki-2011_cAF_Cell_Membrane.em
   }
 
   Variable Variable(IKr)
   {
     Name "IKr in component delayed_rectifier_K_currents (picoA)";
     Value  0.000148376605059;
-%line 295 ./Koivumaki-2011_Cell_Membrane.em
+%line 295 ./Koivumaki-2011_cAF_Cell_Membrane.em
   }
 
   Variable Variable(IKrpainf)
   {
     Name "IKrpainf in component delayed_rectifier_K_currents_pa_gate (dimensionless)";
     Value  4.39096148881e-05;
-%line 301 ./Koivumaki-2011_Cell_Membrane.em
+%line 301 ./Koivumaki-2011_cAF_Cell_Membrane.em
   }
 
   Variable Variable(IKrpatau)
   {
     Name "IKrpatau in component delayed_rectifier_K_currents_pa_gate (second)";
     Value  0.0316423998973;
-%line 307 ./Koivumaki-2011_Cell_Membrane.em
+%line 307 ./Koivumaki-2011_cAF_Cell_Membrane.em
   }
 
   Variable Variable(IKrpa)
   {
     Name "IKrpa in component delayed_rectifier_K_currents_pa_gate (dimensionless)";
     Value  4.354e-05;
-%line 313 ./Koivumaki-2011_Cell_Membrane.em
+%line 313 ./Koivumaki-2011_cAF_Cell_Membrane.em
   }
 
   # IK1
@@ -489,7 +489,7 @@ System System( /Cell/Membrane )
   {
     Name "IK1 in component inward_rectifier (picoA)";
     Value  22.7464968937;
-%line 321 ./Koivumaki-2011_Cell_Membrane.em
+%line 321 ./Koivumaki-2011_cAF_Cell_Membrane.em
   }
 
   # Background leaks
@@ -498,14 +498,14 @@ System System( /Cell/Membrane )
   {
     Name "INab in component background_currents (picoA)";
     Value  -8.91474388627;
-%line 329 ./Koivumaki-2011_Cell_Membrane.em
+%line 329 ./Koivumaki-2011_cAF_Cell_Membrane.em
   }
 
   Variable Variable(ICab)
   {
     Name "ICab in component background_currents (picoA)";
     Value  -18.7691089282;
-%line 335 ./Koivumaki-2011_Cell_Membrane.em
+%line 335 ./Koivumaki-2011_cAF_Cell_Membrane.em
   }
 
   # INaK
@@ -514,7 +514,7 @@ System System( /Cell/Membrane )
   {
     Name "INaK in component sodium_potassium_pump (picoA)";
     Value  14.5078105705;
-%line 343 ./Koivumaki-2011_Cell_Membrane.em
+%line 343 ./Koivumaki-2011_cAF_Cell_Membrane.em
   }
 
   # INaCa
@@ -523,7 +523,7 @@ System System( /Cell/Membrane )
   {
     Name "INaCa in component Na_Ca_ion_exchanger_current (picoA)";
     Value  -8.83422079701;
-%line 351 ./Koivumaki-2011_Cell_Membrane.em
+%line 351 ./Koivumaki-2011_cAF_Cell_Membrane.em
   }
 
   # ICaP
@@ -532,7 +532,7 @@ System System( /Cell/Membrane )
   {
     Name "ICaP in component sarcolemmal_calcium_pump_current (picoA)";
     Value  0.515659789224;
-%line 359 ./Koivumaki-2011_Cell_Membrane.em
+%line 359 ./Koivumaki-2011_cAF_Cell_Membrane.em
   }
 
 # If
@@ -541,42 +541,42 @@ System System( /Cell/Membrane )
   {
     Name "";
     Value  0.140256162446;
-%line 367 ./Koivumaki-2011_Cell_Membrane.em
+%line 367 ./Koivumaki-2011_cAF_Cell_Membrane.em
   }
 
   Variable Variable(Ifytau)
   {
     Name "";
     Value  1.77121678702;
-%line 373 ./Koivumaki-2011_Cell_Membrane.em
+%line 373 ./Koivumaki-2011_cAF_Cell_Membrane.em
   }
 
   Variable Variable(Ify)
   {
     Name "";
     Value  0.055;
-%line 379 ./Koivumaki-2011_Cell_Membrane.em
+%line 379 ./Koivumaki-2011_cAF_Cell_Membrane.em
   }
 
   Variable Variable(IfNa)
   {
     Name "";
     Value  -2.16598015825;
-%line 385 ./Koivumaki-2011_Cell_Membrane.em
+%line 385 ./Koivumaki-2011_cAF_Cell_Membrane.em
   }
 
   Variable Variable(IfK)
   {
     Name "";
     Value  0.392822007309;
-%line 391 ./Koivumaki-2011_Cell_Membrane.em
+%line 391 ./Koivumaki-2011_cAF_Cell_Membrane.em
   }
 
   Variable Variable(If)
   {
     Name "";
     Value  -1.77315815094;
-%line 397 ./Koivumaki-2011_Cell_Membrane.em
+%line 397 ./Koivumaki-2011_cAF_Cell_Membrane.em
   }
 
   #**********************************************
@@ -715,6 +715,27 @@ System System( /Cell/Membrane )
     g_Ca_L   15.0;    # 6.75,  g_Ca_L in component L_type_Ca_channel (nanoS)
     kCa      0.0006;     # 0.025, k_Ca in component L_type_Ca_channel (millimolar)
     kCan     2;
+    h_f1     0.0;
+    k_finf1  0.04;
+    k_finf2  0.96;
+    k_finf4  25.5;
+    k_finf5  8.4;
+    k_finf6  1.0;
+    k_finf8  60.0;
+    k_finf9  8.0;
+    #            k1     k2      k3           k4    k5      k6   k7            k8  k9
+    # ICaLfinf = 0.00 + 1.00 / (1 + exp((V + 27.4)/7.1)) + 0 / (1 + exp(-(V - 0.)/1.0e10))
+    # ICaLfinf = 0.04 + 0.96 / (1 + exp((V + 25.5)/8.4)) + 1 / (1 + exp(-(V - 60)/8.0)) # cAF
+    k_dtau1  0.00065;
+    k_dtau5  0.0005;
+    #            k1                 k2  k3   k4    k5
+    # ICaLdtau = 0.0027 * exp( -((V+35)/30)**2 ) + 0.002
+    # ICaLdtau = 0.00065* exp( -((V+35)/30)**2 ) + 0.0005
+    k_f2tau1 1.34;
+    k_f2tau5 0.04;
+    #             k1               k2  k3     k4    k5
+    # ICaLf2tau = 1.3323*exp( -((V+40)/14.2)**2 ) + 0.0626
+    # ICaLf2tau = 1.34  *exp( -((V+40)/14.2)**2 ) + 0.04  # cAF
 
     VariableReferenceList
       [ICaL       :.:ICaL               1]
@@ -1114,7 +1135,7 @@ System System( /Cell/Membrane )
       [INaCa :../Membrane:INaCa  0] # pA = pC/sec
       [Cass  :../Cytosol/ss:Ca   1];
   }
-        %line 941 ./Koivumaki-2011_Cell_Membrane.em
+        %line 962 ./Koivumaki-2011_cAF_Cell_Membrane.em
 
 } # End of /Cell/Membrane
 %line 499 Koivumaki-2011_nSR.em
@@ -1125,19 +1146,19 @@ System System( /Cell/Membrane )
 
 
 
-%line 1 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+%line 1 ./Koivumaki-2011_cAF_Cell_Cytoplasm_bulk_x.em
 
 System System( /Cell/Cytosol/ss )
-%line 8 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+%line 8 ./Koivumaki-2011_cAF_Cell_Cytoplasm_bulk_x.em
 {
   StepperID    Default;
   Name "Cytosol ss";
-%line 11 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+%line 11 ./Koivumaki-2011_cAF_Cell_Cytoplasm_bulk_x.em
 
   Variable Variable( SIZE )
   {
     Value    4.99232e-14;
-%line 15 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+%line 15 ./Koivumaki-2011_cAF_Cell_Cytoplasm_bulk_x.em
   }
 
   
@@ -1154,12 +1175,12 @@ System System( /Cell/Cytosol/ss )
     Fixed 1;
   }
   
-%line 31 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+%line 31 ./Koivumaki-2011_cAF_Cell_Cytoplasm_bulk_x.em
 
   Variable Variable( Ca )
   {
     MolarConc    1.737e-07;  # Cai1
-%line 35 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+%line 35 ./Koivumaki-2011_cAF_Cell_Cytoplasm_bulk_x.em
   }
 
   Variable Variable( Ca_buffer )
@@ -1324,6 +1345,7 @@ System System( /Cell/Cytosol/ss )
     
 
     k_nu  625.0;  # k_nuss in SR4
+    k_Ca  1.0;
 
     VariableReferenceList
       [Jrel    :.:Jrel                     1]
@@ -1374,7 +1396,7 @@ System System( /Cell/Cytosol/ss )
       [g_inf :.:RyRainf      0]
       [g_tau :.:RyRtauadapt  0];
   }
-        %line 264 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+        %line 265 ./Koivumaki-2011_cAF_Cell_Cytoplasm_bulk_x.em
 
   
    # ss
@@ -1425,37 +1447,37 @@ System System( /Cell/Cytosol/ss )
       [j  :.:Ca         -1]; # Cass
   }
   
-    %line 365 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+    %line 366 ./Koivumaki-2011_cAF_Cell_Cytoplasm_bulk_x.em
 
 } # END of /Cell/Cytosol/ss
-%line 367 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+%line 368 ./Koivumaki-2011_cAF_Cell_Cytoplasm_bulk_x.em
 %line 512 Koivumaki-2011_nSR.em
 
 
 
 
-%line 1 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+%line 1 ./Koivumaki-2011_cAF_Cell_Cytoplasm_bulk_x.em
 
 System System( /Cell/Cytosol/bulk_1 )
-%line 8 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+%line 8 ./Koivumaki-2011_cAF_Cell_Cytoplasm_bulk_x.em
 {
   StepperID    Default;
   Name "Cytosol bulk_1";
-%line 11 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+%line 11 ./Koivumaki-2011_cAF_Cell_Cytoplasm_bulk_x.em
 
   Variable Variable( SIZE )
   {
     Value    5.06253396241e-13;
-%line 15 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+%line 15 ./Koivumaki-2011_cAF_Cell_Cytoplasm_bulk_x.em
   }
 
   
-%line 31 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+%line 31 ./Koivumaki-2011_cAF_Cell_Cytoplasm_bulk_x.em
 
   Variable Variable( Ca )
   {
     MolarConc    1.672e-07;  # Cai1
-%line 35 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+%line 35 ./Koivumaki-2011_cAF_Cell_Cytoplasm_bulk_x.em
   }
 
   Variable Variable( Ca_buffer )
@@ -1620,6 +1642,7 @@ System System( /Cell/Cytosol/bulk_1 )
     
 
     k_nu  1.0;  # k_nuss in SR4
+    k_Ca  1.0;
 
     VariableReferenceList
       [Jrel    :.:Jrel                     1]
@@ -1670,7 +1693,7 @@ System System( /Cell/Cytosol/bulk_1 )
       [g_inf :.:RyRainf      0]
       [g_tau :.:RyRtauadapt  0];
   }
-        %line 264 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+        %line 265 ./Koivumaki-2011_cAF_Cell_Cytoplasm_bulk_x.em
 
   
    # bulk_1-4
@@ -1710,37 +1733,37 @@ System System( /Cell/Cytosol/bulk_1 )
   }
 
   
-    %line 365 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+    %line 366 ./Koivumaki-2011_cAF_Cell_Cytoplasm_bulk_x.em
 
 } # END of /Cell/Cytosol/bulk_1
-%line 367 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+%line 368 ./Koivumaki-2011_cAF_Cell_Cytoplasm_bulk_x.em
 %line 512 Koivumaki-2011_nSR.em
 
 
 
 
-%line 1 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+%line 1 ./Koivumaki-2011_cAF_Cell_Cytoplasm_bulk_x.em
 
 System System( /Cell/Cytosol/bulk_2 )
-%line 8 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+%line 8 ./Koivumaki-2011_cAF_Cell_Cytoplasm_bulk_x.em
 {
   StepperID    Default;
   Name "Cytosol bulk_2";
-%line 11 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+%line 11 ./Koivumaki-2011_cAF_Cell_Cytoplasm_bulk_x.em
 
   Variable Variable( SIZE )
   {
     Value    1.51876018872e-12;
-%line 15 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+%line 15 ./Koivumaki-2011_cAF_Cell_Cytoplasm_bulk_x.em
   }
 
   
-%line 31 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+%line 31 ./Koivumaki-2011_cAF_Cell_Cytoplasm_bulk_x.em
 
   Variable Variable( Ca )
   {
     MolarConc    1.67e-07;  # Cai1
-%line 35 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+%line 35 ./Koivumaki-2011_cAF_Cell_Cytoplasm_bulk_x.em
   }
 
   Variable Variable( Ca_buffer )
@@ -1905,6 +1928,7 @@ System System( /Cell/Cytosol/bulk_2 )
     
 
     k_nu  1.0;  # k_nuss in SR4
+    k_Ca  1.0;
 
     VariableReferenceList
       [Jrel    :.:Jrel                     1]
@@ -1955,7 +1979,7 @@ System System( /Cell/Cytosol/bulk_2 )
       [g_inf :.:RyRainf      0]
       [g_tau :.:RyRtauadapt  0];
   }
-        %line 264 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+        %line 265 ./Koivumaki-2011_cAF_Cell_Cytoplasm_bulk_x.em
 
   
    # bulk_1-4
@@ -1995,37 +2019,37 @@ System System( /Cell/Cytosol/bulk_2 )
   }
 
   
-    %line 365 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+    %line 366 ./Koivumaki-2011_cAF_Cell_Cytoplasm_bulk_x.em
 
 } # END of /Cell/Cytosol/bulk_2
-%line 367 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+%line 368 ./Koivumaki-2011_cAF_Cell_Cytoplasm_bulk_x.em
 %line 512 Koivumaki-2011_nSR.em
 
 
 
 
-%line 1 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+%line 1 ./Koivumaki-2011_cAF_Cell_Cytoplasm_bulk_x.em
 
 System System( /Cell/Cytosol/bulk_3 )
-%line 8 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+%line 8 ./Koivumaki-2011_cAF_Cell_Cytoplasm_bulk_x.em
 {
   StepperID    Default;
   Name "Cytosol bulk_3";
-%line 11 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+%line 11 ./Koivumaki-2011_cAF_Cell_Cytoplasm_bulk_x.em
 
   Variable Variable( SIZE )
   {
     Value    2.5312669812e-12;
-%line 15 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+%line 15 ./Koivumaki-2011_cAF_Cell_Cytoplasm_bulk_x.em
   }
 
   
-%line 31 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+%line 31 ./Koivumaki-2011_cAF_Cell_Cytoplasm_bulk_x.em
 
   Variable Variable( Ca )
   {
     MolarConc    1.68e-07;  # Cai1
-%line 35 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+%line 35 ./Koivumaki-2011_cAF_Cell_Cytoplasm_bulk_x.em
   }
 
   Variable Variable( Ca_buffer )
@@ -2190,6 +2214,7 @@ System System( /Cell/Cytosol/bulk_3 )
     
 
     k_nu  1.0;  # k_nuss in SR4
+    k_Ca  1.0;
 
     VariableReferenceList
       [Jrel    :.:Jrel                     1]
@@ -2240,7 +2265,7 @@ System System( /Cell/Cytosol/bulk_3 )
       [g_inf :.:RyRainf      0]
       [g_tau :.:RyRtauadapt  0];
   }
-        %line 264 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+        %line 265 ./Koivumaki-2011_cAF_Cell_Cytoplasm_bulk_x.em
 
   
    # bulk_1-4
@@ -2280,37 +2305,37 @@ System System( /Cell/Cytosol/bulk_3 )
   }
 
   
-    %line 365 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+    %line 366 ./Koivumaki-2011_cAF_Cell_Cytoplasm_bulk_x.em
 
 } # END of /Cell/Cytosol/bulk_3
-%line 367 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+%line 368 ./Koivumaki-2011_cAF_Cell_Cytoplasm_bulk_x.em
 %line 512 Koivumaki-2011_nSR.em
 
 
 
 
-%line 1 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+%line 1 ./Koivumaki-2011_cAF_Cell_Cytoplasm_bulk_x.em
 
 System System( /Cell/Cytosol/bulk_4 )
-%line 8 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+%line 8 ./Koivumaki-2011_cAF_Cell_Cytoplasm_bulk_x.em
 {
   StepperID    Default;
   Name "Cytosol bulk_4";
-%line 11 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+%line 11 ./Koivumaki-2011_cAF_Cell_Cytoplasm_bulk_x.em
 
   Variable Variable( SIZE )
   {
     Value    3.54377377368e-12;
-%line 15 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+%line 15 ./Koivumaki-2011_cAF_Cell_Cytoplasm_bulk_x.em
   }
 
   
-%line 31 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+%line 31 ./Koivumaki-2011_cAF_Cell_Cytoplasm_bulk_x.em
 
   Variable Variable( Ca )
   {
     MolarConc    1.719e-07;  # Cai1
-%line 35 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+%line 35 ./Koivumaki-2011_cAF_Cell_Cytoplasm_bulk_x.em
   }
 
   Variable Variable( Ca_buffer )
@@ -2320,7 +2345,7 @@ System System( /Cell/Cytosol/bulk_4 )
     Fixed 1;
   }
 
-    %line 264 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+    %line 265 ./Koivumaki-2011_cAF_Cell_Cytoplasm_bulk_x.em
 
   
    # bulk_1-4
@@ -2360,10 +2385,10 @@ System System( /Cell/Cytosol/bulk_4 )
   }
 
   
-    %line 365 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+    %line 366 ./Koivumaki-2011_cAF_Cell_Cytoplasm_bulk_x.em
 
 } # END of /Cell/Cytosol/bulk_4
-%line 367 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
+%line 368 ./Koivumaki-2011_cAF_Cell_Cytoplasm_bulk_x.em
 %line 512 Koivumaki-2011_nSR.em
 
 
