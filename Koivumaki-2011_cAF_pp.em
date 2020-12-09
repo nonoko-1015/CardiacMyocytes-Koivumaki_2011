@@ -1,4 +1,4 @@
-%line 1 ./Koivumaki-2011_cAF.em
+%line 1 Koivumaki-2011_cAF.em
 
 
 
@@ -24,21 +24,21 @@ System System( / )
   Variable Variable( Nao )
   {
     MolarConc    0.13;
-%line 409 ./Koivumaki-2011_cAF.em
+%line 409 Koivumaki-2011_cAF.em
     Fixed  1;
   }
 
   Variable Variable( Ko )
   {
     MolarConc    0.0054;
-%line 415 ./Koivumaki-2011_cAF.em
+%line 415 Koivumaki-2011_cAF.em
     Fixed  1;
   }
 
   Variable Variable( Cao )
   {
     MolarConc    0.0018;
-%line 421 ./Koivumaki-2011_cAF.em
+%line 421 Koivumaki-2011_cAF.em
     Fixed  1;
   }
 
@@ -59,7 +59,7 @@ System System( /Cell )
   Variable Variable( SIZE )
   {
     Value    1.30918156458e-11;
-%line 441 ./Koivumaki-2011_cAF.em
+%line 441 Koivumaki-2011_cAF.em
   }
 }
 
@@ -71,7 +71,7 @@ System System( /Cell/Cytosol )
   Variable Variable( SIZE )
   {
     Value    1.29095644231e-11;
-%line 452 ./Koivumaki-2011_cAF.em
+%line 452 Koivumaki-2011_cAF.em
   }
 
   Variable Variable(K_i)
@@ -90,7 +90,7 @@ System System( /Cell/Cytosol/bulk )
   Variable Variable( SIZE )
   {
     Value    1.29095644231e-11;
-%line 470 ./Koivumaki-2011_cAF.em
+%line 470 Koivumaki-2011_cAF.em
   }
 
   Variable Variable(Na_i)
@@ -105,11 +105,11 @@ System System( /Cell/Cytosol/bulk )
     
 
     D  0.12;
-%line 487 ./Koivumaki-2011_cAF.em
+%line 487 Koivumaki-2011_cAF.em
     Aj_nj  3289.86822419;
-%line 488 ./Koivumaki-2011_cAF.em
+%line 488 Koivumaki-2011_cAF.em
     xj_nj  3.912;
-%line 489 ./Koivumaki-2011_cAF.em
+%line 489 Koivumaki-2011_cAF.em
 
     VariableReferenceList
       [nj    :.:Na_i    0]
@@ -1117,9 +1117,9 @@ System System( /Cell/Membrane )
         %line 941 ./Koivumaki-2011_Cell_Membrane.em
 
 } # End of /Cell/Membrane
-%line 499 ./Koivumaki-2011_cAF.em
+%line 499 Koivumaki-2011_cAF.em
 
-%line 500 ./Koivumaki-2011_cAF.em
+%line 500 Koivumaki-2011_cAF.em
 
 # /Cell/Cytoplasm/{ss||bulk_x}
 
@@ -1172,19 +1172,19 @@ System System( /Cell/Cytosol/ss )
   
   Variable Variable( SERCACa ) # ss, bulk_1-3
   {
-    MolarConc    4.25e-06;  # SERCACa1
+    MolarConc    7.291e-07;  # SERCACa1
   }
 
   Variable Variable( J_SERCASR ) # ss, bulk_1-3
   {
     Name "pmol/sec";
-    Value    7.98764379041e-06;
+    Value    5.218970849e-07;
   }
 
   Variable Variable( J_bulkSERCA ) # ss, bulk_1-3
   {
     Name "pmol/sec";
-    Value    -2.63375603367e-07;
+    Value    5.27705341133e-07;
   }
 
   Variable Variable( JSRCaleak ) # ss, bulk_1-3
@@ -1429,7 +1429,7 @@ System System( /Cell/Cytosol/ss )
 
 } # END of /Cell/Cytosol/ss
 %line 367 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
-%line 512 ./Koivumaki-2011_cAF.em
+%line 512 Koivumaki-2011_cAF.em
 
 
 
@@ -1454,7 +1454,7 @@ System System( /Cell/Cytosol/bulk_1 )
 
   Variable Variable( Ca )
   {
-    MolarConc    1.193e-07;  # Cai1
+    MolarConc    1.35e-07;  # Cai1
 %line 35 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
   }
 
@@ -1480,7 +1480,7 @@ System System( /Cell/Cytosol/bulk_1 )
   Variable Variable( J_bulkSERCA ) # ss, bulk_1-3
   {
     Name "pmol/sec";
-    Value    2.68361929514e-06;
+    Value    3.9284692982e-06;
   }
 
   Variable Variable( JSRCaleak ) # ss, bulk_1-3
@@ -1505,17 +1505,17 @@ System System( /Cell/Cytosol/bulk_1 )
 
   Variable Variable( RyRainf ) # ss, bulk_1-3
   {
-    Value    0.125348974425;
+    Value    0.134029514819;
   }
 
   Variable Variable( RyRoinf ) # ss, bulk_1-3
   {
-    Value    0.00590128336981;
+    Value    0.0099190129128;
   }
 
   Variable Variable( RyRcinf ) # ss, bulk_1-3
   {
-    Value    0.998307745623;
+    Value    0.991917991375;
   }
 
   Variable Variable( RyRtauact ) # ss, bulk_1-3
@@ -1539,7 +1539,7 @@ System System( /Cell/Cytosol/bulk_1 )
   Variable Variable( Jrel ) # ss, bulk_1-3
   {
     Name "pmol/sec";
-    Value    8.43755291008e-07;
+    Value    8.4371544822e-07;
   }
 
   
@@ -1714,7 +1714,7 @@ System System( /Cell/Cytosol/bulk_1 )
 
 } # END of /Cell/Cytosol/bulk_1
 %line 367 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
-%line 512 ./Koivumaki-2011_cAF.em
+%line 512 Koivumaki-2011_cAF.em
 
 
 
@@ -1739,7 +1739,7 @@ System System( /Cell/Cytosol/bulk_2 )
 
   Variable Variable( Ca )
   {
-    MolarConc    1.214e-07;  # Cai1
+    MolarConc    1.38e-07;  # Cai1
 %line 35 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
   }
 
@@ -1765,7 +1765,7 @@ System System( /Cell/Cytosol/bulk_2 )
   Variable Variable( J_bulkSERCA ) # ss, bulk_1-3
   {
     Name "pmol/sec";
-    Value    8.86599675085e-06;
+    Value    1.29081479998e-05;
   }
 
   Variable Variable( JSRCaleak ) # ss, bulk_1-3
@@ -1790,17 +1790,17 @@ System System( /Cell/Cytosol/bulk_2 )
 
   Variable Variable( RyRainf ) # ss, bulk_1-3
   {
-    Value    0.126437900086;
+    Value    0.135834551649;
   }
 
   Variable Variable( RyRoinf ) # ss, bulk_1-3
   {
-    Value    0.00532501768574;
+    Value    0.00922411903369;
   }
 
   Variable Variable( RyRcinf ) # ss, bulk_1-3
   {
-    Value    0.99875826106;
+    Value    0.993503667716;
   }
 
   Variable Variable( RyRtauact ) # ss, bulk_1-3
@@ -1824,7 +1824,7 @@ System System( /Cell/Cytosol/bulk_2 )
   Variable Variable( Jrel ) # ss, bulk_1-3
   {
     Name "pmol/sec";
-    Value    2.1313630717e-06;
+    Value    2.13125180438e-06;
   }
 
   
@@ -1999,7 +1999,7 @@ System System( /Cell/Cytosol/bulk_2 )
 
 } # END of /Cell/Cytosol/bulk_2
 %line 367 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
-%line 512 ./Koivumaki-2011_cAF.em
+%line 512 Koivumaki-2011_cAF.em
 
 
 
@@ -2024,7 +2024,7 @@ System System( /Cell/Cytosol/bulk_3 )
 
   Variable Variable( Ca )
   {
-    MolarConc    1.27e-07;  # Cai1
+    MolarConc    1.44e-07;  # Cai1
 %line 35 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
   }
 
@@ -2050,7 +2050,7 @@ System System( /Cell/Cytosol/bulk_3 )
   Variable Variable( J_bulkSERCA ) # ss, bulk_1-3
   {
     Name "pmol/sec";
-    Value    1.79931994071e-05;
+    Value    2.5246940162e-05;
   }
 
   Variable Variable( JSRCaleak ) # ss, bulk_1-3
@@ -2075,17 +2075,17 @@ System System( /Cell/Cytosol/bulk_3 )
 
   Variable Variable( RyRainf ) # ss, bulk_1-3
   {
-    Value    0.129448926564;
+    Value    0.139591722793;
   }
 
   Variable Variable( RyRoinf ) # ss, bulk_1-3
   {
-    Value    0.00401644592026;
+    Value    0.00705690583718;
   }
 
   Variable Variable( RyRcinf ) # ss, bulk_1-3
   {
-    Value    0.999468884612;
+    Value    0.997099594198;
   }
 
   Variable Variable( RyRtauact ) # ss, bulk_1-3
@@ -2109,7 +2109,7 @@ System System( /Cell/Cytosol/bulk_3 )
   Variable Variable( Jrel ) # ss, bulk_1-3
   {
     Name "pmol/sec";
-    Value    2.31582270618e-06;
+    Value    2.315687032e-06;
   }
 
   
@@ -2284,7 +2284,7 @@ System System( /Cell/Cytosol/bulk_3 )
 
 } # END of /Cell/Cytosol/bulk_3
 %line 367 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
-%line 512 ./Koivumaki-2011_cAF.em
+%line 512 Koivumaki-2011_cAF.em
 
 
 
@@ -2309,7 +2309,7 @@ System System( /Cell/Cytosol/bulk_4 )
 
   Variable Variable( Ca )
   {
-    MolarConc    1.395e-07;  # Cai1
+    MolarConc    1.56e-07;  # Cai1
 %line 35 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
   }
 
@@ -2364,11 +2364,11 @@ System System( /Cell/Cytosol/bulk_4 )
 
 } # END of /Cell/Cytosol/bulk_4
 %line 367 ./Koivumaki-2011_Cell_Cytoplasm_bulk_x.em
-%line 512 ./Koivumaki-2011_cAF.em
+%line 512 Koivumaki-2011_cAF.em
 
 
 
-%line 513 ./Koivumaki-2011_cAF.em
+%line 513 Koivumaki-2011_cAF.em
 
 # /Cell/SR_x
 
@@ -2434,7 +2434,7 @@ System System( /Cell/SR_1 )
 
 } # END of /Cell/SR_1
 %line 60 ./Koivumaki-2011_Cell_SR_x.em
-%line 519 ./Koivumaki-2011_cAF.em
+%line 519 Koivumaki-2011_cAF.em
 
 
 
@@ -2499,7 +2499,7 @@ System System( /Cell/SR_2 )
 
 } # END of /Cell/SR_2
 %line 60 ./Koivumaki-2011_Cell_SR_x.em
-%line 519 ./Koivumaki-2011_cAF.em
+%line 519 Koivumaki-2011_cAF.em
 
 
 
@@ -2564,7 +2564,7 @@ System System( /Cell/SR_3 )
 
 } # END of /Cell/SR_3
 %line 60 ./Koivumaki-2011_Cell_SR_x.em
-%line 519 ./Koivumaki-2011_cAF.em
+%line 519 Koivumaki-2011_cAF.em
 
 
 
@@ -2629,8 +2629,8 @@ System System( /Cell/SR_4 )
 
 } # END of /Cell/SR_4
 %line 60 ./Koivumaki-2011_Cell_SR_x.em
-%line 519 ./Koivumaki-2011_cAF.em
+%line 519 Koivumaki-2011_cAF.em
 
 
 
-%line 520 ./Koivumaki-2011_cAF.em
+%line 520 Koivumaki-2011_cAF.em
