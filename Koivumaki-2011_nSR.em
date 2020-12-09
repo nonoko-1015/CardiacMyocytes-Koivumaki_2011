@@ -38,7 +38,6 @@ stim_offset = 1.0e-2   # sec
 # Model variant
 #**********************************************
 
-"""
 # nSR
 cAF_lcell = 1.
 cAF_gCaL = 1.
@@ -64,6 +63,7 @@ cAF_PLB = 1.18
 cAF_SLN = 0.60
 cAF_phos = 2.
 cAF_RyR = 2.
+"""
 
 # Cell dilation in cAF
 Ddcell = (cAF_lcell - 1.) * (20./10.) + 1.
